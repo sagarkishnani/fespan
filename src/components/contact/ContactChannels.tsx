@@ -31,7 +31,7 @@ export default function ContactChannels({ query, variables, data: initialData, l
               </span>
               <div className="min-w-0">
                 <div className="text-subtitle-sm" data-tina-field={tinaField(channel, "title")}>{tField(channel, "title", locale)}</div>
-                <div className="mt-2 whitespace-pre-line break-words text-[17px] leading-relaxed text-content-muted" data-tina-field={tinaField(channel, "text")}>
+                <div className="mt-2 whitespace-pre-line break-words text-body-base leading-relaxed text-content-muted" data-tina-field={tinaField(channel, "text")}>
                   {href ? <a href={href} className="hover:text-brand-primary">{text}</a> : text}
                 </div>
               </div>

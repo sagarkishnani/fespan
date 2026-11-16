@@ -18,11 +18,11 @@ export default function ShareBar({ url, title, locale }: { url: string; title: s
   };
 
   const encodedUrl = encodeURIComponent(url);
-  const round = "flex h-[46px] w-[46px] items-center justify-center rounded-full bg-surface-sunken text-content transition-colors hover:bg-[#D5F0E0]";
+  const round = "flex h-control-sm w-control-sm items-center justify-center rounded-full bg-surface-sunken text-content transition-colors hover:bg-surface-mint-strong";
 
   return (
     <div className="flex items-center gap-2.5">
-      <button type="button" onClick={copy} className="flex h-[46px] items-center gap-2.5 rounded-full border border-line bg-surface px-5 text-body-sm transition-colors hover:border-brand-primary">
+      <button type="button" onClick={copy} className="flex h-control-sm items-center gap-2.5 rounded-full border border-line bg-surface px-5 text-body-sm transition-colors hover:border-brand-primary">
         <CopyIcon />
         <span aria-live="polite">{copied ? t("blog.copied", locale) : t("blog.copyLink", locale)}</span>
       </button>

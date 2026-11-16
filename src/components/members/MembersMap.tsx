@@ -32,8 +32,8 @@ function MapTooltip({ society }: { society: SocietyModel }) {
     >
       <div className="animate-fade-up rounded-[18px] bg-surface px-5 py-4 shadow-[0_18px_40px_rgba(15,46,42,.16)] [text-wrap:balance]">
         <div className="text-[12px] font-medium uppercase tracking-[0.1em] text-brand-primary">{society.country}</div>
-        <div className="mt-1 text-[17px] font-medium">{society.name}</div>
-        <div className="mt-1.5 flex items-center gap-1.5 text-[14px] text-content-muted">
+        <div className="mt-1 text-body-base font-medium">{society.name}</div>
+        <div className="mt-1.5 flex items-center gap-1.5 text-caption-md text-content-muted">
           <SolidPinIcon className="text-brand-primary" />
           {society.city}
         </div>
@@ -60,11 +60,15 @@ export default function MembersMap({ societies, visibleCodes, hovered, onHover, 
           <path
             key={country.code}
             d={country.d}
-            fill={hovered === country.code ? "#0F7440" : visibleCodes.has(country.code) ? "#2DBE6C" : "#9FD9B8"}
-            stroke="#fff"
             strokeWidth={0.35}
             strokeLinejoin="round"
-            className="cursor-pointer transition-[fill] duration-300"
+            className={`cursor-pointer stroke-white transition-[fill] duration-300 ${
+              hovered === country.code
+                ? "fill-brand-primary"
+                : visibleCodes.has(country.code)
+                ? "fill-brand-primary-light"
+                : "fill-brand-primary-pale"
+            }`}
             onMouseEnter={() => onHover(country.code)}
             onMouseLeave={() => onHover(null)}
             onClick={() => openSite(country.code)}
@@ -74,7 +78,7 @@ export default function MembersMap({ societies, visibleCodes, hovered, onHover, 
           <g key={hovered} transform={`translate(${pin.x} ${pin.y})`} className="pointer-events-none">
             <circle r={4} fill="rgba(14,35,39,.35)" className="origin-center animate-pulse-ring [transform-box:fill-box]" />
             <g className="animate-drop">
-              <circle r={2.6} fill="#0E2327" stroke="#fff" strokeWidth={1} />
+              <circle r={2.6} strokeWidth={1} className="fill-content stroke-white" />
             </g>
           </g>
         )}

@@ -31,7 +31,7 @@ export default function HomeAbout({ query, variables, data: initialData, locale 
                     <span data-count={stat.value ?? 0}>{(stat.value ?? 0).toLocaleString("en-US")}</span>
                     <span className="text-brand-primary-light">{stat.suffix}</span>
                   </div>
-                  <span className="text-[17px]" data-tina-field={tinaField(stat, "label")}>{tField(stat, "label", locale)}</span>
+                  <span className="text-body-base" data-tina-field={tinaField(stat, "label")}>{tField(stat, "label", locale)}</span>
                 </div>
               ))}
             </div>

@@ -24,7 +24,7 @@ export function SolidPinIcon(props: IconProps) {
   return (
     <svg width="12" height="14" viewBox="0 0 12 14" aria-hidden="true" {...props}>
       <path d="M6 13.5S11 8.6 11 5.5A5 5 0 0 0 1 5.5C1 8.6 6 13.5 6 13.5Z" fill="currentColor" />
-      <circle cx="6" cy="5.5" r="1.8" fill="#fff" />
+      <circle cx="6" cy="5.5" r="1.8" className="fill-white" />
     </svg>
   );
 }

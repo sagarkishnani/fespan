@@ -21,8 +21,8 @@ function MemberCard({ member, locale }: { member: any; locale: TinaSectionProps[
         </a>
       )}
       <div className="absolute inset-x-3.5 bottom-3.5 rounded-[18px] bg-brand-primary px-5 py-4 text-white">
-        <div className="text-[19px] font-medium" data-tina-field={tinaField(member, "role")}>{role}</div>
-        <div className="mt-1 text-[14px] uppercase tracking-[0.02em] text-white/90" data-tina-field={tinaField(member, "name")}>{member.name}</div>
+        <div className="text-subtitle-xs font-medium" data-tina-field={tinaField(member, "role")}>{role}</div>
+        <div className="mt-1 text-caption-md uppercase tracking-[0.02em] text-white/90" data-tina-field={tinaField(member, "name")}>{member.name}</div>
       </div>
     </div>
   );

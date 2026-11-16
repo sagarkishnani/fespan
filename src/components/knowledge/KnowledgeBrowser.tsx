@@ -39,7 +39,7 @@ function KindTabs({ docs, kind, locale, onChange }: { docs: KnowledgeDocModel[];
             role="tab"
             aria-selected={active}
             onClick={() => onChange(id)}
-            className={`-mb-px flex items-center gap-2.5 whitespace-nowrap border-b-[3px] px-[22px] py-4 text-[19px] transition-colors hover:text-content ${
+            className={`-mb-px flex items-center gap-2.5 whitespace-nowrap border-b-[3px] px-[22px] py-4 text-subtitle-xs transition-colors hover:text-content ${
               active ? "border-brand-primary-light font-medium text-content" : "border-transparent text-content-muted"
             }`}
           >
@@ -57,7 +57,7 @@ function KindTabs({ docs, kind, locale, onChange }: { docs: KnowledgeDocModel[];
 function DocRow({ doc, locale }: { doc: KnowledgeDocModel; locale: Locale }) {
   const category = `${translateTerm(doc.kind === "guia" ? "Guía" : "Investigación", locale)} · ${translateTerm(doc.area, locale)}`;
   return (
-    <div className="grid gap-4 border-b border-line py-9 transition-colors hover:bg-[#FAFCFB] lg:grid-cols-[300px_minmax(0,1fr)_auto] lg:items-center lg:gap-12">
+    <div className="grid gap-4 border-b border-line py-9 transition-colors hover:bg-surface-raised lg:grid-cols-[300px_minmax(0,1fr)_auto] lg:items-center lg:gap-12">
       <span className="text-body-sm font-medium uppercase leading-normal tracking-[0.06em] text-accent">{category}</span>
       <div className="flex flex-col gap-1.5">
         <h3 className="mb-1 text-subtitle-md [text-wrap:pretty]">{doc.title}</h3>
@@ -143,7 +143,7 @@ export default function KnowledgeBrowser({ docs, areas, locale }: Props) {
               value={query}
               onChange={(event) => { setQuery(event.target.value); setPage(0); }}
               placeholder={t("knowledge.searchPlaceholder", locale)}
-              className="field field-with-icon h-[58px] rounded-xl border-line-strong text-[17px] font-normal"
+              className="field field-with-icon h-[58px] rounded-xl border-line-strong text-body-base font-normal"
             />
           </div>
         </label>
@@ -153,7 +153,7 @@ export default function KnowledgeBrowser({ docs, areas, locale }: Props) {
             <select
               value={area}
               onChange={(event) => { setArea(event.target.value); setPage(0); }}
-              className="field h-[58px] cursor-pointer appearance-none rounded-xl border-line-strong pr-12 text-[17px] font-normal"
+              className="field h-[58px] cursor-pointer appearance-none rounded-xl border-line-strong pr-12 text-body-base font-normal"
             >
               <option value={ALL}>{t("common.all", locale)}</option>
               {areas.map((value) => (

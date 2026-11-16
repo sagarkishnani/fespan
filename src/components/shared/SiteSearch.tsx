@@ -79,7 +79,7 @@ export default function SiteSearch({ locale, open, onToggle, pages, footerLinks 
         onClick={onToggle}
         aria-label={t("search.open", locale)}
         aria-expanded={open}
-        className={`flex h-[46px] w-[46px] items-center justify-center rounded-full text-content transition-colors hover:bg-surface-mint ${
+        className={`flex h-control-sm w-control-sm items-center justify-center rounded-full text-content transition-colors hover:bg-surface-mint ${
           open ? "bg-surface-mint" : "bg-surface-sunken"
         }`}
       >
