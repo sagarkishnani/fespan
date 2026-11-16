@@ -44,17 +44,6 @@ export const dynamicFormsCollection: Collection = {
       ui: { component: "textarea" },
     },
     ...translations({ name: "description", label: "Descripción", type: "string", ui: { component: "textarea" } }),
-    {
-      name: "styleVariant",
-      label: "Estilo visual",
-      type: "string",
-      options: [
-        { value: "default", label: "Estándar (fondo claro)" },
-        { value: "contact", label: "Contacto (estilo Tailwind, claro)" },
-        { value: "contact-dark", label: "Contacto (oscuro / corp)" },
-      ],
-      description: "Define la apariencia visual del formulario.",
-    },
 
     {
       name: "submitButtonText",

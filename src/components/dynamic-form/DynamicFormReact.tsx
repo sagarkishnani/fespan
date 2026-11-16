@@ -1,23 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { useTina, tinaField } from "tinacms/dist/react";
 import {
-  FormPageHeader,
-  FormSectionHeader,
-  FormInput,
-  FormSelect,
-  FormTextarea,
   FormFileUpload,
-  FormCheckbox,
   FormRadioGroup,
   FormCurrency,
-  FormSubmitButton,
-  FormNote,
-  FormDivider,
   FormInlineRadio,
   FormCheckboxGroup,
   FormDateTriplet,
 } from "../shared/FormControls";
-import { FormSuccess } from "../shared/FormSuccess";
 import { tField } from "../../utils/i18n";
 import type { Locale } from "../../i18n/config";
 import {
@@ -60,7 +50,6 @@ const FORM_UI = {
     invalidFormat: "Formato inválido",
     minChars: (n: number) => `Mínimo ${n} caracteres`,
     successTitle: "¡Formulario enviado!",
-    successSubtitle: "Tu solicitud ha sido registrada correctamente.",
     contactSuccess: "¡Gracias! Tu mensaje ha sido enviado.",
     genericError: "Ocurrió un error al enviar.",
     connError: "No se pudo conectar con el servidor.",
@@ -76,7 +65,6 @@ const FORM_UI = {
     invalidFormat: "Invalid format",
     minChars: (n: number) => `Minimum ${n} characters`,
     successTitle: "Form submitted!",
-    successSubtitle: "Your request has been registered successfully.",
     contactSuccess: "Thank you! Your message has been sent.",
     genericError: "An error occurred while sending.",
     connError: "Could not connect to the server.",
@@ -92,7 +80,6 @@ const FORM_UI = {
     invalidFormat: "Formato inválido",
     minChars: (n: number) => `Mínimo de ${n} caracteres`,
     successTitle: "Formulário enviado!",
-    successSubtitle: "Sua solicitação foi registrada com sucesso.",
     contactSuccess: "Obrigado! Sua mensagem foi enviada.",
     genericError: "Ocorreu um erro ao enviar.",
     connError: "Não foi possível conectar ao servidor.",
@@ -167,7 +154,6 @@ interface FormConfig extends TinaEditable {
   badge?: string;
   description?: string;
   description_en?: string;
-  styleVariant?: "default" | "contact" | "contact-dark";
   submitButtonText?: string;
   submitButtonText_en?: string;
   successTitle?: string;
@@ -207,38 +193,22 @@ function getDefaultValue(field: FormField): any {
   }
 }
 
-const contactLabelCls =
-  "block text-body-sm text-content-soft mb-2.5";
-const contactInputCls =
-  "w-full min-h-14 border rounded-xl px-[18px] py-3.5 text-body-md text-content placeholder:text-content-muted focus:outline-none transition-colors bg-surface";
-const contactInputOk = "border-line focus:border-brand-primary";
-const contactInputErr = "border-red-400 focus:border-red-400 focus:ring-red-400/20";
+const c = {
+  label: "block text-body-sm text-content-soft mb-2.5",
+  input:
+    "w-full min-h-14 border rounded-xl px-[18px] py-3.5 text-body-md text-content placeholder:text-content-muted focus:outline-none transition-colors bg-surface",
+  ok: "border-line focus:border-brand-primary",
+  err: "border-red-400 focus:border-red-400 focus:ring-red-400/20",
+};
 const contactErrorCls = "text-caption-sm text-red-500 mt-1";
 
-const contactLabelDarkCls =
-  "block text-caption-sm font-medium text-greyscale-light mb-2";
-const contactInputDarkCls =
-  "w-full border rounded-xl px-4 py-3.5 text-body-sm text-greyscale-white placeholder:text-greyscale-medium focus:outline-none focus:ring-1 transition-all bg-surface-raised";
-const contactInputDarkOk = "border-line focus:border-brand-primary focus:ring-brand-primary/30";
-const contactInputDarkErr = "border-red-400/70 focus:border-red-400 focus:ring-red-400/20";
-
-function contactCls(dark?: boolean) {
-  return {
-    label: dark ? contactLabelDarkCls : contactLabelCls,
-    input: dark ? contactInputDarkCls : contactInputCls,
-    ok: dark ? contactInputDarkOk : contactInputOk,
-    err: dark ? contactInputDarkErr : contactInputErr,
-  };
-}
-
 function ContactInput({
-  label, placeholder, type = "text", value, onChange, required, maxLength, error, dark, inputMode,
+  label, placeholder, type = "text", value, onChange, required, maxLength, error, inputMode,
 }: {
   label: string; placeholder?: string; type?: string; value: string;
-  onChange: (v: string) => void; required?: boolean; maxLength?: number; error?: string; dark?: boolean;
+  onChange: (v: string) => void; required?: boolean; maxLength?: number; error?: string;
   inputMode?: "numeric" | "text";
 }) {
-  const c = contactCls(dark);
   return (
     <div>
       {label && (
@@ -297,13 +267,12 @@ function renderSelectOptions(options: FieldOption[]) {
 }
 
 function ContactSelect({
-  label, placeholder, options, value, onChange, required, error, dark,
+  label, placeholder, options, value, onChange, required, error,
 }: {
   label: string; placeholder?: string; options: FieldOption[]; value: string;
-  onChange: (v: string) => void; required?: boolean; error?: string; dark?: boolean;
+  onChange: (v: string) => void; required?: boolean; error?: string;
 }) {
-  const c = contactCls(dark);
-  const arrowColor = dark ? "%23B0B0B0" : "%236B7280";
+  const arrowColor = "%236B7280";
   return (
     <div>
       {label && (
@@ -314,7 +283,7 @@ function ContactSelect({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={`${c.input} appearance-none ${dark && !value ? "text-greyscale-medium" : ""} ${error ? c.err : c.ok}`}
+        className={`${c.input} appearance-none ${error ? c.err : c.ok}`}
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='${arrowColor}' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E")`,
           backgroundRepeat: "no-repeat",
@@ -333,12 +302,11 @@ function ContactSelect({
 }
 
 function ContactTextarea({
-  label, placeholder, value, onChange, rows = 4, required, maxLength, error, dark,
+  label, placeholder, value, onChange, rows = 4, required, maxLength, error,
 }: {
   label: string; placeholder?: string; value: string; onChange: (v: string) => void;
-  rows?: number; required?: boolean; maxLength?: number; error?: string; dark?: boolean;
+  rows?: number; required?: boolean; maxLength?: number; error?: string;
 }) {
-  const c = contactCls(dark);
   return (
     <div>
       {label && (
@@ -367,9 +335,9 @@ function ContactTextarea({
 }
 
 function ContactCheckbox({
-  checked, onChange, children, error, dark,
+  checked, onChange, children, error,
 }: {
-  checked: boolean; onChange: (v: boolean) => void; children: React.ReactNode; error?: string; dark?: boolean;
+  checked: boolean; onChange: (v: boolean) => void; children: React.ReactNode; error?: string;
 }) {
   return (
     <div>
@@ -378,9 +346,9 @@ function ContactCheckbox({
           type="checkbox"
           checked={checked}
           onChange={(e) => onChange(e.target.checked)}
-          className={`mt-1 w-4 h-4 shrink-0 basis-4 accent-brand-primary rounded ${dark ? "border-line" : "border-greyscale-light"}`}
+          className="mt-1 w-4 h-4 shrink-0 basis-4 accent-brand-primary rounded border-greyscale-light"
         />
-        <span className={`text-caption-sm leading-relaxed ${dark ? "text-greyscale-light" : "text-greyscale-dark"}`}>{children}</span>
+        <span className="text-caption-sm leading-relaxed text-greyscale-dark">{children}</span>
       </label>
       {error && <p className="text-caption-sm text-red-500 mt-1 ml-7">{error}</p>}
     </div>
@@ -388,21 +356,17 @@ function ContactCheckbox({
 }
 
 function ContactSubmitButton({
-  text, onClick, disabled, dark,
+  text, onClick, disabled,
 }: {
-  text: string; onClick: () => void; disabled?: boolean; dark?: boolean;
+  text: string; onClick: () => void; disabled?: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`flex h-14 items-center justify-center rounded-full px-8 text-[17px] font-medium text-white transition-colors lg:text-[18px] ${
-        disabled
-          ? "cursor-not-allowed bg-brand-primary/60"
-          : dark
-          ? "bg-gradient-to-r from-brand-primary to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darkest"
-          : "bg-brand-primary hover:bg-brand-primary-dark"
+      className={`flex h-14 items-center justify-center rounded-full px-8 text-body-base font-medium text-white transition-colors lg:text-[18px] ${
+        disabled ? "cursor-not-allowed bg-brand-primary/60" : "bg-brand-primary hover:bg-brand-primary-dark"
       }`}
     >
       {text}
@@ -414,36 +378,21 @@ function CheckboxLabel({
   label,
   linkText,
   linkUrl,
-  variant,
 }: {
   label: string;
   linkText?: string;
   linkUrl?: string;
-  variant: "contact" | "contact-dark" | "default";
 }) {
   if (!linkText || !linkUrl) return <>{label}</>;
 
   const parts = label.split(linkText);
-
-  const linkStyle =
-    variant === "default"
-      ? { color: "#0F7440", textDecoration: "underline" }
-      : undefined;
-
-  const linkClass =
-    variant === "contact"
-      ? "text-brand-primary underline hover:text-brand-primary-dark"
-      : variant === "contact-dark"
-      ? "text-[#D070B8] underline hover:text-[#E693CE]"
-      : undefined;
 
   return (
     <>
       {parts[0]}
       <a
         href={linkUrl}
-        style={linkStyle}
-        className={linkClass}
+        className="text-brand-primary underline hover:text-brand-primary-dark"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -480,9 +429,6 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
     }));
 
   const fields: FormField[] = (formConfig.fields || []).filter(Boolean);
-  const variant = formConfig.styleVariant || "default";
-  const isDark = variant === "contact-dark";
-  const isContact = variant === "contact" || isDark;
 
   const [values, setValues] = useState<Record<string, any>>(() => {
     const init: Record<string, any> = {};
@@ -503,7 +449,6 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState("");
-  const [correlativo, setCorrelativo] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [isMobile, setIsMobile] = useState(false);
 
@@ -711,7 +656,6 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
       });
 
       if (result.success) {
-        setCorrelativo(result.correlativo || "");
         setSubmitted(true);
       } else {
         setSendError(
@@ -741,54 +685,27 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
   }
 
   if (submitted) {
-    if (isContact && !isDark) {
-      return (
-        <div className="flex animate-fade-up flex-col items-start gap-4 rounded-2xl bg-surface p-8 lg:p-12">
-          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-primary">
-            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
-              <path d="M5 13.5l5.5 5.5L21 7.5" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </span>
-          <h3 className="mt-2 text-heading-sm" data-tina-field={tinaField(formConfig, "successTitle")}>
-            {L(formConfig, "successTitle") || ui.successTitle}
-          </h3>
-          <p className="text-[17px] leading-relaxed text-content-muted" data-tina-field={tinaField(formConfig, "successMessage")}>
-            {L(formConfig, "successMessage") || ui.contactSuccess}
-          </p>
-          <button
-            type="button"
-            onClick={startOver}
-            className="mt-2 h-[50px] rounded-full border border-brand-primary px-6 text-body-md font-medium text-brand-primary transition-colors hover:bg-brand-primary hover:text-white"
-          >
-            {ui.sendAnother}
-          </button>
-        </div>
-      );
-    }
-
-    if (isContact) {
-      return (
-        <div className="flex items-center justify-center h-full min-h-[400px]">
-          <div className="text-center">
-            <div className="w-16 h-16 rounded-full bg-semantics-success/10 flex items-center justify-center mx-auto mb-4">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M5 13l4 4L19 7" stroke="#22C55E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <p className={`text-subtitle-sm font-semibold ${isDark ? "text-greyscale-white" : "text-greyscale-darkest"}`}>
-              {L(formConfig, "successMessage") || ui.contactSuccess}
-            </p>
-          </div>
-        </div>
-      );
-    }
-
     return (
-      <FormSuccess
-        title={L(formConfig, "successTitle") || ui.successTitle}
-        subtitle={L(formConfig, "successMessage") || ui.successSubtitle}
-        correlativo={formConfig.showCorrelativo ? correlativo : undefined}
-      />
+      <div className="flex animate-fade-up flex-col items-start gap-4 rounded-2xl bg-surface p-8 lg:p-12">
+        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-primary">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+            <path d="M5 13.5l5.5 5.5L21 7.5" className="stroke-white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
+        <h3 className="mt-2 text-heading-sm" data-tina-field={tinaField(formConfig, "successTitle")}>
+          {L(formConfig, "successTitle") || ui.successTitle}
+        </h3>
+        <p className="text-body-base leading-relaxed text-content-muted" data-tina-field={tinaField(formConfig, "successMessage")}>
+          {L(formConfig, "successMessage") || ui.contactSuccess}
+        </p>
+        <button
+          type="button"
+          onClick={startOver}
+          className="mt-2 h-[50px] rounded-full border border-brand-primary px-6 text-body-md font-medium text-brand-primary transition-colors hover:bg-brand-primary hover:text-white"
+        >
+          {ui.sendAnother}
+        </button>
+      </div>
     );
   }
 
@@ -806,35 +723,23 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
     if (field.fieldType === "section_header") {
       return (
         <div data-tina-field={tinaField(field, "label")}>
-          {isContact ? (
-            <h3 className={`text-body-md font-medium mt-4 mb-2 ${isDark ? "text-greyscale-white" : "text-greyscale-darkest"}`}>
-              {L(field, "label")}
-            </h3>
-          ) : (
-            <FormSectionHeader number={field.sectionNumber || 1} title={L(field, "label")} />
-          )}
+          <h3 className="text-body-md font-medium mt-4 mb-2 text-greyscale-darkest">
+            {L(field, "label")}
+          </h3>
         </div>
       );
     }
 
     if (field.fieldType === "divider") {
-      return isContact ? (
-        <div className={`border-t ${isDark ? "border-line" : "border-greyscale-light"}`} />
-      ) : (
-        <FormDivider />
-      );
+      return <div className="border-t border-greyscale-light" />;
     }
 
     if (field.fieldType === "note") {
       return (
         <div data-tina-field={tinaField(field, "noteContent")}>
-          {isContact ? (
-            <p className="text-caption-sm text-greyscale-medium leading-relaxed">
-              {L(field, "noteContent")}
-            </p>
-          ) : (
-            <FormNote text={L(field, "noteContent")} />
-          )}
+          <p className="text-caption-sm text-greyscale-medium leading-relaxed">
+            {L(field, "noteContent")}
+          </p>
         </div>
       );
     }
@@ -854,105 +759,12 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
     const numOnChange = (v: string) =>
       updateField(name, numType ? sanitizeNumeric(v, numType) : maxLen ? v.slice(0, maxLen) : v);
 
-    if (isContact) {
-      if (field.fieldType === "text" || field.fieldType === "tel" || field.fieldType === "number" || field.fieldType === "ruc") {
-        return (
-          <ContactInput
-            label={label}
-            placeholder={placeholder}
-            type={numType ? "tel" : field.fieldType === "number" ? "number" : "text"}
-            inputMode={numInputMode}
-            value={val || ""}
-            onChange={numOnChange}
-            required={required}
-            maxLength={numMaxLen}
-            error={err}
-            dark={isDark}
-          />
-        );
-      }
-
-      if (field.fieldType === "email") {
-        return (
-          <ContactInput
-            label={label}
-            placeholder={placeholder}
-            type="email"
-            value={val || ""}
-            onChange={(v) => updateField(name, v)}
-            required={required}
-            error={err}
-            dark={isDark}
-          />
-        );
-      }
-
-      if (field.fieldType === "select") {
-        return (
-          <ContactSelect
-            label={label}
-            placeholder={selectPlaceholder}
-            options={fieldOptions}
-            value={val || ""}
-            onChange={(v) => updateField(name, v)}
-            required={required}
-            error={err}
-            dark={isDark}
-          />
-        );
-      }
-
-      if (field.fieldType === "textarea") {
-        return (
-          <ContactTextarea
-            label={label}
-            placeholder={placeholder}
-            value={val || ""}
-            onChange={(v) => updateField(name, v)}
-            rows={field.rows || 4}
-            required={required}
-            maxLength={maxLen}
-            error={err}
-            dark={isDark}
-          />
-        );
-      }
-
-      if (field.fieldType === "checkbox") {
-        return (
-          <ContactCheckbox
-            checked={!!val}
-            onChange={(v) => updateField(name, v)}
-            error={err}
-            dark={isDark}
-          >
-            <span data-tina-field={tinaField(field, "label")}>
-              <CheckboxLabel
-                label={label}
-                linkText={L(field, "linkText")}
-                linkUrl={field.linkUrl}
-                variant={isDark ? "contact-dark" : "contact"}
-              />
-            </span>
-          </ContactCheckbox>
-        );
-      }
-    }
-
-    if (field.fieldType === "text" || field.fieldType === "tel" || field.fieldType === "number" || field.fieldType === "email" || field.fieldType === "ruc") {
+    if (field.fieldType === "text" || field.fieldType === "tel" || field.fieldType === "number" || field.fieldType === "ruc") {
       return (
-        <FormInput
+        <ContactInput
           label={label}
           placeholder={placeholder}
-          type={
-            field.fieldType === "email"
-              ? "email"
-              : numType
-              ? "tel"
-              : field.fieldType === "number"
-              ? "number"
-              : "text"
-          }
+          type={numType ? "tel" : field.fieldType === "number" ? "number" : "text"}
           inputMode={numInputMode}
           value={val || ""}
           onChange={numOnChange}
@@ -963,9 +775,23 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
       );
     }
 
+    if (field.fieldType === "email") {
+      return (
+        <ContactInput
+          label={label}
+          placeholder={placeholder}
+          type="email"
+          value={val || ""}
+          onChange={(v) => updateField(name, v)}
+          required={required}
+          error={err}
+        />
+      );
+    }
+
     if (field.fieldType === "select") {
       return (
-        <FormSelect
+        <ContactSelect
           label={label}
           placeholder={selectPlaceholder}
           options={fieldOptions}
@@ -979,7 +805,7 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
 
     if (field.fieldType === "textarea") {
       return (
-        <FormTextarea
+        <ContactTextarea
           label={label}
           placeholder={placeholder}
           value={val || ""}
@@ -994,16 +820,19 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
 
     if (field.fieldType === "checkbox") {
       return (
-        <FormCheckbox checked={!!val} onChange={(v) => updateField(name, v)} error={err}>
+        <ContactCheckbox
+          checked={!!val}
+          onChange={(v) => updateField(name, v)}
+          error={err}
+        >
           <span data-tina-field={tinaField(field, "label")}>
             <CheckboxLabel
               label={label}
               linkText={L(field, "linkText")}
               linkUrl={field.linkUrl}
-              variant="default"
             />
           </span>
-        </FormCheckbox>
+        </ContactCheckbox>
       );
     }
 
@@ -1116,34 +945,11 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
         }
       `}</style>
 
-      {!hideHeader && !isContact && (formConfig.badge || formConfig.formTitle || formConfig.description) && (
-        <div data-tina-field={tinaField(formConfig, "formTitle")}>
-          <FormPageHeader
-            badge={formConfig.badge}
-            title={L(formConfig, "formTitle")}
-            description={L(formConfig, "description")}
-          />
-        </div>
-      )}
-
-      {!hideHeader && isContact && (formConfig.formTitle || (isDark && formConfig.description)) && (
+      {!hideHeader && L(formConfig, "formTitle") && (
         <div className="mb-8">
-          {L(formConfig, "formTitle") && (
-            <h2
-              className={`text-heading-sm ${isDark ? "text-greyscale-white mb-2" : "text-content"}`}
-              data-tina-field={tinaField(formConfig, "formTitle")}
-            >
-              {L(formConfig, "formTitle")}
-            </h2>
-          )}
-          {isDark && L(formConfig, "description") && (
-            <p
-              className="text-body-sm text-greyscale-light"
-              data-tina-field={tinaField(formConfig, "description")}
-            >
-              {L(formConfig, "description")}
-            </p>
-          )}
+          <h2 className="text-heading-sm text-content" data-tina-field={tinaField(formConfig, "formTitle")}>
+            {L(formConfig, "formTitle")}
+          </h2>
         </div>
       )}
 
@@ -1171,14 +977,7 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
             >
               {renderField(field)}
               {L(field, "helpText") && !["upload", "note"].includes(field.fieldType) && (
-                <p
-                  style={
-                    isContact
-                      ? undefined
-                      : { fontSize: "12px", color: "#9CA3AF", marginTop: "4px", fontFamily: "Poppins, sans-serif" }
-                  }
-                  className={isContact ? "text-caption-sm text-greyscale-medium mt-1" : undefined}
-                >
+                <p className="text-caption-sm text-greyscale-medium mt-1">
                   {L(field, "helpText")}
                 </p>
               )}
@@ -1195,31 +994,15 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
       <div ref={captchaRef} style={{ marginTop: "16px" }} />
 
       <div style={{ marginTop: "24px" }}>
-        {isContact ? (
-          <ContactSubmitButton
-            text={sending ? ui.sending : (L(formConfig, "submitButtonText") || ui.submit)}
-            onClick={handleSubmit}
-            disabled={sending}
-            dark={isDark}
-          />
-        ) : (
-          <FormSubmitButton
-            text={sending ? ui.sending : (L(formConfig, "submitButtonText") || ui.submit)}
-            onClick={handleSubmit}
-            disabled={sending}
-          />
-        )}
+        <ContactSubmitButton
+          text={sending ? ui.sending : (L(formConfig, "submitButtonText") || ui.submit)}
+          onClick={handleSubmit}
+          disabled={sending}
+        />
       </div>
 
       {sendError && (
-        <p
-          style={
-            isContact
-              ? undefined
-              : { textAlign: "center", color: "#EF4444", fontSize: "13px", marginTop: "8px", fontFamily: "Poppins, sans-serif" }
-          }
-          className={isContact ? "text-caption-sm text-red-500 text-center mt-2" : undefined}
-        >
+        <p className="text-caption-sm text-red-500 text-center mt-2">
           {sendError}
         </p>
       )}
