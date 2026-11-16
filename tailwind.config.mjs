@@ -86,6 +86,7 @@ export default {
         'control-lg': '60px',
       },
       backgroundImage: {
+        'select-chevron': "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E\")",
         'hero-soft': 'linear-gradient(100deg, #E6F2EE 0%, #EEF5F2 60%, #F5F8F7 100%)',
         'hero-about': 'linear-gradient(100deg, #D5EAE1 0%, #EEF6F2 55%, #F7FAF8 100%)',
         'hero-about-scrim': 'linear-gradient(90deg, #E2F0EA 40%, rgba(226, 240, 234, .6) 52%, rgba(226, 240, 234, 0) 72%)',

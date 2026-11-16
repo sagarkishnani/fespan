@@ -7,6 +7,7 @@ import {
   FormInlineRadio,
   FormCheckboxGroup,
   FormDateTriplet,
+  fieldClasses as c,
 } from "../shared/FormControls";
 import { tField } from "../../utils/i18n";
 import type { Locale } from "../../i18n/config";
@@ -193,14 +194,6 @@ function getDefaultValue(field: FormField): any {
   }
 }
 
-const c = {
-  label: "block text-body-sm text-content-soft mb-2.5",
-  input:
-    "w-full min-h-14 border rounded-xl px-[18px] py-3.5 text-body-md text-content placeholder:text-content-muted focus:outline-none transition-colors bg-surface",
-  ok: "border-line focus:border-brand-primary",
-  err: "border-red-400 focus:border-red-400 focus:ring-red-400/20",
-};
-const contactErrorCls = "text-caption-sm text-red-500 mt-1";
 
 function ContactInput({
   label, placeholder, type = "text", value, onChange, required, maxLength, error, inputMode,
@@ -225,7 +218,7 @@ function ContactInput({
         maxLength={maxLength}
         className={`${c.input} ${error ? c.err : c.ok}`}
       />
-      {error && <p className={contactErrorCls}>{error}</p>}
+      {error && <p className={c.error}>{error}</p>}
     </div>
   );
 }
@@ -272,7 +265,6 @@ function ContactSelect({
   label: string; placeholder?: string; options: FieldOption[]; value: string;
   onChange: (v: string) => void; required?: boolean; error?: string;
 }) {
-  const arrowColor = "%236B7280";
   return (
     <div>
       {label && (
@@ -283,20 +275,14 @@ function ContactSelect({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={`${c.input} appearance-none ${error ? c.err : c.ok}`}
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='${arrowColor}' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E")`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "right 16px center",
-          backgroundSize: "12px",
-        }}
+        className={`${c.input} appearance-none bg-select-chevron bg-[length:12px] bg-[position:right_16px_center] bg-no-repeat ${error ? c.err : c.ok}`}
       >
         <option value="" disabled>
           {placeholder || "Selecciona una opción"}
         </option>
         {renderSelectOptions(options)}
       </select>
-      {error && <p className={contactErrorCls}>{error}</p>}
+      {error && <p className={c.error}>{error}</p>}
     </div>
   );
 }
@@ -323,7 +309,7 @@ function ContactTextarea({
         className={`${c.input} resize-none ${error ? c.err : c.ok}`}
       />
       <div className="flex justify-between mt-1">
-        {error ? <p className={contactErrorCls}>{error}</p> : <span />}
+        {error ? <p className={c.error}>{error}</p> : <span />}
         {maxLength && (
           <span className="text-caption-sm text-greyscale-medium">
             {value.length}/{maxLength}
@@ -350,7 +336,7 @@ function ContactCheckbox({
         />
         <span className="text-caption-sm leading-relaxed text-greyscale-dark">{children}</span>
       </label>
-      {error && <p className="text-caption-sm text-red-500 mt-1 ml-7">{error}</p>}
+      {error && <p className={`${c.error} ml-7`}>{error}</p>}
     </div>
   );
 }
@@ -1002,7 +988,7 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
       </div>
 
       {sendError && (
-        <p className="text-caption-sm text-red-500 text-center mt-2">
+        <p className="text-caption-sm text-semantics-error text-center mt-2">
           {sendError}
         </p>
       )}
