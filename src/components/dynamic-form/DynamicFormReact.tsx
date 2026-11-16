@@ -227,7 +227,7 @@ function renderSelectOptions(options: FieldOption[]) {
   const hasGroups = options.some((o) => o.group);
   if (!hasGroups) {
     return options.map((opt, i) => (
-      <option key={i} value={opt.value} className="text-greyscale-darkest">
+      <option key={i} value={opt.value} className="text-content">
         {opt.label}
       </option>
     ));
@@ -245,12 +245,12 @@ function renderSelectOptions(options: FieldOption[]) {
   return order.map((key, gi) => {
     const groupOpts = buckets.get(key)!;
     const children = groupOpts.map((opt, i) => (
-      <option key={i} value={opt.value} className="text-greyscale-darkest">
+      <option key={i} value={opt.value} className="text-content">
         {opt.label}
       </option>
     ));
     return key ? (
-      <optgroup key={gi} label={key} className="text-greyscale-darkest">
+      <optgroup key={gi} label={key} className="text-content">
         {children}
       </optgroup>
     ) : (
@@ -311,7 +311,7 @@ function ContactTextarea({
       <div className="flex justify-between mt-1">
         {error ? <p className={c.error}>{error}</p> : <span />}
         {maxLength && (
-          <span className="text-caption-sm text-greyscale-medium">
+          <span className="text-caption-sm text-content-muted">
             {value.length}/{maxLength}
           </span>
         )}
@@ -332,9 +332,9 @@ function ContactCheckbox({
           type="checkbox"
           checked={checked}
           onChange={(e) => onChange(e.target.checked)}
-          className="mt-1 w-4 h-4 shrink-0 basis-4 accent-brand-primary rounded border-greyscale-light"
+          className="mt-1 w-4 h-4 shrink-0 basis-4 accent-brand-primary rounded border-line"
         />
-        <span className="text-caption-sm leading-relaxed text-greyscale-dark">{children}</span>
+        <span className="text-caption-sm leading-relaxed text-content-soft">{children}</span>
       </label>
       {error && <p className={`${c.error} ml-7`}>{error}</p>}
     </div>
@@ -709,7 +709,7 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
     if (field.fieldType === "section_header") {
       return (
         <div data-tina-field={tinaField(field, "label")}>
-          <h3 className="text-body-md font-medium mt-4 mb-2 text-greyscale-darkest">
+          <h3 className="text-body-md font-medium mt-4 mb-2 text-content">
             {L(field, "label")}
           </h3>
         </div>
@@ -717,13 +717,13 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
     }
 
     if (field.fieldType === "divider") {
-      return <div className="border-t border-greyscale-light" />;
+      return <div className="border-t border-line" />;
     }
 
     if (field.fieldType === "note") {
       return (
         <div data-tina-field={tinaField(field, "noteContent")}>
-          <p className="text-caption-sm text-greyscale-medium leading-relaxed">
+          <p className="text-caption-sm text-content-muted leading-relaxed">
             {L(field, "noteContent")}
           </p>
         </div>
@@ -963,7 +963,7 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
             >
               {renderField(field)}
               {L(field, "helpText") && !["upload", "note"].includes(field.fieldType) && (
-                <p className="text-caption-sm text-greyscale-medium mt-1">
+                <p className="text-caption-sm text-content-muted mt-1">
                   {L(field, "helpText")}
                 </p>
               )}

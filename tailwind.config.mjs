@@ -49,16 +49,6 @@ export default {
           alert:   { dark: '#CA7900', DEFAULT: '#FC9700', lightest: '#FFF4D8' },
           error:   { dark: '#8C1D1D', DEFAULT: '#EB0E0E', lightest: '#F9EBEA' },
         },
-        greyscale: {
-          darkest:  '#0E2327',
-          dark:     '#2F4A4E',
-          medium:   '#5C7377',
-          DEFAULT:  '#5C7377',
-          light:    '#E3E9E8',
-          lightest: '#F5F8F7',
-          white:    '#FFFFFF',
-        },
-
         surface: {
           DEFAULT: '#FFFFFF',
           raised:  '#F5F8F7',
@@ -72,7 +62,6 @@ export default {
           DEFAULT: '#0E2327',
           soft:    '#2F4A4E',
           muted:   '#5C7377',
-          subtle:  '#5C7377',
           faint:   '#7E8F92',
         },
         line: {
