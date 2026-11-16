@@ -1,0 +1,244 @@
+{
+  "hero": {
+    "title": "Quiénes somos",
+    "title_en": "Who we are",
+    "title_pt": "Quem somos",
+    "subtitle": "Una red panamericana que impulsa la ciencia nutricional y la salud de nuestras poblaciones.",
+    "subtitle_en": "A Pan American network advancing nutrition science and the health of our populations.",
+    "subtitle_pt": "Uma rede pan-americana que impulsiona a ciência da nutrição e a saúde de nossas populações.",
+    "image": "/images/nosotros/hero.webp",
+    "buttonLabel": "Conoce más",
+    "buttonLabel_en": "Learn more",
+    "buttonLabel_pt": "Saiba mais"
+  },
+  "intro": {
+    "title": "Construyendo un futuro más saludable",
+    "title_en": "Building a healthier future",
+    "title_pt": "Construindo um futuro mais saudável",
+    "body": "La Federación de Sociedades Panamericanas de Nutrición (FESPAN) es una organización sin fines de lucro que agrupa a sociedades de nutrición de las Américas.\n\nSu objetivo es fortalecer la cooperación científica y profesional en la región, promoviendo la investigación, la educación y las buenas prácticas en nutrición para mejorar la salud y el bienestar de las poblaciones de las Américas.",
+    "body_en": "The Federation of Pan American Nutrition Societies (FESPAN) is a non-profit organization that brings together nutrition societies across the Americas.\n\nIts goal is to strengthen scientific and professional cooperation in the region, promoting research, education and good nutrition practices to improve the health and well-being of the populations of the Americas.",
+    "body_pt": "A Federação de Sociedades Pan-Americanas de Nutrição (FESPAN) é uma organização sem fins lucrativos que reúne sociedades de nutrição das Américas.\n\nSeu objetivo é fortalecer a cooperação científica e profissional na região, promovendo a pesquisa, a educação e as boas práticas em nutrição para melhorar a saúde e o bem-estar das populações das Américas.",
+    "button": {
+      "label": "Conoce más",
+      "label_en": "Learn more",
+      "label_pt": "Saiba mais",
+      "url": "/actividades"
+    },
+    "image": "/images/nosotros/frutas.webp"
+  },
+  "values": {
+    "title": "Misión, visión y valores",
+    "title_en": "Mission, vision and values",
+    "title_pt": "Missão, visão e valores",
+    "button": {
+      "label": "Ver más",
+      "label_en": "See more",
+      "label_pt": "Ver mais",
+      "url": "/contacto"
+    },
+    "items": [
+      {
+        "icon": "/images/iconos/mision.svg",
+        "title": "Misión",
+        "title_en": "Mission",
+        "title_pt": "Missão",
+        "text": "Promover el avance de la ciencia nutricional en las Américas mediante la cooperación, la educación y la investigación.",
+        "text_en": "To advance nutrition science across the Americas through cooperation, education and research.",
+        "text_pt": "Promover o avanço da ciência da nutrição nas Américas por meio da cooperação, da educação e da pesquisa.",
+        "link": {
+          "label": "Conoce más",
+          "label_en": "Learn more",
+          "label_pt": "Saiba mais",
+          "url": "/actividades"
+        }
+      },
+      {
+        "icon": "/images/iconos/vision.svg",
+        "title": "Visión",
+        "title_en": "Vision",
+        "title_pt": "Visão",
+        "text": "Ser la red líder que impulsa el conocimiento y las políticas nutricionales para una región más saludable.",
+        "text_en": "To be the leading network driving nutrition knowledge and policy for a healthier region.",
+        "text_pt": "Ser a rede líder que impulsiona o conhecimento e as políticas de nutrição para uma região mais saudável.",
+        "link": {
+          "label": "Conoce más",
+          "label_en": "Learn more",
+          "label_pt": "Saiba mais",
+          "url": "/conocimiento"
+        }
+      },
+      {
+        "icon": "/images/iconos/valores.svg",
+        "title": "Valores",
+        "title_en": "Values",
+        "title_pt": "Valores",
+        "text": "Excelencia científica | Colaboración | Ética | Compromiso social | Innovación",
+        "text_en": "Scientific excellence | Collaboration | Ethics | Social commitment | Innovation",
+        "text_pt": "Excelência científica | Colaboração | Ética | Compromisso social | Inovação",
+        "link": {
+          "label": "Conoce más",
+          "label_en": "Learn more",
+          "label_pt": "Saiba mais",
+          "url": "/miembros"
+        }
+      }
+    ]
+  },
+  "board": {
+    "eyebrow": "Gobernanza",
+    "eyebrow_en": "Governance",
+    "eyebrow_pt": "Governança",
+    "title": "Junta directiva",
+    "title_en": "Board of directors",
+    "title_pt": "Diretoria",
+    "members": [
+      {
+        "role": "Presidencia",
+        "role_en": "Presidency",
+        "role_pt": "Presidência",
+        "name": "[Nombre y país]",
+        "photo": "/images/equipo/roxana-fernandez.webp",
+        "linkedin": ""
+      },
+      {
+        "role": "Vicepresidencia",
+        "role_en": "Vice presidency",
+        "role_pt": "Vice-presidência",
+        "name": "[Nombre y país]",
+        "photo": "/images/equipo/miembro-2.webp",
+        "linkedin": ""
+      },
+      {
+        "role": "Secretaría general",
+        "role_en": "General secretariat",
+        "role_pt": "Secretaria-geral",
+        "name": "[Nombre y país]",
+        "photo": "/images/equipo/roxana-fernandez.webp",
+        "linkedin": ""
+      },
+      {
+        "role": "Tesorería",
+        "role_en": "Treasury",
+        "role_pt": "Tesouraria",
+        "name": "[Nombre y país]",
+        "photo": "/images/equipo/miembro-2.webp",
+        "linkedin": ""
+      }
+    ]
+  },
+  "committees": {
+    "title": "Comités",
+    "title_en": "Committees",
+    "title_pt": "Comitês",
+    "members": [
+      {
+        "role": "Comité científico",
+        "role_en": "Scientific committee",
+        "role_pt": "Comitê científico",
+        "name": "[Nombre y país]",
+        "photo": "/images/equipo/miembro-2.webp",
+        "linkedin": ""
+      },
+      {
+        "role": "Comité de formación",
+        "role_en": "Training committee",
+        "role_pt": "Comitê de formação",
+        "name": "[Nombre y país]",
+        "photo": "/images/equipo/roxana-fernandez.webp",
+        "linkedin": ""
+      },
+      {
+        "role": "Comité de comunicación",
+        "role_en": "Communications committee",
+        "role_pt": "Comitê de comunicação",
+        "name": "[Nombre y país]",
+        "photo": "/images/equipo/miembro-2.webp",
+        "linkedin": ""
+      },
+      {
+        "role": "Comité de ética",
+        "role_en": "Ethics committee",
+        "role_pt": "Comitê de ética",
+        "name": "[Nombre y país]",
+        "photo": "/images/equipo/roxana-fernandez.webp",
+        "linkedin": ""
+      }
+    ]
+  },
+  "documents": {
+    "eyebrow": "Transparencia",
+    "eyebrow_en": "Transparency",
+    "eyebrow_pt": "Transparência",
+    "title": "Documentos oficiales",
+    "title_en": "Official documents",
+    "title_pt": "Documentos oficiais",
+    "items": [
+      {
+        "title": "Estatutos",
+        "title_en": "Bylaws",
+        "title_pt": "Estatutos",
+        "file": ""
+      },
+      {
+        "title": "Memoria anual",
+        "title_en": "Annual report",
+        "title_pt": "Relatório anual",
+        "file": ""
+      },
+      {
+        "title": "Política de patrocinios y conflictos de interés",
+        "title_en": "Sponsorship and conflict of interest policy",
+        "title_pt": "Política de patrocínios e conflitos de interesse",
+        "file": ""
+      }
+    ]
+  },
+  "allies": {
+    "title": "Alianzas",
+    "title_en": "Partnerships",
+    "title_pt": "Alianças",
+    "text": "Organismos y federaciones con las que FESPAN colabora",
+    "text_en": "Organizations and federations FESPAN works with",
+    "text_pt": "Organismos e federações com os quais a FESPAN colabora",
+    "items": [
+      {
+        "name": "[LOGO 1]",
+        "logo": "",
+        "url": ""
+      },
+      {
+        "name": "[LOGO 2]",
+        "logo": "",
+        "url": ""
+      },
+      {
+        "name": "[LOGO 3]",
+        "logo": "",
+        "url": ""
+      },
+      {
+        "name": "[LOGO 4]",
+        "logo": "",
+        "url": ""
+      },
+      {
+        "name": "[LOGO 5]",
+        "logo": "",
+        "url": ""
+      },
+      {
+        "name": "[LOGO 6]",
+        "logo": "",
+        "url": ""
+      }
+    ]
+  },
+  "seo": {
+    "title": "Nosotros — FESPAN",
+    "title_en": "About us — FESPAN",
+    "title_pt": "Sobre nós — FESPAN",
+    "description": "Una red panamericana que impulsa la ciencia nutricional y la salud de nuestras poblaciones.",
+    "description_en": "A Pan American network advancing nutrition science and the health of our populations.",
+    "description_pt": "Uma rede pan-americana que impulsiona a ciência da nutrição e a saúde de nossas populações."
+  }
+}

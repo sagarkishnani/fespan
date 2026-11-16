@@ -85,6 +85,12 @@ Cada sección alimentada por el CMS son dos archivos:
 - `ComponenteReact.tsx` — recibe esas props y renderiza; envuelve el contenido en
   `useTina()`, que es lo que habilita la edición visual en el panel.
 
+Las secciones estáticas usan `client:tina` (en producción no cargan React);
+solo hidratan en el navegador el header, el video de la home, los listados con
+filtros (blog, conocimiento, miembros), el formulario y el botón de compartir.
+Las animaciones de entrada son `data-reveal` + un script vanilla en
+`BaseLayout` (y `data-count` para los contadores).
+
 Directivas de hidratación: `client:load` arriba del fold, `client:visible`
 debajo. `client:tina` (integración propia en `astro-tina-directive/`) hidrata
 **solo dentro del editor de Tina**: en producción no carga React.
@@ -103,9 +109,16 @@ Los tipos, las queries y el cliente se generan en `tina/__generated__/`
 
 Colecciones:
 
-- `global` — navegación, footer, SEO por defecto, código inyectado.
-- `home` — contenido de la portada.
-- `post` — artículos del blog en MDX (`src/content/blog/`).
+- `global` — navegación, banda CTA, footer, SEO por defecto, código inyectado.
+- Páginas (documento único): `home`, `about` (Nosotros), `activitiesPage`,
+  `knowledgePage`, `membersPage`, `contactPage`, `blogPage`.
+- `activity` — congresos y formaciones (`/actividades/<slug>`).
+- `knowledgeDoc` — guías e investigaciones (`/conocimiento`).
+- `society` — sociedades miembro; `countryCode` decide la silueta del mapa
+  (`src/data/america-map.json` + `src/data/countryPins.ts`).
+- `post` — artículos del blog en MDX (`src/content/blog/`), con plantillas
+  `Callout`, `Figure` y `Quote` en el cuerpo.
+- `legal` — páginas legales en MDX (`/legal/<slug>`).
 - `formConfig` — por formulario: `formType`, `label`, `enabled`, `recipients[]`.
 - `dynamicForms` — definición completa de cada formulario (un JSON por formulario).
 - `maintenance` — modo mantenimiento del sitio.
@@ -181,16 +194,16 @@ sobre fondo claro ese tono es ilegible.
 Space Mono (acentos técnicos). La escala está como utilidades de Tailwind
 (`heading-xxl` → `caption-sm`).
 
-### Internacionalización (EN)
+### Internacionalización (ES / EN / PT)
 
 `es` es el idioma por defecto y vive en la raíz;
-`en` vive bajo `/en/`. Cada campo cae al idioma
+`en` vive bajo `/en/` y `pt` bajo `/pt/`. Cada campo cae al idioma
 por defecto cuando no hay traducción.
 
 - **Astro i18n** (`astro.config.mjs`): `prefixDefaultLocale: false` y **sin
   `fallback`** — en salida estática el fallback genera redirects, no páginas.
-- **Las páginas `/en` son reales**: wrappers en
-  `src/pages/en/**` que importan la página del idioma por defecto
+- **Las páginas `/en` y `/pt` son reales**: wrappers en
+  `src/pages/en/**` y `src/pages/pt/**` que importan la página del idioma por defecto
   y renderizan `<Page />`; las rutas dinámicas re-exportan `getStaticPaths`.
   **Al agregar una ruta nueva, agrega también su wrapper.**
 - **Detección de idioma**: `BaseLayout` calcula el locale
@@ -198,12 +211,18 @@ por defecto cuando no hay traducción.
   islas; los componentes no leen `currentLocale` por su cuenta.
 - **Helpers** (`src/utils/i18n.ts`): `getLocale`, `localizedPath`,
   `localizeHref`, `tField`, `richField`. Todos conscientes de `BASE_URL`.
-- **Convención `_en`**: cada campo traducible del CMS tiene un
-  hermano opcional `<campo>_en`. Vacío ⇒ idioma por defecto.
+- **Convención `_en` / `_pt`**: cada campo traducible del CMS tiene hermanos
+  opcionales `<campo>_en` y `<campo>_pt`. En el schema se declaran con
+  `localized()` / `translations()` de `tina/collections/localized.ts`, que
+  los genera a partir de `TRANSLATED_LOCALES`. Vacío ⇒ idioma por defecto.
   Se leen con `tField(obj, 'campo', locale)`; los rich-text con
   `richField(...)` (un `tField` devolvería un objeto, y Tina entrega un
   rich-text vacío pero *truthy* cuando la traducción no existe).
-- **Textos de UI que no están en el CMS**: `src/i18n/ui.ts` → `t(key, locale)`.
+- **Textos de UI que no están en el CMS**: `src/i18n/ui.ts` → `t(key, locale)`;
+  áreas, categorías y países con `translateTerm(valor, locale)`.
+- **Agregar un idioma**: súmalo a `LOCALES` en `src/i18n/config.ts` y a
+  `astro.config.mjs`, crea sus wrappers en `src/pages/<código>/` y su tabla en
+  `ui.ts` y en `FORM_UI` de `DynamicFormReact.tsx`.
 
 ### Panel del CMS
 

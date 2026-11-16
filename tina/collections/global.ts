@@ -1,11 +1,14 @@
 import type { Collection } from "tinacms";
+import { text, longText, linkObject, singleDocument } from "./shared";
+
+const navLinkFields = [...text("label", "Texto"), { name: "url", label: "URL", type: "string" as const }];
 
 export const globalCollection: Collection = {
   name: "global",
   label: "Global (nav / footer / SEO)",
   path: "src/content/global",
   format: "json",
-  ui: { allowedActions: { create: false, delete: false } },
+  ui: singleDocument,
   fields: [
     {
       type: "object",
@@ -20,32 +23,23 @@ export const globalCollection: Collection = {
           label: "Enlaces",
           list: true,
           ui: { itemProps: (item) => ({ label: item?.label || "Enlace" }) },
-          fields: [
-            { name: "label", label: "Texto", type: "string" },
-            { name: "label_en", label: "Texto (EN)", type: "string" },
-            { name: "url", label: "URL", type: "string" },
-            { name: "external", label: "Abre en otra pestaña", type: "boolean" },
-          ],
+          fields: navLinkFields,
         },
-        {
-          type: "object",
-          name: "cta",
-          label: "Botón principal",
-          fields: [
-            { name: "label", label: "Texto", type: "string" },
-            { name: "label_en", label: "Texto (EN)", type: "string" },
-            { name: "url", label: "URL", type: "string" },
-          ],
-        },
+        linkObject("cta", "Botón principal"),
+        { name: "loginUrl", label: "URL de 'Ingresar' (vacío lo oculta)", type: "string" },
       ],
+    },
+    {
+      type: "object",
+      name: "ctaBand",
+      label: "Banda de llamada a la acción (antes del footer)",
+      fields: [...text("title", "Título"), linkObject("button", "Botón")],
     },
     {
       type: "object",
       name: "footer",
       label: "Footer",
       fields: [
-        { name: "tagline", label: "Frase", type: "string" },
-        { name: "tagline_en", label: "Frase (EN)", type: "string" },
         {
           type: "object",
           name: "columns",
@@ -53,22 +47,21 @@ export const globalCollection: Collection = {
           list: true,
           ui: { itemProps: (item) => ({ label: item?.title || "Columna" }) },
           fields: [
-            { name: "title", label: "Título", type: "string" },
-            { name: "title_en", label: "Título (EN)", type: "string" },
+            ...text("title", "Título"),
             {
               type: "object",
               name: "links",
               label: "Enlaces",
               list: true,
               ui: { itemProps: (item) => ({ label: item?.label || "Enlace" }) },
-              fields: [
-                { name: "label", label: "Texto", type: "string" },
-                { name: "label_en", label: "Texto (EN)", type: "string" },
-                { name: "url", label: "URL", type: "string" },
-              ],
+              fields: navLinkFields,
             },
           ],
         },
+        ...text("helpTitle", "Título de ayuda"),
+        ...longText("helpText", "Texto de ayuda"),
+        { name: "phone", label: "Teléfono", type: "string" },
+        { name: "email", label: "Correo", type: "string" },
         {
           type: "object",
           name: "social",
@@ -80,13 +73,12 @@ export const globalCollection: Collection = {
               name: "network",
               label: "Red",
               type: "string",
-              options: ["linkedin", "instagram", "facebook", "x", "youtube", "tiktok", "whatsapp"],
+              options: ["facebook", "instagram", "linkedin", "x", "youtube", "tiktok", "whatsapp"],
             },
             { name: "url", label: "URL", type: "string" },
           ],
         },
-        { name: "legal", label: "Línea legal", type: "string" },
-        { name: "legal_en", label: "Línea legal (EN)", type: "string" },
+        ...text("legal", "Línea legal"),
       ],
     },
     {
@@ -94,11 +86,9 @@ export const globalCollection: Collection = {
       name: "seo",
       label: "SEO por defecto",
       fields: [
-        { name: "title", label: "Título por defecto", type: "string" },
-        { name: "description", label: "Descripción por defecto", type: "string", ui: { component: "textarea" } },
+        ...text("title", "Título por defecto"),
+        ...longText("description", "Descripción por defecto"),
         { name: "ogImage", label: "Imagen para compartir (1200×630)", type: "image" },
-        { name: "title_en", label: "Título por defecto (EN)", type: "string" },
-        { name: "description_en", label: "Descripción por defecto (EN)", type: "string", ui: { component: "textarea" } },
       ],
     },
     {

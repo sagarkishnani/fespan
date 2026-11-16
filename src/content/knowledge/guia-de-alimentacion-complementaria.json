@@ -1,0 +1,19 @@
+{
+  "title": "Guía de alimentación complementaria",
+  "title_en": "Complementary feeding guideline",
+  "title_pt": "Guia de alimentação complementar",
+  "kind": "guia",
+  "area": "Pediatría",
+  "published": "[FECHA]",
+  "revision": "[FECHA]",
+  "authors": "[GRUPO DE TRABAJO]",
+  "conflicts": "[DECLARACIÓN]",
+  "conflicts_en": "[STATEMENT]",
+  "conflicts_pt": "[DECLARAÇÃO]",
+  "languages": [
+    "ES",
+    "PT",
+    "EN"
+  ],
+  "file": ""
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Alimentación saludable en la escuela",
+  "title_en": "Healthy eating at school",
+  "title_pt": "Alimentação saudável na escola",
+  "kind": "guia",
+  "area": "Pediatría",
+  "published": "[FECHA]",
+  "revision": "[FECHA]",
+  "authors": "[GRUPO DE TRABAJO]",
+  "conflicts": "[DECLARACIÓN]",
+  "conflicts_en": "[STATEMENT]",
+  "conflicts_pt": "[DECLARAÇÃO]",
+  "languages": [
+    "ES",
+    "PT",
+    "EN"
+  ],
+  "file": ""
+}

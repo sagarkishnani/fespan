@@ -1,0 +1,66 @@
+{
+  "kind": "congreso",
+  "title": "Congreso Panamericano de Nutrición 2027",
+  "title_en": "Pan American Nutrition Congress 2027",
+  "title_pt": "Congresso Pan-Americano de Nutrição 2027",
+  "badge": "Próximo congreso",
+  "badge_en": "Upcoming congress",
+  "badge_pt": "Próximo congresso",
+  "dateLabel": "2027",
+  "dateLabel_en": "2027",
+  "dateLabel_pt": "2027",
+  "place": "Por confirmar",
+  "place_en": "To be confirmed",
+  "place_pt": "A confirmar",
+  "summary": "Ciencia, formación y encuentro entre las sociedades de las Américas, con programa en español, portugués e inglés.",
+  "summary_en": "Science, training and exchange among the societies of the Americas, with a program in Spanish, Portuguese and English.",
+  "summary_pt": "Ciência, formação e encontro entre as sociedades das Américas, com programação em espanhol, português e inglês.",
+  "image": "/images/actividades/congreso-panamericano.webp",
+  "imagePosition": "center",
+  "facts": [
+    {
+      "label": "Tema",
+      "label_en": "Topic",
+      "label_pt": "Tema",
+      "value": "Por confirmar",
+      "value_en": "To be confirmed",
+      "value_pt": "A confirmar"
+    },
+    {
+      "label": "Fecha",
+      "label_en": "Date",
+      "label_pt": "Data",
+      "value": "2027",
+      "value_en": "2027",
+      "value_pt": "2027"
+    },
+    {
+      "label": "Ciudad",
+      "label_en": "City",
+      "label_pt": "Cidade",
+      "value": "Por confirmar",
+      "value_en": "To be confirmed",
+      "value_pt": "A confirmar"
+    },
+    {
+      "label": "Sede",
+      "label_en": "Venue",
+      "label_pt": "Sede",
+      "value": "Por confirmar",
+      "value_en": "To be confirmed",
+      "value_pt": "A confirmar"
+    },
+    {
+      "label": "Organiza",
+      "label_en": "Organizer",
+      "label_pt": "Organização",
+      "value": "FESPAN",
+      "value_en": "FESPAN",
+      "value_pt": "FESPAN"
+    }
+  ],
+  "abstractUrl": "/contacto",
+  "registerUrl": "/contacto",
+  "showOnHome": true,
+  "order": 1
+}

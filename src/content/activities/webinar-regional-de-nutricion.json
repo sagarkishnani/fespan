@@ -1,0 +1,58 @@
+{
+  "kind": "formacion",
+  "title": "Webinar Regional de Nutrición",
+  "title_en": "Regional Nutrition Webinar",
+  "title_pt": "Webinar Regional de Nutrição",
+  "badge": "Próxima formación",
+  "badge_en": "Upcoming training",
+  "badge_pt": "Próxima formação",
+  "dateLabel": "Feb 2027",
+  "dateLabel_en": "Feb 2027",
+  "dateLabel_pt": "Fev 2027",
+  "place": "Webinar",
+  "place_en": "Webinar",
+  "place_pt": "Webinar",
+  "summary": "Sesión virtual abierta a profesionales de la nutrición y la salud de toda la región.",
+  "summary_en": "A virtual session open to nutrition and health professionals across the region.",
+  "summary_pt": "Sessão virtual aberta a profissionais de nutrição e saúde de toda a região.",
+  "image": "/images/blog/aula.webp",
+  "imagePosition": "center",
+  "facts": [
+    {
+      "label": "Modalidad",
+      "label_en": "Format",
+      "label_pt": "Modalidade",
+      "value": "Virtual",
+      "value_en": "Online",
+      "value_pt": "Virtual"
+    },
+    {
+      "label": "Fecha",
+      "label_en": "Date",
+      "label_pt": "Data",
+      "value": "Feb 2027",
+      "value_en": "Feb 2027",
+      "value_pt": "Fev 2027"
+    },
+    {
+      "label": "Tema",
+      "label_en": "Topic",
+      "label_pt": "Tema",
+      "value": "Por confirmar",
+      "value_en": "To be confirmed",
+      "value_pt": "A confirmar"
+    },
+    {
+      "label": "Organiza",
+      "label_en": "Organizer",
+      "label_pt": "Organização",
+      "value": "FESPAN",
+      "value_en": "FESPAN",
+      "value_pt": "FESPAN"
+    }
+  ],
+  "abstractUrl": "",
+  "registerUrl": "/contacto",
+  "showOnHome": true,
+  "order": 5
+}

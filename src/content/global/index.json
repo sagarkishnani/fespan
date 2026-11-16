@@ -1,30 +1,187 @@
 {
   "nav": {
+    "logo": "/images/marca/logo-fespan.svg",
     "logoAlt": "FESPAN",
     "links": [
-      { "label": "Inicio", "url": "/" },
-      { "label": "Nosotros", "url": "/#features" },
-      { "label": "Contacto", "url": "/#cta" }
+      {
+        "label": "Inicio",
+        "label_en": "Home",
+        "label_pt": "Início",
+        "url": "/"
+      },
+      {
+        "label": "Nosotros",
+        "label_en": "About us",
+        "label_pt": "Sobre nós",
+        "url": "/nosotros"
+      },
+      {
+        "label": "Miembros",
+        "label_en": "Members",
+        "label_pt": "Membros",
+        "url": "/miembros"
+      },
+      {
+        "label": "Actividades",
+        "label_en": "Activities",
+        "label_pt": "Atividades",
+        "url": "/actividades"
+      },
+      {
+        "label": "Conocimiento",
+        "label_en": "Knowledge",
+        "label_pt": "Conhecimento",
+        "url": "/conocimiento"
+      },
+      {
+        "label": "Blog",
+        "label_en": "Blog",
+        "label_pt": "Blog",
+        "url": "/blog"
+      }
     ],
-    "cta": { "label": "Conversemos", "url": "/#cta" }
+    "cta": {
+      "label": "Contáctanos",
+      "label_en": "Contact us",
+      "label_pt": "Fale conosco",
+      "url": "/contacto"
+    },
+    "loginUrl": ""
+  },
+  "ctaBand": {
+    "title": "Conoce más sobre FESPAN, sus iniciativas y eventos",
+    "title_en": "Learn more about FESPAN, its initiatives and events",
+    "title_pt": "Saiba mais sobre a FESPAN, suas iniciativas e eventos",
+    "button": {
+      "label": "Conversemos",
+      "label_en": "Let’s talk",
+      "label_pt": "Vamos conversar",
+      "url": "/contacto"
+    }
   },
   "footer": {
-    "tagline": "Federación de Sociedades Panamericanas de Nutrición. Integramos a las sociedades de nutrición de las Américas para mejorar la salud de nuestras poblaciones.",
     "columns": [
       {
-        "title": "Sitio",
+        "title": "Conoce FESPAN",
+        "title_en": "About FESPAN",
+        "title_pt": "Conheça a FESPAN",
         "links": [
-          { "label": "Inicio", "url": "/" },
-          { "label": "Contacto", "url": "/#cta" }
+          {
+            "label": "Nosotros",
+            "label_en": "About us",
+            "label_pt": "Sobre nós",
+            "url": "/nosotros"
+          },
+          {
+            "label": "Miembros",
+            "label_en": "Members",
+            "label_pt": "Membros",
+            "url": "/miembros"
+          },
+          {
+            "label": "Actividades",
+            "label_en": "Activities",
+            "label_pt": "Atividades",
+            "url": "/actividades"
+          },
+          {
+            "label": "Conocimiento",
+            "label_en": "Knowledge",
+            "label_pt": "Conhecimento",
+            "url": "/conocimiento"
+          },
+          {
+            "label": "Blog",
+            "label_en": "Blog",
+            "label_pt": "Blog",
+            "url": "/blog"
+          }
+        ]
+      },
+      {
+        "title": "Recursos",
+        "title_en": "Resources",
+        "title_pt": "Recursos",
+        "links": [
+          {
+            "label": "Publicaciones",
+            "label_en": "Publications",
+            "label_pt": "Publicações",
+            "url": "/blog"
+          },
+          {
+            "label": "Eventos",
+            "label_en": "Events",
+            "label_pt": "Eventos",
+            "url": "/actividades"
+          },
+          {
+            "label": "Directorio",
+            "label_en": "Directory",
+            "label_pt": "Diretório",
+            "url": "/miembros"
+          }
+        ]
+      },
+      {
+        "title": "Legales",
+        "title_en": "Legal",
+        "title_pt": "Legal",
+        "links": [
+          {
+            "label": "Política de patrocinios",
+            "label_en": "Sponsorship policy",
+            "label_pt": "Política de patrocínios",
+            "url": "/legal/politica-de-patrocinios"
+          },
+          {
+            "label": "Política de privacidad",
+            "label_en": "Privacy policy",
+            "label_pt": "Política de privacidade",
+            "url": "/legal/politica-de-privacidad"
+          },
+          {
+            "label": "Términos y condiciones",
+            "label_en": "Terms and conditions",
+            "label_pt": "Termos e condições",
+            "url": "/legal/terminos-y-condiciones"
+          }
         ]
       }
     ],
-    "social": [],
-    "legal": "© 2026 FESPAN. Todos los derechos reservados."
+    "helpTitle": "Estamos para ayudarte",
+    "helpTitle_en": "We’re here to help",
+    "helpTitle_pt": "Estamos aqui para ajudar",
+    "helpText": "Comunícate con nosotros a través de nuestros canales de atención",
+    "helpText_en": "Get in touch with us through our support channels",
+    "helpText_pt": "Fale conosco por meio de nossos canais de atendimento",
+    "phone": "(51) 979 900 749",
+    "email": "presidenta@fespan.org",
+    "social": [
+      {
+        "network": "facebook",
+        "url": "https://www.facebook.com/"
+      },
+      {
+        "network": "instagram",
+        "url": "https://www.instagram.com/"
+      }
+    ],
+    "legal": "Copyright © 2025 FESPAN - Federación de Sociedades Panamericanas de Nutrición. Todos los derechos reservados",
+    "legal_en": "Copyright © 2025 FESPAN - Federation of Pan American Nutrition Societies. All rights reserved",
+    "legal_pt": "Copyright © 2025 FESPAN - Federação de Sociedades Pan-Americanas de Nutrição. Todos os direitos reservados"
   },
   "seo": {
-    "title": "FESPAN",
-    "description": "Federación de Sociedades Panamericanas de Nutrición. Integramos a las sociedades de nutrición de las Américas para mejorar la salud de nuestras poblaciones."
+    "title": "FESPAN — Federación de Sociedades Panamericanas de Nutrición",
+    "title_en": "FESPAN — Federation of Pan American Nutrition Societies",
+    "title_pt": "FESPAN — Federação de Sociedades Pan-Americanas de Nutrição",
+    "description": "Integramos a las sociedades de nutrición de las Américas para mejorar la salud de nuestras poblaciones.",
+    "description_en": "We bring together the nutrition societies of the Americas to improve the health of our populations.",
+    "description_pt": "Reunimos as sociedades de nutrição das Américas para melhorar a saúde de nossas populações.",
+    "ogImage": ""
   },
-  "codeInjection": { "head": "", "bodyEnd": "" }
+  "codeInjection": {
+    "head": "",
+    "bodyEnd": ""
+  }
 }

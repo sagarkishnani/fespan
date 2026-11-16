@@ -1,62 +1,26 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogTitle from "../../components/blog/BlogTitle";
+import BlogBrowser from "../../components/blog/BlogBrowser";
 import client from "../../../tina/__generated__/client";
-import { getLocale, tField } from "../../utils/i18n";
-import { isLocale } from "../../i18n/config";
-import { mediaUrl } from "../../utils/mediaUrl";
+import { pageLocale, seoOf } from "../../lib/pageLocale";
+import { nodesOf, sortByDateDesc, toPostCard } from "../../lib/viewModels";
+import { translateTerm } from "../../i18n/ui";
+import { BLOG_CATEGORIES } from "../../../tina/collections/post";
 
-const locale = isLocale(Astro.currentLocale) ? Astro.currentLocale : getLocale(Astro.url);
-const base = import.meta.env.BASE_URL || "/";
-const prefix = locale === "es" ? base : `${base}${locale}/`;
-
-const result = await client.queries.postConnection();
-const posts = (result.data?.postConnection?.edges || [])
-  .map((edge: any) => edge?.node)
-  .filter(Boolean)
-  .sort((a: any, b: any) => new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime());
+const locale = pageLocale(Astro);
+const { query, variables, data } = await client.queries.blogPage({ relativePath: "index.json" });
+const postResult = await client.queries.postConnection({ first: 500 });
+const posts = sortByDateDesc(nodesOf(postResult.data.postConnection)).map((post) => toPostCard(post, locale));
+const usedCategories = new Set(posts.map((post) => post.categoryKey));
+const categories = BLOG_CATEGORIES.filter((key) => usedCategories.has(key)).map((key) => ({ key, label: translateTerm(key, locale) }));
+const seo = seoOf(data.blogPage.seo, locale);
 ---
 
-<BaseLayout title="Blog — FESPAN" description="Artículos y novedades.">
-  <section class="section pt-[128px]">
-    <div class="container-xl">
-      <h1 class="text-heading-xl">Blog</h1>
-
-      <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post: any) => (
-          <a
-            href={`${prefix}blog/${post._sys.filename}`}
-            class="card group flex flex-col overflow-hidden !p-0"
-          >
-            {post.coverImage && (
-              <img
-                src={mediaUrl(post.coverImage)}
-                alt=""
-                class="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-              />
-            )}
-            <div class="flex flex-1 flex-col p-6">
-              <div class="flex flex-wrap gap-2">
-                {(post.tags || []).map((tag: string) => (
-                  <span class="rounded-full bg-brand-primary/15 px-3 py-1 text-caption-sm text-accent">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <h2 class="mt-4 text-subtitle-sm">{tField(post, "title", locale)}</h2>
-              <p class="mt-2 flex-1 text-body-sm text-content-muted">
-                {tField(post, "excerpt", locale)}
-              </p>
-              {post.date && (
-                <time class="mt-4 text-caption-sm text-content-subtle" datetime={post.date}>
-                  {new Date(post.date).toLocaleDateString(locale, {
-                    year: "numeric", month: "long", day: "numeric",
-                  })}
-                </time>
-              )}
-            </div>
-          </a>
-        ))}
-      </div>
-    </div>
+<BaseLayout title={seo.title} description={seo.description} showCta>
+  <section class="container-xl page-top pb-20 lg:pb-[120px]">
+    <BlogBrowser posts={posts} categories={categories} locale={locale} client:load>
+      <BlogTitle query={query} variables={variables} data={data} locale={locale} client:tina />
+    </BlogBrowser>
   </section>
 </BaseLayout>

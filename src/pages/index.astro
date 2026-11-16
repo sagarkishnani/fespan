@@ -1,20 +1,32 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Hero from "../components/home/Hero.astro";
-import Features from "../components/home/Features.astro";
-import CTA from "../components/home/CTA.astro";
+import HomeHero from "../components/home/HomeHero";
+import HomeAbout from "../components/home/HomeAbout";
+import HomeActivities from "../components/home/HomeActivities";
+import HomeVideo from "../components/home/HomeVideo";
+import HomeNews from "../components/home/HomeNews";
 import client from "../../tina/__generated__/client";
-import { getLocale } from "../utils/i18n";
-import { isLocale } from "../i18n/config";
+import { pageLocale, seoOf } from "../lib/pageLocale";
+import { nodesOf, sortByDateDesc, sortByOrder, toActivityCard, toPostCard } from "../lib/viewModels";
 
-const locale = isLocale(Astro.currentLocale) ? Astro.currentLocale : getLocale(Astro.url);
-const result = await client.queries.home({ relativePath: "index.json" });
-const { query, variables, data } = result;
-const seo = data?.home?.seo;
+const locale = pageLocale(Astro);
+const { query, variables, data } = await client.queries.home({ relativePath: "index.json" });
+const sectionProps = { query, variables, data, locale };
+
+const activityResult = await client.queries.activityConnection({ first: 50 });
+const activities = sortByOrder(nodesOf(activityResult.data.activityConnection))
+  .filter((activity: any) => activity.showOnHome)
+  .map((activity) => toActivityCard(activity, locale));
+
+const postResult = await client.queries.postConnection({ first: 50 });
+const posts = sortByDateDesc(nodesOf(postResult.data.postConnection)).map((post) => toPostCard(post, locale));
+const seo = seoOf(data.home.seo, locale);
 ---
 
-<BaseLayout title={seo?.title} description={seo?.description}>
-  <Hero query={query} variables={variables} data={data} locale={locale} />
-  <Features query={query} variables={variables} data={data} locale={locale} />
-  <CTA query={query} variables={variables} data={data} locale={locale} />
+<BaseLayout title={seo.title} description={seo.description} image={data.home.hero?.image ?? undefined}>
+  <HomeHero {...sectionProps} client:tina />
+  <HomeAbout {...sectionProps} client:tina />
+  <HomeActivities {...sectionProps} activities={activities} client:tina />
+  <HomeVideo {...sectionProps} client:visible />
+  <HomeNews {...sectionProps} posts={posts} client:tina />
 </BaseLayout>

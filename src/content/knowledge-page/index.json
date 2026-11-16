@@ -1,0 +1,18 @@
+{
+  "hero": {
+    "title": "Conocimiento",
+    "title_en": "Knowledge",
+    "title_pt": "Conhecimento",
+    "subtitle": "Guías e investigaciones elaboradas por los grupos de trabajo.",
+    "subtitle_en": "Guidelines and research produced by the working groups.",
+    "subtitle_pt": "Guias e pesquisas elaboradas pelos grupos de trabalho."
+  },
+  "seo": {
+    "title": "Conocimiento — FESPAN",
+    "title_en": "Knowledge — FESPAN",
+    "title_pt": "Conhecimento — FESPAN",
+    "description": "Guías e investigaciones elaboradas por los grupos de trabajo.",
+    "description_en": "Guidelines and research produced by the working groups.",
+    "description_pt": "Guias e pesquisas elaboradas pelos grupos de trabalho."
+  }
+}

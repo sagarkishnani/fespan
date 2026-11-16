@@ -1,0 +1,58 @@
+{
+  "kind": "congreso",
+  "title": "IUNS-ICN 2025",
+  "title_en": "IUNS-ICN 2025",
+  "title_pt": "IUNS-ICN 2025",
+  "badge": "Congreso",
+  "badge_en": "Congress",
+  "badge_pt": "Congresso",
+  "dateLabel": "24–29 Ago 2025",
+  "dateLabel_en": "Aug 24–29, 2025",
+  "dateLabel_pt": "24–29 ago 2025",
+  "place": "París, Francia",
+  "place_en": "Paris, France",
+  "place_pt": "Paris, França",
+  "summary": "International Congress of Nutrition. Sustainable food for global health.",
+  "summary_en": "International Congress of Nutrition. Sustainable food for global health.",
+  "summary_pt": "International Congress of Nutrition. Sustainable food for global health.",
+  "image": "/images/actividades/iuns-icn.webp",
+  "imagePosition": "center",
+  "facts": [
+    {
+      "label": "Tema",
+      "label_en": "Topic",
+      "label_pt": "Tema",
+      "value": "Sustainable food for global health",
+      "value_en": "Sustainable food for global health",
+      "value_pt": "Sustainable food for global health"
+    },
+    {
+      "label": "Fecha",
+      "label_en": "Date",
+      "label_pt": "Data",
+      "value": "24–29 Ago 2025",
+      "value_en": "Aug 24–29, 2025",
+      "value_pt": "24–29 ago 2025"
+    },
+    {
+      "label": "Ciudad",
+      "label_en": "City",
+      "label_pt": "Cidade",
+      "value": "París, Francia",
+      "value_en": "Paris, France",
+      "value_pt": "Paris, França"
+    },
+    {
+      "label": "Organiza",
+      "label_en": "Organizer",
+      "label_pt": "Organização",
+      "value": "IUNS",
+      "value_en": "IUNS",
+      "value_pt": "IUNS"
+    }
+  ],
+  "abstractUrl": "/contacto",
+  "registerUrl": "/contacto",
+  "showOnHome": true,
+  "order": 4
+}

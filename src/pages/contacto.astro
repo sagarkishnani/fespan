@@ -1,19 +1,31 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactHero from "../components/contact/ContactHero";
+import ContactChannels from "../components/contact/ContactChannels";
 import DynamicForm from "../components/dynamic-form/DynamicForm.astro";
+import client from "../../tina/__generated__/client";
+import { pageLocale, seoOf } from "../lib/pageLocale";
+
+const locale = pageLocale(Astro);
+const { query, variables, data } = await client.queries.contactPage({ relativePath: "index.json" });
+const sectionProps = { query, variables, data, locale };
+const mapEmbedUrl = data.contactPage.mapEmbedUrl;
+const seo = seoOf(data.contactPage.seo, locale);
 ---
 
-<BaseLayout title="Contacto — FESPAN" description="Escríbenos y te respondemos pronto.">
-  <section class="section pt-[128px]">
-    <div class="container-lg">
-      <h1 class="text-heading-lg">Contacto</h1>
-      <p class="mt-3 max-w-xl text-body-lg text-content-muted">
-        Escríbenos y te respondemos el mismo día.
-      </p>
-
-      <div class="mt-10">
-        <DynamicForm formSlug="contacto" />
-      </div>
+<BaseLayout title={seo.title} description={seo.description}>
+  <ContactHero {...sectionProps} client:tina />
+  <section class="container-xl grid items-start gap-12 py-20 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:pb-[100px] lg:pt-[110px]">
+    <div data-reveal class="rounded-4xl bg-surface-raised p-6 sm:p-12">
+      <DynamicForm formSlug="contacto" />
     </div>
+    <ContactChannels {...sectionProps} client:tina />
   </section>
+  {mapEmbedUrl && (
+    <section class="container-xl pb-20 lg:pb-[120px]">
+      <div data-reveal class="h-[360px] overflow-hidden rounded-4xl bg-[#E8EEEB] lg:h-[480px] lg:rounded-5xl">
+        <iframe title="Mapa FESPAN" src={mapEmbedUrl} class="block h-full w-full border-0 saturate-[.85]" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </section>
+  )}
 </BaseLayout>

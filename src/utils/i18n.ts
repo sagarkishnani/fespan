@@ -1,4 +1,4 @@
-import { DEFAULT_LOCALE, type Locale } from "../i18n/config";
+import { DEFAULT_LOCALE, TRANSLATED_LOCALES, type Locale } from "../i18n/config";
 
 const BASE = import.meta.env.BASE_URL || "/";
 
@@ -15,13 +15,13 @@ export function stripBase(pathname: string): string {
   return p.replace(/^\/+|\/+$/g, "");
 }
 
+function localePrefixOf(rel: string): Locale | null {
+  return TRANSLATED_LOCALES.find((code) => rel === code || rel.startsWith(`${code}/`)) ?? null;
+}
+
 export function getLocale(url: URL | string): Locale {
   const pathname = typeof url === "string" ? url : url.pathname;
-  const rel = stripBase(pathname);
-  // Cast: in single-locale projects the second locale is not part of the Locale union.
-  return rel === "en" || rel.startsWith("en/")
-    ? ("en" as Locale)
-    : DEFAULT_LOCALE;
+  return localePrefixOf(stripBase(pathname)) ?? DEFAULT_LOCALE;
 }
 
 export function localizedPath(pathname: string, locale: Locale): string {
@@ -29,8 +29,8 @@ export function localizedPath(pathname: string, locale: Locale): string {
   const hadTrailing = pathname.endsWith("/");
   let rel = stripBase(pathname);
 
-  if (rel === "en") rel = "";
-  else if (rel.startsWith("en/")) rel = rel.slice("en/".length);
+  const current = localePrefixOf(rel);
+  if (current) rel = rel === current ? "" : rel.slice(current.length + 1);
 
   const localized =
     locale === DEFAULT_LOCALE ? rel : rel ? `${locale}/${rel}` : locale;
@@ -82,4 +82,9 @@ export function richField(obj: any, key: string, locale: Locale): any {
     return obj[`${key}_${locale}`];
   }
   return obj[key];
+}
+
+export function localePrefix(locale: Locale): string {
+  const b = normBase();
+  return locale === DEFAULT_LOCALE ? b : `${b}${locale}/`;
 }

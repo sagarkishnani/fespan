@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import KnowledgeHero from "../components/knowledge/KnowledgeHero";
+import KnowledgeBrowser, { type KnowledgeDocModel } from "../components/knowledge/KnowledgeBrowser";
+import client from "../../tina/__generated__/client";
+import { pageLocale, seoOf } from "../lib/pageLocale";
+import { nodesOf } from "../lib/viewModels";
+import { tField } from "../utils/i18n";
+import { mediaUrl } from "../utils/mediaUrl";
+import { KNOWLEDGE_AREAS } from "../../tina/collections/knowledgeDoc";
+
+const locale = pageLocale(Astro);
+const { query, variables, data } = await client.queries.knowledgePage({ relativePath: "index.json" });
+const docResult = await client.queries.knowledgeDocConnection({ first: 500 });
+const docs: KnowledgeDocModel[] = nodesOf(docResult.data.knowledgeDocConnection)
+  .map((doc: any) => ({
+    id: doc._sys.filename,
+    kind: doc.kind,
+    area: doc.area || "",
+    title: tField(doc, "title", locale),
+    published: doc.published || "",
+    revision: doc.revision || "",
+    authors: doc.authors || "",
+    conflicts: tField(doc, "conflicts", locale),
+    languages: (doc.languages || []).filter(Boolean).join(" · "),
+    file: mediaUrl(doc.file),
+  }))
+  .sort((a, b) => a.title.localeCompare(b.title, locale));
+const seo = seoOf(data.knowledgePage.seo, locale);
+---
+
+<BaseLayout title={seo.title} description={seo.description} showCta>
+  <KnowledgeHero query={query} variables={variables} data={data} locale={locale} client:tina />
+  <KnowledgeBrowser docs={docs} areas={KNOWLEDGE_AREAS} locale={locale} client:load />
+</BaseLayout>

@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ActivitiesListing from "../../components/activities/ActivitiesListing";
+import client from "../../../tina/__generated__/client";
+import { pageLocale, seoOf } from "../../lib/pageLocale";
+import { nodesOf, sortByOrder, toActivityCard } from "../../lib/viewModels";
+
+const locale = pageLocale(Astro);
+const { query, variables, data } = await client.queries.activitiesPage({ relativePath: "index.json" });
+const activityResult = await client.queries.activityConnection({ first: 100 });
+const activities = sortByOrder(nodesOf(activityResult.data.activityConnection)).map((activity) => toActivityCard(activity, locale));
+const seo = seoOf(data.activitiesPage.seo, locale);
+---
+
+<BaseLayout title={seo.title} description={seo.description} showCta>
+  <ActivitiesListing
+    query={query}
+    variables={variables}
+    data={data}
+    locale={locale}
+    congresses={activities.filter((activity) => activity.kind === "congreso")}
+    trainings={activities.filter((activity) => activity.kind === "formacion")}
+    client:tina
+  />
+</BaseLayout>

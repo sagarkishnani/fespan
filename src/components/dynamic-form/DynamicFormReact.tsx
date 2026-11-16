@@ -65,6 +65,7 @@ const FORM_UI = {
     genericError: "Ocurrió un error al enviar.",
     connError: "No se pudo conectar con el servidor.",
     captchaMissing: "Verificación de seguridad no disponible. Contacta al administrador.",
+    sendAnother: "Enviar otro mensaje",
   },
   en: {
     sending: "Sending...",
@@ -80,6 +81,23 @@ const FORM_UI = {
     genericError: "An error occurred while sending.",
     connError: "Could not connect to the server.",
     captchaMissing: "Security verification unavailable. Please contact the administrator.",
+    sendAnother: "Send another message",
+  },
+  pt: {
+    sending: "Enviando...",
+    submit: "Enviar",
+    selectPlaceholder: "Selecione uma opção",
+    required: "Este campo é obrigatório",
+    invalidEmail: "Digite um e-mail válido",
+    invalidFormat: "Formato inválido",
+    minChars: (n: number) => `Mínimo de ${n} caracteres`,
+    successTitle: "Formulário enviado!",
+    successSubtitle: "Sua solicitação foi registrada com sucesso.",
+    contactSuccess: "Obrigado! Sua mensagem foi enviada.",
+    genericError: "Ocorreu um erro ao enviar.",
+    connError: "Não foi possível conectar ao servidor.",
+    captchaMissing: "Verificação de segurança indisponível. Entre em contato com o administrador.",
+    sendAnother: "Enviar outra mensagem",
   },
 } as const;
 
@@ -190,10 +208,10 @@ function getDefaultValue(field: FormField): any {
 }
 
 const contactLabelCls =
-  "block text-caption-sm font-semibold text-greyscale-darkest tracking-wider uppercase mb-2";
+  "block text-body-sm text-content-soft mb-2.5";
 const contactInputCls =
-  "w-full border rounded-xl px-4 py-3.5 text-body-sm text-greyscale-darkest placeholder:text-greyscale-medium focus:outline-none focus:ring-1 transition-all bg-greyscale-white";
-const contactInputOk = "border-greyscale-light focus:border-brand-primary focus:ring-brand-primary/20";
+  "w-full min-h-14 border rounded-xl px-[18px] py-3.5 text-body-md text-content placeholder:text-content-muted focus:outline-none transition-colors bg-surface";
+const contactInputOk = "border-line focus:border-brand-primary";
 const contactInputErr = "border-red-400 focus:border-red-400 focus:ring-red-400/20";
 const contactErrorCls = "text-caption-sm text-red-500 mt-1";
 
@@ -379,12 +397,12 @@ function ContactSubmitButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`w-full h-12 flex items-center justify-center rounded-[8px] text-greyscale-white text-body-md font-semibold transition-all ${
+      className={`flex h-14 items-center justify-center rounded-full px-8 text-[17px] font-medium text-white transition-colors lg:text-[18px] ${
         disabled
-          ? "bg-brand-primary/60 cursor-not-allowed"
+          ? "cursor-not-allowed bg-brand-primary/60"
           : dark
-          ? "bg-gradient-to-r from-brand-primary to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darkest active:scale-[0.99]"
-          : "bg-brand-primary hover:bg-brand-primary-dark active:scale-[0.99]"
+          ? "bg-gradient-to-r from-brand-primary to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darkest"
+          : "bg-brand-primary hover:bg-brand-primary-dark"
       }`}
     >
       {text}
@@ -711,7 +729,43 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
     }
   };
 
+  function startOver() {
+    setValues(() => {
+      const fresh: Record<string, any> = {};
+      for (const f of fields) {
+        if (f.name && !isStructural(f.fieldType)) fresh[f.name] = getDefaultValue(f);
+      }
+      return fresh;
+    });
+    setSubmitted(false);
+  }
+
   if (submitted) {
+    if (isContact && !isDark) {
+      return (
+        <div className="flex animate-fade-up flex-col items-start gap-4 rounded-2xl bg-surface p-8 lg:p-12">
+          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-primary">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+              <path d="M5 13.5l5.5 5.5L21 7.5" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+          <h3 className="mt-2 text-heading-sm" data-tina-field={tinaField(formConfig, "successTitle")}>
+            {L(formConfig, "successTitle") || ui.successTitle}
+          </h3>
+          <p className="text-[17px] leading-relaxed text-content-muted" data-tina-field={tinaField(formConfig, "successMessage")}>
+            {L(formConfig, "successMessage") || ui.contactSuccess}
+          </p>
+          <button
+            type="button"
+            onClick={startOver}
+            className="mt-2 h-[50px] rounded-full border border-brand-primary px-6 text-body-md font-medium text-brand-primary transition-colors hover:bg-brand-primary hover:text-white"
+          >
+            {ui.sendAnother}
+          </button>
+        </div>
+      );
+    }
+
     if (isContact) {
       return (
         <div className="flex items-center justify-center h-full min-h-[400px]">
@@ -1050,7 +1104,7 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
         .df-grid-${formId} {
           display: grid;
           grid-template-columns: repeat(6, 1fr);
-          gap: 16px 16px;
+          gap: 22px 20px;
         }
         .df-grid-${formId} .df-full  { grid-column: span 6; }
         .df-grid-${formId} .df-half  { grid-column: span 3; }
@@ -1076,7 +1130,7 @@ export default function DynamicFormReact({ query, variables, data: initialData, 
         <div className="mb-8">
           {L(formConfig, "formTitle") && (
             <h2
-              className={`text-subtitle-md font-medium! ${isDark ? "text-greyscale-white mb-2" : "text-greyscale-darkest"}`}
+              className={`text-heading-sm ${isDark ? "text-greyscale-white mb-2" : "text-content"}`}
               data-tina-field={tinaField(formConfig, "formTitle")}
             >
               {L(formConfig, "formTitle")}

@@ -1,20 +1,23 @@
 ---
 import Header from "../components/shared/Header.astro";
 import Footer from "../components/shared/Footer.astro";
+import CtaBand from "../components/shared/CtaBand.astro";
 import client from "../../tina/__generated__/client";
 import { ClientRouter } from "astro:transitions";
-import { getLocale, tField } from "../utils/i18n";
-import { isLocale } from "../i18n/config";
+import { getLocale, tField, localizedPath } from "../utils/i18n";
+import { isLocale, LOCALES, DEFAULT_LOCALE } from "../i18n/config";
+import { mediaUrl } from "../utils/mediaUrl";
 import "../styles/global.css";
 import CookieConsent from "../components/cookies/CookieConsent.astro";
 
 interface Props {
   title?: string;
   description?: string;
-  headerTheme?: "light" | "dark";
+  image?: string;
+  showCta?: boolean;
 }
 
-const { title, description, headerTheme = "dark" } = Astro.props;
+const { title, description, image, showCta = false } = Astro.props;
 
 const locale = isLocale(Astro.currentLocale) ? Astro.currentLocale : getLocale(Astro.url);
 
@@ -27,7 +30,13 @@ try {
 const seoTitle = title || tField(globalData?.seo, "title", locale) || "FESPAN";
 const seoDescription =
   description || tField(globalData?.seo, "description", locale) || "Federación de Sociedades Panamericanas de Nutrición. Integramos a las sociedades de nutrición de las Américas para mejorar la salud de nuestras poblaciones.";
-const ogImage = globalData?.seo?.ogImage || "";
+const siteOrigin = Astro.site || "https://fespan.org";
+const ogImageSource = image || globalData?.seo?.ogImage || "";
+const ogImage = ogImageSource ? new URL(mediaUrl(ogImageSource), siteOrigin).href : "";
+const alternates = LOCALES.map((code) => ({
+  code,
+  href: new URL(localizedPath(Astro.url.pathname, code), siteOrigin).href,
+}));
 const injectHead = globalData?.codeInjection?.head || "";
 const injectBodyEnd = globalData?.codeInjection?.bodyEnd || "";
 
@@ -64,8 +73,11 @@ try {
     <title>{seoTitle}</title>
     <meta name="description" content={seoDescription} />
     <link rel="canonical" href={canonical} />
+    {alternates.map((alt) => <link rel="alternate" hreflang={alt.code} href={alt.href} />)}
+    <link rel="alternate" hreflang="x-default" href={alternates.find((alt) => alt.code === DEFAULT_LOCALE)?.href} />
 
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={locale} />
     <meta property="og:title" content={seoTitle} />
     <meta property="og:description" content={seoDescription} />
     {ogImage && <meta property="og:image" content={ogImage} />}
@@ -75,7 +87,8 @@ try {
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" />
+    <script is:inline>document.documentElement.classList.add("reveal-ready");</script>
 
     <ClientRouter />
     <Fragment set:html={injectHead} />
@@ -97,10 +110,11 @@ try {
       </main>
     ) : (
       <>
-        <Header locale={locale} theme={headerTheme} />
+        <Header locale={locale} />
         <main>
           <slot />
         </main>
+        {showCta && <CtaBand locale={locale} />}
         <Footer locale={locale} />
         <CookieConsent />
       </>
@@ -124,6 +138,46 @@ try {
 
       startLenis();
       document.addEventListener("astro:after-swap", startLenis);
+
+      const COUNT_DURATION_MS = 1800;
+
+      function countUp(element: HTMLElement) {
+        const target = Number(element.dataset.count || 0);
+        const startedAt = performance.now();
+        const step = (now: number) => {
+          const progress = Math.min(1, (now - startedAt) / COUNT_DURATION_MS);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          element.textContent = Math.round(target * eased).toLocaleString("en-US");
+          if (progress < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      }
+
+      function reveal(element: Element) {
+        element.classList.add("is-revealed");
+        element.querySelectorAll<HTMLElement>("[data-count]").forEach(countUp);
+      }
+
+      function observeReveals() {
+        const pending = document.querySelectorAll("[data-reveal]:not(.is-revealed)");
+        if (!("IntersectionObserver" in window)) {
+          pending.forEach(reveal);
+          return;
+        }
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              reveal(entry.target);
+              observer.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+        );
+        pending.forEach((element) => observer.observe(element));
+      }
+
+      document.addEventListener("astro:page-load", observeReveals);
     </script>
   </body>
 </html>

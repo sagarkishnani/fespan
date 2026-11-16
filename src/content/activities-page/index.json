@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "eyebrow": "Actividades",
+    "eyebrow_en": "Activities",
+    "eyebrow_pt": "Atividades",
+    "title": "Impulsando la Nutrición en América",
+    "title_en": "Driving Nutrition across the Americas",
+    "title_pt": "Impulsionando a Nutrição nas Américas",
+    "subtitle": "Congresos, encuentros y actividades científicas de la red de sociedades FESPAN.",
+    "subtitle_en": "Congresses, meetings and scientific activities across the FESPAN network of societies.",
+    "subtitle_pt": "Congressos, encontros e atividades científicas da rede de sociedades da FESPAN."
+  },
+  "congressesTitle": "Próximos congresos",
+  "congressesTitle_en": "Upcoming congresses",
+  "congressesTitle_pt": "Próximos congressos",
+  "training": {
+    "eyebrow": "Formación",
+    "eyebrow_en": "Training",
+    "eyebrow_pt": "Formação",
+    "title": "Aprende y crece con FESPAN",
+    "title_en": "Learn and grow with FESPAN",
+    "title_pt": "Aprenda e cresça com a FESPAN",
+    "listTitle": "Próximas formaciones",
+    "listTitle_en": "Upcoming training",
+    "listTitle_pt": "Próximas formações"
+  },
+  "seo": {
+    "title": "Actividades — FESPAN",
+    "title_en": "Activities — FESPAN",
+    "title_pt": "Atividades — FESPAN",
+    "description": "Congresos, encuentros y actividades científicas de la red de sociedades FESPAN.",
+    "description_en": "Congresses, meetings and scientific activities across the FESPAN network of societies.",
+    "description_pt": "Congressos, encontros e atividades científicas da rede de sociedades da FESPAN."
+  }
+}

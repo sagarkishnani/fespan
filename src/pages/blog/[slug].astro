@@ -1,50 +1,47 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import PostBody from "../../components/blog/PostBody";
+import PostArticle from "../../components/blog/PostArticle";
+import ShareBar from "../../components/blog/ShareBar";
+import PostCard from "../../components/cards/PostCard";
 import client from "../../../tina/__generated__/client";
-import { getLocale, tField, richField } from "../../utils/i18n";
-import { isLocale } from "../../i18n/config";
-import { mediaUrl } from "../../utils/mediaUrl";
+import { pageLocale } from "../../lib/pageLocale";
+import { nodesOf, sortByDateDesc, toPostCard } from "../../lib/viewModels";
+import { tField } from "../../utils/i18n";
+import { t } from "../../i18n/ui";
 
 export async function getStaticPaths() {
-  const result = await client.queries.postConnection();
-  return (result.data?.postConnection?.edges || [])
-    .map((edge: any) => edge?.node)
-    .filter(Boolean)
-    .map((post: any) => ({ params: { slug: post._sys.filename } }));
+  const result = await client.queries.postConnection({ first: 500 });
+  return nodesOf(result.data.postConnection).map((post: any) => ({ params: { slug: post._sys.filename } }));
 }
 
 const { slug } = Astro.params;
-const locale = isLocale(Astro.currentLocale) ? Astro.currentLocale : getLocale(Astro.url);
-const base = import.meta.env.BASE_URL || "/";
-const prefix = locale === "es" ? base : `${base}${locale}/`;
+const locale = pageLocale(Astro);
+const { query, variables, data } = await client.queries.post({ relativePath: `${slug}.mdx` });
+const post = data.post;
+const title = tField(post, "title", locale);
 
-const result = await client.queries.post({ relativePath: `${slug}.mdx` });
-const post = result.data?.post;
-const body = richField(post, "body", locale);
+const allPosts = await client.queries.postConnection({ first: 500 });
+const related = sortByDateDesc(nodesOf(allPosts.data.postConnection))
+  .filter((candidate: any) => candidate._sys.filename !== slug)
+  .slice(0, 3)
+  .map((candidate) => toPostCard(candidate, locale));
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
-<BaseLayout
-  title={`${tField(post, "title", locale)} — FESPAN`}
-  description={tField(post, "excerpt", locale)}
->
-  <article class="section pt-[128px]">
-    <div class="container-lg">
-      <a href={`${prefix}blog`} class="text-body-sm text-content-subtle hover:text-content">← Blog</a>
-      <h1 class="mt-6 text-heading-lg">{tField(post, "title", locale)}</h1>
-      {post?.date && (
-        <time class="mt-4 block text-body-sm text-content-subtle" datetime={post.date}>
-          {new Date(post.date).toLocaleDateString(locale, {
-            year: "numeric", month: "long", day: "numeric",
-          })}
-        </time>
-      )}
-      {post?.coverImage && (
-        <img src={mediaUrl(post.coverImage)} alt="" class="mt-8 w-full rounded-xl object-cover" />
-      )}
-      <div class="prose mt-10 max-w-none prose-headings:font-heading prose-a:text-brand-primary-light">
-        <PostBody content={body} client:visible />
+<BaseLayout title={`${title} — FESPAN`} description={tField(post, "excerpt", locale)} image={post.coverImage ?? undefined}>
+  <PostArticle query={query} variables={variables} data={data} locale={locale} client:tina>
+    <ShareBar url={canonical} title={title} locale={locale} client:visible />
+  </PostArticle>
+  {related.length > 0 && (
+    <section class="container-xl pb-20 pt-24 lg:pb-[120px] lg:pt-[130px]">
+      <h2 data-reveal class="mb-12 text-heading-lg">{t("blog.related", locale)}</h2>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {related.map((card) => (
+          <div data-reveal>
+            <PostCard post={card} ctaLabel={t("common.readArticle", locale)} />
+          </div>
+        ))}
       </div>
-    </div>
-  </article>
+    </section>
+  )}
 </BaseLayout>

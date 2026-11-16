@@ -1,7 +1,17 @@
 import { defineConfig } from "tinacms";
 import { globalCollection } from "./collections/global";
 import { homeCollection } from "./collections/home";
+import { aboutCollection } from "./collections/about";
+import { activitiesPageCollection } from "./collections/activitiesPage";
+import { activityCollection } from "./collections/activity";
+import { knowledgePageCollection } from "./collections/knowledgePage";
+import { knowledgeDocCollection } from "./collections/knowledgeDoc";
+import { membersPageCollection } from "./collections/membersPage";
+import { societyCollection } from "./collections/society";
+import { contactPageCollection } from "./collections/contactPage";
+import { blogPageCollection } from "./collections/blogPage";
 import { postCollection } from "./collections/post";
+import { legalCollection } from "./collections/legal";
 import { formConfigCollection } from "./collections/formConfig";
 import { dynamicFormsCollection } from "./collections/dynamicForms";
 import { maintenanceCollection } from "./collections/maintenance";
@@ -29,7 +39,17 @@ export default defineConfig({
     collections: [
       globalCollection,
       homeCollection,
+      aboutCollection,
+      activitiesPageCollection,
+      activityCollection,
+      knowledgePageCollection,
+      knowledgeDocCollection,
+      membersPageCollection,
+      societyCollection,
+      contactPageCollection,
+      blogPageCollection,
       postCollection,
+      legalCollection,
       formConfigCollection,
       dynamicFormsCollection,
       maintenanceCollection,

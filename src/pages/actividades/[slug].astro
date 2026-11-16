@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ActivityDetail from "../../components/activities/ActivityDetail";
+import client from "../../../tina/__generated__/client";
+import { pageLocale } from "../../lib/pageLocale";
+import { nodesOf } from "../../lib/viewModels";
+import { tField } from "../../utils/i18n";
+
+export async function getStaticPaths() {
+  const result = await client.queries.activityConnection({ first: 100 });
+  return nodesOf(result.data.activityConnection).map((activity: any) => ({ params: { slug: activity._sys.filename } }));
+}
+
+const { slug } = Astro.params;
+const locale = pageLocale(Astro);
+const { query, variables, data } = await client.queries.activity({ relativePath: `${slug}.json` });
+const activity = data.activity;
+---
+
+<BaseLayout title={`${tField(activity, "title", locale)} — FESPAN`} description={tField(activity, "summary", locale)} image={activity.image ?? undefined}>
+  <ActivityDetail query={query} variables={variables} data={data} locale={locale} client:tina />
+</BaseLayout>

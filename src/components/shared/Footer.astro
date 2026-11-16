@@ -8,14 +8,7 @@ interface Props {
 }
 
 const { locale } = Astro.props;
-
 const result = await client.queries.global({ relativePath: "index.json" });
 ---
 
-<FooterReact
-  query={result.query}
-  variables={result.variables}
-  data={result.data}
-  locale={locale}
-  client:visible
-/>
+<FooterReact query={result.query} variables={result.variables} data={result.data} locale={locale} client:tina />

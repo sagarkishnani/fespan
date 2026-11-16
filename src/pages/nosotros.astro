@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AboutHero from "../components/about/AboutHero";
+import AboutIntro from "../components/about/AboutIntro";
+import AboutValues from "../components/about/AboutValues";
+import AboutTeam from "../components/about/AboutTeam";
+import AboutTransparency from "../components/about/AboutTransparency";
+import client from "../../tina/__generated__/client";
+import { pageLocale, seoOf } from "../lib/pageLocale";
+
+const locale = pageLocale(Astro);
+const { query, variables, data } = await client.queries.about({ relativePath: "index.json" });
+const sectionProps = { query, variables, data, locale };
+const seo = seoOf(data.about.seo, locale);
+---
+
+<BaseLayout title={seo.title} description={seo.description} image={data.about.hero?.image ?? undefined} showCta>
+  <AboutHero {...sectionProps} client:tina />
+  <AboutIntro {...sectionProps} client:tina />
+  <AboutValues {...sectionProps} client:tina />
+  <AboutTeam {...sectionProps} group="board" client:tina />
+  <AboutTeam {...sectionProps} group="committees" client:tina />
+  <AboutTransparency {...sectionProps} client:tina />
+</BaseLayout>

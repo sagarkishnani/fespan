@@ -1,0 +1,58 @@
+{
+  "kind": "congreso",
+  "title": "III Congreso Internacional de Posgrado Neurosinergia 2026",
+  "title_en": "III International Postgraduate Congress Neurosinergia 2026",
+  "title_pt": "III Congresso Internacional de Pós-Graduação Neurosinergia 2026",
+  "badge": "Próximo congreso",
+  "badge_en": "Upcoming congress",
+  "badge_pt": "Próximo congresso",
+  "dateLabel": "23–24 Oct 2026",
+  "dateLabel_en": "Oct 23–24, 2026",
+  "dateLabel_pt": "23–24 out 2026",
+  "place": "Por confirmar",
+  "place_en": "To be confirmed",
+  "place_pt": "A confirmar",
+  "summary": "Conectando la ciencia con el desarrollo, el bienestar y la justicia.",
+  "summary_en": "Connecting science with development, well-being and justice.",
+  "summary_pt": "Conectando a ciência ao desenvolvimento, ao bem-estar e à justiça.",
+  "image": "/images/actividades/neurosinergia.webp",
+  "imagePosition": "left center",
+  "facts": [
+    {
+      "label": "Tema",
+      "label_en": "Topic",
+      "label_pt": "Tema",
+      "value": "Conectando la ciencia con el desarrollo, el bienestar y la justicia",
+      "value_en": "Connecting science with development, well-being and justice",
+      "value_pt": "Conectando a ciência ao desenvolvimento, ao bem-estar e à justiça"
+    },
+    {
+      "label": "Fecha",
+      "label_en": "Date",
+      "label_pt": "Data",
+      "value": "23–24 Oct 2026",
+      "value_en": "Oct 23–24, 2026",
+      "value_pt": "23–24 out 2026"
+    },
+    {
+      "label": "Ciudad",
+      "label_en": "City",
+      "label_pt": "Cidade",
+      "value": "Por confirmar",
+      "value_en": "To be confirmed",
+      "value_pt": "A confirmar"
+    },
+    {
+      "label": "Sede",
+      "label_en": "Venue",
+      "label_pt": "Sede",
+      "value": "Por confirmar",
+      "value_en": "To be confirmed",
+      "value_pt": "A confirmar"
+    }
+  ],
+  "abstractUrl": "/contacto",
+  "registerUrl": "/contacto",
+  "showOnHome": true,
+  "order": 2
+}

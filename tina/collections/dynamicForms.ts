@@ -1,4 +1,5 @@
 import type { Collection } from "tinacms";
+import { translations } from "./localized";
 
 export const dynamicFormsCollection: Collection = {
   name: "dynamicForms",
@@ -28,7 +29,7 @@ export const dynamicFormsCollection: Collection = {
       label: "Título del formulario",
       type: "string",
     },
-    { name: "formTitle_en", label: "Título del formulario (EN)", type: "string" },
+    ...translations({ name: "formTitle", label: "Título del formulario", type: "string" }),
     {
       name: "badge",
       label: "Badge (opcional)",
@@ -42,12 +43,7 @@ export const dynamicFormsCollection: Collection = {
       type: "string",
       ui: { component: "textarea" },
     },
-    {
-      name: "description_en",
-      label: "Descripción (EN)",
-      type: "string",
-      ui: { component: "textarea" },
-    },
+    ...translations({ name: "description", label: "Descripción", type: "string", ui: { component: "textarea" } }),
     {
       name: "styleVariant",
       label: "Estilo visual",
@@ -65,7 +61,7 @@ export const dynamicFormsCollection: Collection = {
       label: "Texto botón enviar",
       type: "string",
     },
-    { name: "submitButtonText_en", label: "Texto botón enviar (EN)", type: "string" },
+    ...translations({ name: "submitButtonText", label: "Texto botón enviar", type: "string" }),
     {
       name: "successTitle",
       label: "Título de éxito",
@@ -73,26 +69,21 @@ export const dynamicFormsCollection: Collection = {
       description:
         "Título que se muestra después de enviar exitosamente.",
     },
-    { name: "successTitle_en", label: "Título de éxito (EN)", type: "string" },
+    ...translations({ name: "successTitle", label: "Título de éxito", type: "string" }),
     {
       name: "successMessage",
       label: "Mensaje de éxito",
       type: "string",
       ui: { component: "textarea" },
     },
-    {
-      name: "successMessage_en",
-      label: "Mensaje de éxito (EN)",
-      type: "string",
-      ui: { component: "textarea" },
-    },
+    ...translations({ name: "successMessage", label: "Mensaje de éxito", type: "string", ui: { component: "textarea" } }),
     {
       name: "errorMessage",
       label: "Mensaje de error (servidor)",
       type: "string",
       description: "Se muestra cuando falla el envío al servidor.",
     },
-    { name: "errorMessage_en", label: "Mensaje de error (EN)", type: "string" },
+    ...translations({ name: "errorMessage", label: "Mensaje de error", type: "string" }),
     {
       name: "validationMessage",
       label: "Mensaje de validación",
@@ -100,7 +91,7 @@ export const dynamicFormsCollection: Collection = {
       description:
         "Se muestra cuando el usuario intenta enviar con campos inválidos. Ej: 'Por favor completa los campos marcados en rojo'.",
     },
-    { name: "validationMessage_en", label: "Mensaje de validación (EN)", type: "string" },
+    ...translations({ name: "validationMessage", label: "Mensaje de validación", type: "string" }),
     {
       name: "showCorrelativo",
       label: "Mostrar N° correlativo",
@@ -204,13 +195,13 @@ export const dynamicFormsCollection: Collection = {
           type: "string",
           description: "Para section_header es el título de la sección.",
         },
-        { name: "label_en", label: "Etiqueta visible (EN)", type: "string" },
+        ...translations({ name: "label", label: "Etiqueta visible", type: "string" }),
         {
           name: "placeholder",
           label: "Placeholder",
           type: "string",
         },
-        { name: "placeholder_en", label: "Placeholder (EN)", type: "string" },
+        ...translations({ name: "placeholder", label: "Placeholder", type: "string" }),
         {
           name: "required",
           label: "Obligatorio",
@@ -256,12 +247,7 @@ export const dynamicFormsCollection: Collection = {
           ui: { component: "textarea" },
           description: "Solo para note. El texto del párrafo.",
         },
-        {
-          name: "noteContent_en",
-          label: "Contenido de nota (EN)",
-          type: "string",
-          ui: { component: "textarea" },
-        },
+        ...translations({ name: "noteContent", label: "Contenido de nota", type: "string", ui: { component: "textarea" } }),
         {
           name: "rows",
           label: "Filas",
@@ -298,7 +284,7 @@ export const dynamicFormsCollection: Collection = {
               description:
                 "Mensaje cuando el valor no cumple el patrón. Ej: 'El RUC debe tener 11 dígitos'.",
             },
-            { name: "patternMessage_en", label: "Mensaje del patrón (EN)", type: "string" },
+            ...translations({ name: "patternMessage", label: "Mensaje del patrón", type: "string" }),
           ],
         },
         {
@@ -308,7 +294,7 @@ export const dynamicFormsCollection: Collection = {
           description:
             "Si se deja vacío, se genera un mensaje automático según la validación que falle.",
         },
-        { name: "errorMessage_en", label: "Mensaje de error personalizado (EN)", type: "string" },
+        ...translations({ name: "errorMessage", label: "Mensaje de error personalizado", type: "string" }),
         {
           name: "helpText",
           label: "Texto de ayuda",
@@ -316,7 +302,7 @@ export const dynamicFormsCollection: Collection = {
           description:
             "Texto pequeño debajo del campo. Para upload aparece como instrucción de archivos.",
         },
-        { name: "helpText_en", label: "Texto de ayuda (EN)", type: "string" },
+        ...translations({ name: "helpText", label: "Texto de ayuda", type: "string" }),
         {
           name: "defaultValue",
           label: "Valor por defecto",
@@ -335,7 +321,7 @@ export const dynamicFormsCollection: Collection = {
           fields: [
             { name: "value", label: "Valor", type: "string" },
             { name: "label", label: "Etiqueta", type: "string" },
-            { name: "label_en", label: "Etiqueta (EN)", type: "string" },
+            ...translations({ name: "label", label: "Etiqueta", type: "string" }),
             {
               name: "group",
               label: "Grupo / Categoría",
@@ -343,7 +329,7 @@ export const dynamicFormsCollection: Collection = {
               description:
                 "Solo para select: agrupa las opciones bajo un encabezado (optgroup). Ej: la categoría del servicio.",
             },
-            { name: "group_en", label: "Grupo / Categoría (EN)", type: "string" },
+            ...translations({ name: "group", label: "Grupo / Categoría", type: "string" }),
             {
               name: "description",
               label: "Descripción",
@@ -351,7 +337,7 @@ export const dynamicFormsCollection: Collection = {
               description:
                 "Solo para radioGroup (aparece debajo del título en la tarjeta).",
             },
-            { name: "description_en", label: "Descripción (EN)", type: "string" },
+            ...translations({ name: "description", label: "Descripción", type: "string" }),
           ],
         },
 
@@ -380,7 +366,7 @@ export const dynamicFormsCollection: Collection = {
           description:
             "Solo para checkbox. Parte del label que se convierte en enlace. Ej: 'Política de Privacidad'.",
         },
-        { name: "linkText_en", label: "Texto del enlace (EN)", type: "string" },
+        ...translations({ name: "linkText", label: "Texto del enlace", type: "string" }),
         {
           name: "linkUrl",
           label: "URL del enlace",

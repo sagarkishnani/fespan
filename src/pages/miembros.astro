@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MembersHero from "../components/members/MembersHero";
+import MembersDirectory, { type SocietyModel } from "../components/members/MembersDirectory";
+import client from "../../tina/__generated__/client";
+import { pageLocale, seoOf } from "../lib/pageLocale";
+import { nodesOf, sortByOrder } from "../lib/viewModels";
+import { tField } from "../utils/i18n";
+import { hostOf } from "../utils/format";
+import { translateTerm } from "../i18n/ui";
+import { SOCIETY_COUNTRIES } from "../../tina/collections/society";
+
+const locale = pageLocale(Astro);
+const { query, variables, data } = await client.queries.membersPage({ relativePath: "index.json" });
+const societyResult = await client.queries.societyConnection({ first: 200 });
+const countryName = (code: string) => translateTerm(SOCIETY_COUNTRIES.find((item) => item.value === code)?.label || code, locale);
+const societies: SocietyModel[] = sortByOrder(nodesOf(societyResult.data.societyConnection)).map((society: any) => ({
+  id: society._sys.filename,
+  name: tField(society, "name", locale),
+  city: tField(society, "city", locale),
+  country: countryName(society.countryCode),
+  countryCode: society.countryCode,
+  url: society.url || "",
+  site: hostOf(society.url),
+}));
+const seo = seoOf(data.membersPage.seo, locale);
+---
+
+<BaseLayout title={seo.title} description={seo.description}>
+  <section class="container-xl pb-20 pt-[130px] lg:pb-[120px] lg:pt-[170px]">
+    <MembersDirectory societies={societies} locale={locale} mapImage="/images/miembros/mapa-america.webp" client:load>
+      <MembersHero query={query} variables={variables} data={data} locale={locale} client:tina />
+    </MembersDirectory>
+  </section>
+</BaseLayout>

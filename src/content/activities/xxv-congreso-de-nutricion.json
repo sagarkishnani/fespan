@@ -1,0 +1,58 @@
+{
+  "kind": "congreso",
+  "title": "XXV Congreso de Nutrición",
+  "title_en": "XXV Nutrition Congress",
+  "title_pt": "XXV Congresso de Nutrição",
+  "badge": "Congreso",
+  "badge_en": "Congress",
+  "badge_pt": "Congresso",
+  "dateLabel": "5–7 Nov 2025",
+  "dateLabel_en": "Nov 5–7, 2025",
+  "dateLabel_pt": "5–7 nov 2025",
+  "place": "Santiago de Chile",
+  "place_en": "Santiago, Chile",
+  "place_pt": "Santiago do Chile",
+  "summary": "UC Campus San Joaquín, Auditorio Complejo Andrónico Luksic. Av. Vicuña Mackenna 4860, Macul.",
+  "summary_en": "UC San Joaquín Campus, Andrónico Luksic Complex Auditorium. Av. Vicuña Mackenna 4860, Macul.",
+  "summary_pt": "UC Campus San Joaquín, Auditório Complexo Andrónico Luksic. Av. Vicuña Mackenna 4860, Macul.",
+  "image": "/images/actividades/xxv-congreso.webp",
+  "imagePosition": "center 30%",
+  "facts": [
+    {
+      "label": "Fecha",
+      "label_en": "Date",
+      "label_pt": "Data",
+      "value": "5–7 Nov 2025",
+      "value_en": "Nov 5–7, 2025",
+      "value_pt": "5–7 nov 2025"
+    },
+    {
+      "label": "Ciudad",
+      "label_en": "City",
+      "label_pt": "Cidade",
+      "value": "Santiago de Chile",
+      "value_en": "Santiago, Chile",
+      "value_pt": "Santiago do Chile"
+    },
+    {
+      "label": "Sede",
+      "label_en": "Venue",
+      "label_pt": "Sede",
+      "value": "UC Campus San Joaquín, Auditorio Complejo Andrónico Luksic. Av. Vicuña Mackenna 4860, Macul",
+      "value_en": "UC San Joaquín Campus, Andrónico Luksic Complex Auditorium. Av. Vicuña Mackenna 4860, Macul",
+      "value_pt": "UC Campus San Joaquín, Auditório Complexo Andrónico Luksic. Av. Vicuña Mackenna 4860, Macul"
+    },
+    {
+      "label": "Organiza",
+      "label_en": "Organizer",
+      "label_pt": "Organização",
+      "value": "Sociedad Chilena de Nutrición, Bromatología y Toxicología",
+      "value_en": "Chilean Society of Nutrition, Food Science and Toxicology",
+      "value_pt": "Sociedade Chilena de Nutrição, Bromatologia e Toxicologia"
+    }
+  ],
+  "abstractUrl": "/contacto",
+  "registerUrl": "/contacto",
+  "showOnHome": true,
+  "order": 3
+}

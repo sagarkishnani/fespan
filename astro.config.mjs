@@ -13,7 +13,7 @@ export default defineConfig({
   // No `fallback`: in static output it emits redirect stubs instead of rendered pages.
   i18n: {
     defaultLocale: 'es',
-    locales: ['es', 'en'],
+    locales: ['es', 'en', 'pt'],
     routing: { prefixDefaultLocale: false },
   },
   prefetch: {

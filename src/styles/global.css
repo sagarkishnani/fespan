@@ -12,34 +12,71 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading font-medium;
   }
+  a {
+    @apply transition-colors;
+  }
   :focus-visible {
     @apply outline-none ring-2 ring-brand-primary ring-offset-2 ring-offset-surface;
   }
 }
 
 @layer components {
-  .container-xl { @apply mx-auto w-full max-w-[1280px] px-5 md:px-8; }
-  .container-lg { @apply mx-auto w-full max-w-[1024px] px-5 md:px-8; }
+  .container-xl { @apply mx-auto w-full max-w-site px-5 md:px-6; }
+  .container-lg { @apply mx-auto w-full max-w-[1024px] px-5 md:px-6; }
+  .container-md { @apply mx-auto w-full max-w-[848px] px-5 md:px-6; }
 
-  .section      { @apply py-16 md:py-24; }
+  .section      { @apply py-20 lg:py-[120px]; }
   .section-alt  { @apply bg-surface-raised; }
+  .page-top     { @apply pt-[136px] lg:pt-[180px]; }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3
-           text-body-md font-medium transition-colors duration-200;
+    @apply inline-flex h-14 items-center justify-center gap-2 rounded-full px-8
+           text-[17px] font-medium transition-[background-color,border-color,color,transform] duration-300 lg:text-[18px];
   }
-  /* text-white is intentional: the brand color is dark in both themes. */
-  .btn-primary   { @apply btn bg-brand-primary text-white hover:bg-brand-primary-dark; }
-  .btn-secondary { @apply btn border border-line-strong text-content hover:border-brand-primary hover:bg-surface-raised; }
+  .btn-sm { @apply h-[46px] px-6 text-body-md lg:text-body-md; }
+  .btn-primary   { @apply btn bg-brand-primary text-white hover:bg-brand-primary-dark hover:text-white; }
+  .btn-secondary { @apply btn border border-line bg-surface text-content hover:border-brand-primary; }
+  .btn-outline   { @apply btn border-[1.5px] border-content bg-transparent text-content hover:bg-content hover:text-white; }
+  .btn-light     { @apply btn bg-white text-content hover:scale-[1.04]; }
+  .btn-ghost-light { @apply btn border border-white/40 bg-transparent text-white hover:border-white hover:bg-white/10; }
+
+  .eyebrow { @apply mb-5 flex items-center gap-2.5 text-eyebrow uppercase text-accent; }
+  .eyebrow::before { content: ""; @apply h-2 w-2 rounded-[2px] bg-accent; }
+
+  .link-arrow { @apply inline-flex items-center gap-2.5 font-medium text-brand-primary hover:text-brand-primary-dark; }
 
   .card {
     @apply rounded-xl border border-line bg-surface-raised p-6
            transition-colors duration-200 hover:border-brand-primary/50;
   }
+
+  .card-lift { @apply transition-[transform,box-shadow] duration-[400ms] hover:-translate-y-1.5 hover:shadow-lift; }
+  .media-zoom { @apply transition-transform duration-[1200ms] ease-smooth; }
+  .group:hover .media-zoom { @apply scale-[1.06]; }
+
+  .field {
+    @apply h-[52px] w-full rounded-full border border-line bg-surface px-[22px] text-body-md text-content
+           outline-none transition-colors placeholder:text-content-muted focus:border-brand-primary;
+  }
+  .field-with-icon { @apply pl-[52px]; }
+
+  .meta-dot { @apply h-1 w-1 rounded-full bg-[#A8B3AF]; }
+}
+
+html.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity .9s cubic-bezier(.2,.8,.2,1) var(--reveal-delay, 0ms),
+              transform .9s cubic-bezier(.2,.8,.2,1) var(--reveal-delay, 0ms);
+}
+html.reveal-ready [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  html.reveal-ready [data-reveal] { opacity: 1; transform: none; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import LegalPage from "../../components/shared/LegalPage";
+import client from "../../../tina/__generated__/client";
+import { pageLocale } from "../../lib/pageLocale";
+import { nodesOf } from "../../lib/viewModels";
+import { tField } from "../../utils/i18n";
+
+export async function getStaticPaths() {
+  const result = await client.queries.legalConnection({ first: 50 });
+  return nodesOf(result.data.legalConnection).map((page: any) => ({ params: { slug: page._sys.filename } }));
+}
+
+const { slug } = Astro.params;
+const locale = pageLocale(Astro);
+const { query, variables, data } = await client.queries.legal({ relativePath: `${slug}.mdx` });
+const title = tField(data.legal, "title", locale);
+---
+
+<BaseLayout title={`${title} — FESPAN`} description={`${title} — FESPAN, Federación de Sociedades Panamericanas de Nutrición.`}>
+  <LegalPage query={query} variables={variables} data={data} locale={locale} client:tina />
+</BaseLayout>

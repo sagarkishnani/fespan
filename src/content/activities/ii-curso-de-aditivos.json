@@ -1,0 +1,58 @@
+{
+  "kind": "formacion",
+  "title": "II Curso de Aditivos",
+  "title_en": "II Food Additives Course",
+  "title_pt": "II Curso de Aditivos",
+  "badge": "Próxima formación",
+  "badge_en": "Upcoming training",
+  "badge_pt": "Próxima formação",
+  "dateLabel": "Por confirmar",
+  "dateLabel_en": "To be confirmed",
+  "dateLabel_pt": "A confirmar",
+  "place": "Curso",
+  "place_en": "Course",
+  "place_pt": "Curso",
+  "summary": "Segunda edición del curso sobre aditivos alimentarios: uso, regulación y evidencia.",
+  "summary_en": "Second edition of the course on food additives: use, regulation and evidence.",
+  "summary_pt": "Segunda edição do curso sobre aditivos alimentares: uso, regulação e evidências.",
+  "image": "/images/actividades/curso-aditivos.webp",
+  "imagePosition": "center",
+  "facts": [
+    {
+      "label": "Modalidad",
+      "label_en": "Format",
+      "label_pt": "Modalidade",
+      "value": "Por confirmar",
+      "value_en": "To be confirmed",
+      "value_pt": "A confirmar"
+    },
+    {
+      "label": "Fecha",
+      "label_en": "Date",
+      "label_pt": "Data",
+      "value": "Por confirmar",
+      "value_en": "To be confirmed",
+      "value_pt": "A confirmar"
+    },
+    {
+      "label": "Tema",
+      "label_en": "Topic",
+      "label_pt": "Tema",
+      "value": "Aditivos alimentarios",
+      "value_en": "Food additives",
+      "value_pt": "Aditivos alimentares"
+    },
+    {
+      "label": "Organiza",
+      "label_en": "Organizer",
+      "label_pt": "Organização",
+      "value": "FESPAN",
+      "value_en": "FESPAN",
+      "value_pt": "FESPAN"
+    }
+  ],
+  "abstractUrl": "",
+  "registerUrl": "/contacto",
+  "showOnHome": true,
+  "order": 6
+}

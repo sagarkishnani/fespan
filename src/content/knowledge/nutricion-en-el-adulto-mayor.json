@@ -1,0 +1,19 @@
+{
+  "title": "Nutrición en el adulto mayor",
+  "title_en": "Nutrition in older adults",
+  "title_pt": "Nutrição na pessoa idosa",
+  "kind": "guia",
+  "area": "Nutrición clínica",
+  "published": "[FECHA]",
+  "revision": "[FECHA]",
+  "authors": "[GRUPO DE TRABAJO]",
+  "conflicts": "[DECLARACIÓN]",
+  "conflicts_en": "[STATEMENT]",
+  "conflicts_pt": "[DECLARAÇÃO]",
+  "languages": [
+    "ES",
+    "PT",
+    "EN"
+  ],
+  "file": ""
+}

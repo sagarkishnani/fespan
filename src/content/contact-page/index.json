@@ -1,0 +1,49 @@
+{
+  "hero": {
+    "title": "Contáctanos",
+    "title_en": "Contact us",
+    "title_pt": "Fale conosco",
+    "subtitle": "Comunícate con nosotros a través de nuestros canales de atención",
+    "subtitle_en": "Get in touch with us through our support channels",
+    "subtitle_pt": "Fale conosco por meio de nossos canais de atendimento",
+    "image": "/images/nosotros/frutas.webp"
+  },
+  "channels": [
+    {
+      "icon": "pin",
+      "title": "Nuestra dirección",
+      "title_en": "Our address",
+      "title_pt": "Nosso endereço",
+      "text": "8920 Calle Pascal-Gagnon\nSaint-Léonard, QC H1P 1Z3",
+      "text_en": "8920 Calle Pascal-Gagnon\nSaint-Léonard, QC H1P 1Z3",
+      "text_pt": "8920 Calle Pascal-Gagnon\nSaint-Léonard, QC H1P 1Z3"
+    },
+    {
+      "icon": "phone",
+      "title": "Nuestro teléfono",
+      "title_en": "Our phone",
+      "title_pt": "Nosso telefone",
+      "text": "+51 979 900 749",
+      "text_en": "+51 979 900 749",
+      "text_pt": "+51 979 900 749"
+    },
+    {
+      "icon": "mail",
+      "title": "Nuestro correo electrónico",
+      "title_en": "Our email",
+      "title_pt": "Nosso e-mail",
+      "text": "presidenta@fespan.org",
+      "text_en": "presidenta@fespan.org",
+      "text_pt": "presidenta@fespan.org"
+    }
+  ],
+  "mapEmbedUrl": "https://maps.google.com/maps?q=8920%20Rue%20Pascal-Gagnon%2C%20Saint-L%C3%A9onard%2C%20QC%20H1P%201Z3&z=15&output=embed",
+  "seo": {
+    "title": "Contacto — FESPAN",
+    "title_en": "Contact — FESPAN",
+    "title_pt": "Contato — FESPAN",
+    "description": "Comunícate con nosotros a través de nuestros canales de atención",
+    "description_en": "Get in touch with us through our support channels",
+    "description_pt": "Fale conosco por meio de nossos canais de atendimento"
+  }
+}

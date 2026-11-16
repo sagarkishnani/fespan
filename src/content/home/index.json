@@ -1,30 +1,117 @@
 {
   "hero": {
-    "eyebrow": "FESPAN",
-    "title": "Un título que explica qué haces en una línea",
-    "subtitle": "Federación de Sociedades Panamericanas de Nutrición. Integramos a las sociedades de nutrición de las Américas para mejorar la salud de nuestras poblaciones.",
-    "buttons": [
-      { "text": "Conversemos", "url": "/#cta", "variant": "primary" },
-      { "text": "Ver más", "url": "/#features", "variant": "secondary" }
-    ]
+    "title": "Federación de Sociedades Panamericanas de Nutrición",
+    "title_en": "Federation of Pan American Nutrition Societies",
+    "title_pt": "Federação de Sociedades Pan-Americanas de Nutrição",
+    "subtitle": "Integramos a las sociedades de nutrición de las Américas para mejorar la salud de nuestras poblaciones.",
+    "subtitle_en": "We bring together the nutrition societies of the Americas to improve the health of our populations.",
+    "subtitle_pt": "Reunimos as sociedades de nutrição das Américas para melhorar a saúde de nossas populações.",
+    "image": "/images/home/hero.webp",
+    "primaryButton": {
+      "label": "Conoce más",
+      "label_en": "Learn more",
+      "label_pt": "Saiba mais",
+      "url": "/nosotros"
+    },
+    "secondaryButton": {
+      "label": "Ver eventos",
+      "label_en": "View events",
+      "label_pt": "Ver eventos",
+      "url": "/actividades"
+    }
   },
-  "features": {
-    "title": "Por qué trabajar con nosotros",
-    "description": "Reemplaza estos textos desde el panel en /admin.",
-    "items": [
-      { "icon": "bolt", "title": "Rápido", "description": "Sitio estático: entrega en milisegundos desde cualquier CDN." },
-      { "icon": "shield", "title": "Seguro", "description": "Sin base de datos ni servidor de aplicaciones que mantener." },
-      { "icon": "chart", "title": "Medible", "description": "Analítica y píxeles se inyectan desde el CMS, sin tocar el código." }
-    ]
+  "about": {
+    "eyebrow": "Sobre nosotros",
+    "eyebrow_en": "About us",
+    "eyebrow_pt": "Sobre nós",
+    "title": "Construyendo un futuro más saludable",
+    "title_en": "Building a healthier future",
+    "title_pt": "Construindo um futuro mais saudável",
+    "body": "FESPAN es una federación sin fines de lucro que integra a las sociedades de nutrición de las Américas. Nuestra misión es promover la excelencia en la ciencia nutricional, fortalecer la cooperación regional y mejorar la salud de nuestras poblaciones.\n\nTrabajamos en estrecha colaboración con profesionales de la nutrición, instituciones académicas, gobiernos y organismos internacionales para abordar los desafíos nutricionales más urgentes de nuestra región.",
+    "body_en": "FESPAN is a non-profit federation that brings together the nutrition societies of the Americas. Our mission is to promote excellence in nutrition science, strengthen regional cooperation and improve the health of our populations.\n\nWe work closely with nutrition professionals, academic institutions, governments and international organizations to address the most pressing nutritional challenges in our region.",
+    "body_pt": "A FESPAN é uma federação sem fins lucrativos que reúne as sociedades de nutrição das Américas. Nossa missão é promover a excelência na ciência da nutrição, fortalecer a cooperação regional e melhorar a saúde de nossas populações.\n\nTrabalhamos em estreita colaboração com profissionais de nutrição, instituições acadêmicas, governos e organismos internacionais para enfrentar os desafios nutricionais mais urgentes da nossa região.",
+    "stats": [
+      {
+        "value": 12,
+        "suffix": "+",
+        "label": "Países miembros",
+        "label_en": "Member countries",
+        "label_pt": "Países membros"
+      },
+      {
+        "value": 5000,
+        "suffix": "+",
+        "label": "Profesionales asociados",
+        "label_en": "Associated professionals",
+        "label_pt": "Profissionais associados"
+      }
+    ],
+    "button": {
+      "label": "Conoce más",
+      "label_en": "Learn more",
+      "label_pt": "Saiba mais",
+      "url": "/nosotros"
+    },
+    "image": "/images/home/sobre-nosotros.webp"
   },
-  "cta": {
-    "title": "¿Empezamos?",
-    "description": "Cuéntanos qué necesitas y te respondemos el mismo día.",
-    "buttonText": "Escríbenos",
-    "buttonUrl": "/contacto"
+  "activities": {
+    "eyebrow": "Actividades",
+    "eyebrow_en": "Activities",
+    "eyebrow_pt": "Atividades",
+    "title": "Impulsando la Nutrición en América",
+    "title_en": "Driving Nutrition across the Americas",
+    "title_pt": "Impulsionando a Nutrição nas Américas",
+    "button": {
+      "label": "Ver más",
+      "label_en": "See more",
+      "label_pt": "Ver mais",
+      "url": "/actividades"
+    }
+  },
+  "video": {
+    "title": "Conoce más sobre FESPAN y sus iniciativas",
+    "title_en": "Learn more about FESPAN and its initiatives",
+    "title_pt": "Saiba mais sobre a FESPAN e suas iniciativas",
+    "buttonLabel": "Ver video",
+    "buttonLabel_en": "Watch video",
+    "buttonLabel_pt": "Ver vídeo",
+    "video": "/videos/fespan.mp4",
+    "poster": "/images/home/video-poster.webp"
+  },
+  "news": {
+    "title": "Mantente",
+    "title_en": "Stay",
+    "title_pt": "Mantenha-se",
+    "highlight": "informado",
+    "highlight_en": "informed",
+    "highlight_pt": "informado",
+    "link": {
+      "label": "Ver todas las publicaciones",
+      "label_en": "View all posts",
+      "label_pt": "Ver todas as publicações",
+      "url": "/blog"
+    }
+  },
+  "transparency": {
+    "title": "Independencia y transparencia",
+    "title_en": "Independence and transparency",
+    "title_pt": "Independência e transparência",
+    "text": "Cómo declaramos los conflictos de interés.",
+    "text_en": "How we declare conflicts of interest.",
+    "text_pt": "Como declaramos os conflitos de interesse.",
+    "button": {
+      "label": "Ver política de patrocinios",
+      "label_en": "View sponsorship policy",
+      "label_pt": "Ver política de patrocínios",
+      "url": "/legal/politica-de-patrocinios"
+    }
   },
   "seo": {
-    "title": "FESPAN",
-    "description": "Federación de Sociedades Panamericanas de Nutrición. Integramos a las sociedades de nutrición de las Américas para mejorar la salud de nuestras poblaciones."
+    "title": "FESPAN — Federación de Sociedades Panamericanas de Nutrición",
+    "title_en": "FESPAN — Federation of Pan American Nutrition Societies",
+    "title_pt": "FESPAN — Federação de Sociedades Pan-Americanas de Nutrição",
+    "description": "Integramos a las sociedades de nutrición de las Américas para mejorar la salud de nuestras poblaciones.",
+    "description_en": "We bring together the nutrition societies of the Americas to improve the health of our populations.",
+    "description_pt": "Reunimos as sociedades de nutrição das Américas para melhorar a saúde de nossas populações."
   }
 }

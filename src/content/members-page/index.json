@@ -1,0 +1,18 @@
+{
+  "hero": {
+    "title": "Sociedades miembros",
+    "title_en": "Member societies",
+    "title_pt": "Sociedades membros",
+    "subtitle": "Pasa el cursor sobre un país o una sociedad para ver su ubicación.",
+    "subtitle_en": "Hover over a country or society to see its location.",
+    "subtitle_pt": "Passe o cursor sobre um país ou uma sociedade para ver sua localização."
+  },
+  "seo": {
+    "title": "Miembros — FESPAN",
+    "title_en": "Members — FESPAN",
+    "title_pt": "Membros — FESPAN",
+    "description": "Sociedades de nutrición de las Américas que integran FESPAN.",
+    "description_en": "Nutrition societies of the Americas that make up FESPAN.",
+    "description_pt": "Sociedades de nutrição das Américas que integram a FESPAN."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Etiquetado frontal de alimentos",
+  "title_en": "Front-of-package food labeling",
+  "title_pt": "Rotulagem frontal de alimentos",
+  "kind": "guia",
+  "area": "Salud pública",
+  "published": "[FECHA]",
+  "revision": "[FECHA]",
+  "authors": "[GRUPO DE TRABAJO]",
+  "conflicts": "[DECLARACIÓN]",
+  "conflicts_en": "[STATEMENT]",
+  "conflicts_pt": "[DECLARAÇÃO]",
+  "languages": [
+    "ES",
+    "PT",
+    "EN"
+  ],
+  "file": ""
+}

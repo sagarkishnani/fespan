@@ -1,0 +1,19 @@
+{
+  "title": "Recomendaciones de hidratación para adultos",
+  "title_en": "Hydration recommendations for adults",
+  "title_pt": "Recomendações de hidratação para adultos",
+  "kind": "guia",
+  "area": "Nutrición clínica",
+  "published": "[FECHA]",
+  "revision": "[FECHA]",
+  "authors": "[GRUPO DE TRABAJO]",
+  "conflicts": "[DECLARACIÓN]",
+  "conflicts_en": "[STATEMENT]",
+  "conflicts_pt": "[DECLARAÇÃO]",
+  "languages": [
+    "ES",
+    "PT",
+    "EN"
+  ],
+  "file": ""
+}
