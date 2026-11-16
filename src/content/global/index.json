@@ -1,0 +1,30 @@
+{
+  "nav": {
+    "logoAlt": "FESPAN",
+    "links": [
+      { "label": "Inicio", "url": "/" },
+      { "label": "Nosotros", "url": "/#features" },
+      { "label": "Contacto", "url": "/#cta" }
+    ],
+    "cta": { "label": "Conversemos", "url": "/#cta" }
+  },
+  "footer": {
+    "tagline": "Federación de Sociedades Panamericanas de Nutrición. Integramos a las sociedades de nutrición de las Américas para mejorar la salud de nuestras poblaciones.",
+    "columns": [
+      {
+        "title": "Sitio",
+        "links": [
+          { "label": "Inicio", "url": "/" },
+          { "label": "Contacto", "url": "/#cta" }
+        ]
+      }
+    ],
+    "social": [],
+    "legal": "© 2026 FESPAN. Todos los derechos reservados."
+  },
+  "seo": {
+    "title": "FESPAN",
+    "description": "Federación de Sociedades Panamericanas de Nutrición. Integramos a las sociedades de nutrición de las Américas para mejorar la salud de nuestras poblaciones."
+  },
+  "codeInjection": { "head": "", "bodyEnd": "" }
+}
