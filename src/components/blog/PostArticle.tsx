@@ -30,7 +30,7 @@ export default function PostArticle({ query, variables, data: initialData, local
           <span aria-current="page">{title}</span>
         </nav>
         <header className="mx-auto mt-14 flex max-w-[860px] flex-col items-center text-center">
-          <div data-reveal className="flex items-center gap-2.5 text-[14px] tracking-[0.08em] text-content-muted">
+          <div data-reveal className="flex items-center gap-2.5 text-caption-md tracking-[0.08em] text-content-muted">
             <span className="uppercase text-brand-primary" data-tina-field={tinaField(post, "category")}>{translateTerm(post.category || "", locale)}</span>
             <span className="meta-dot" />
             <time dateTime={post.date}>{formatShortDate(post.date, locale)}</time>
@@ -61,7 +61,7 @@ export default function PostArticle({ query, variables, data: initialData, local
           <div className="mt-8 flex flex-wrap items-center gap-2.5">
             <span className="mr-1.5 text-body-sm text-content-muted">{t("blog.tags", locale)}</span>
             {tags.map((tag) => (
-              <span key={tag} className="rounded-full bg-surface-mint px-4 py-2 text-[14px] text-brand-primary">{tag}</span>
+              <span key={tag} className="rounded-full bg-surface-mint px-4 py-2 text-caption-md text-brand-primary">{tag}</span>
             ))}
           </div>
         )}
@@ -71,7 +71,7 @@ export default function PostArticle({ query, variables, data: initialData, local
             <div className="flex items-center gap-4">
               {author.photo && <img src={mediaUrl(author.photo)} alt={author.name} className="h-14 w-14 rounded-full object-cover object-[center_20%]" loading="lazy" />}
               <div>
-                <div className="text-[17px] font-medium" data-tina-field={tinaField(author, "name")}>{author.name}</div>
+                <div className="text-body-base font-medium" data-tina-field={tinaField(author, "name")}>{author.name}</div>
                 <div className="mt-0.5 text-body-sm text-content-muted" data-tina-field={tinaField(author, "role")}>{tField(author, "role", locale)}</div>
               </div>
             </div>

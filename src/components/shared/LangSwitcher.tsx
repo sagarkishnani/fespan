@@ -19,7 +19,7 @@ export default function LangSwitcher({ locale, currentPath, open, onToggle }: Pr
         onClick={onToggle}
         aria-expanded={open}
         aria-label={t("lang.switch", locale)}
-        className="flex h-[46px] items-center gap-1.5 rounded-full border border-line bg-surface pl-4 pr-3 text-body-sm font-semibold text-brand-primary transition-colors hover:border-brand-primary"
+        className="flex h-control-sm items-center gap-1.5 rounded-full border border-line bg-surface pl-4 pr-3 text-body-sm font-semibold text-brand-primary transition-colors hover:border-brand-primary"
       >
         {locale.toUpperCase()}
         <ChevronDownIcon className={`text-content transition-transform ${open ? "rotate-180" : ""}`} />

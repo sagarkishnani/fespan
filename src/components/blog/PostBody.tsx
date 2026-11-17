@@ -18,7 +18,7 @@ const components: Components<{
         {src && <img src={mediaUrl(src)} alt={alt || ""} loading="lazy" className="block h-full w-full object-cover" />}
       </div>
       {caption && (
-        <figcaption className="mt-3.5 text-[14px] text-content-muted">
+        <figcaption className="mt-3.5 text-caption-md text-content-muted">
           {creditUrl ? <a href={creditUrl} target="_blank" rel="noopener noreferrer" className="underline">{caption}</a> : caption}
         </figcaption>
       )}

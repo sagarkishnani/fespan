@@ -29,7 +29,7 @@ export default function FooterReact({ query, variables, data: initialData, local
 
           {columns.map((column: any, i: number) => (
             <div key={i} className="flex flex-col gap-4">
-              <span className="mb-1.5 text-[17px] font-medium text-accent" data-tina-field={tinaField(column, "title")}>
+              <span className="mb-1.5 text-body-base font-medium text-accent" data-tina-field={tinaField(column, "title")}>
                 {tField(column, "title", locale)}
               </span>
               {(column.links || []).filter(Boolean).map((link: any, j: number) => (
@@ -41,10 +41,10 @@ export default function FooterReact({ query, variables, data: initialData, local
           ))}
 
           <div className="flex flex-col gap-3.5">
-            <span className="text-[17px] font-medium text-accent" data-tina-field={tinaField(footer, "helpTitle")}>
+            <span className="text-body-base font-medium text-accent" data-tina-field={tinaField(footer, "helpTitle")}>
               {tField(footer, "helpTitle", locale)}
             </span>
-            <span className="max-w-[260px] text-[14px] leading-normal text-content-muted" data-tina-field={tinaField(footer, "helpText")}>
+            <span className="max-w-[260px] text-caption-md leading-normal text-content-muted" data-tina-field={tinaField(footer, "helpText")}>
               {tField(footer, "helpText", locale)}
             </span>
             {footer?.phone && (
@@ -63,7 +63,7 @@ export default function FooterReact({ query, variables, data: initialData, local
         </div>
 
         <div className="mt-16 flex items-center gap-5 lg:mt-[72px]">
-          <span className="text-[14px] text-content-muted">{t("footer.followUs", locale)}</span>
+          <span className="text-caption-md text-content-muted">{t("footer.followUs", locale)}</span>
           <SocialLinks items={footer?.social || []} />
         </div>
 
@@ -71,7 +71,7 @@ export default function FooterReact({ query, variables, data: initialData, local
           <span data-tina-field={tinaField(footer, "legal")}>{tField(footer, "legal", locale)}</span>
           <span className="flex shrink-0 items-center gap-2">
             {t("footer.developedBy", locale)}
-            <span className="text-[20px] font-light tracking-[0.02em] text-[#7E8F92]">TWINSTUDIOS</span>
+            <span className="text-[20px] font-light tracking-[0.02em] text-content-faint">TWINSTUDIOS</span>
           </span>
         </div>
       </div>

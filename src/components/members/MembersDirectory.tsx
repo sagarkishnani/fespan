@@ -81,8 +81,8 @@ export default function MembersDirectory({ societies, locale, mapImage, children
                   onBlur={() => setHovered(null)}
                   className={`flex flex-col gap-0.5 rounded-[18px] py-4 pl-6 pr-4 transition-colors duration-300 ${active ? "bg-surface-mint" : "bg-surface-raised"}`}
                 >
-                  <span className={`text-[19px] text-content ${active ? "font-medium" : ""}`}>{society.name}</span>
-                  <span className="text-[14px] text-content-muted">{society.city}</span>
+                  <span className={`text-subtitle-xs text-content ${active ? "font-medium" : ""}`}>{society.name}</span>
+                  <span className="text-caption-md text-content-muted">{society.city}</span>
                   {society.site && <span className="mt-0.5 text-caption-sm text-brand-primary">{society.site}</span>}
                 </Tag>
               </li>

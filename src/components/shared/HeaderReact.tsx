@@ -112,7 +112,7 @@ export default function HeaderReact({ query, variables, data: initialData, local
             <button
               type="button"
               onClick={() => toggle("mobile")}
-              className="flex h-[46px] w-[46px] items-center justify-center rounded-full bg-surface-sunken text-content xl:hidden"
+              className="flex h-control-sm w-control-sm items-center justify-center rounded-full bg-surface-sunken text-content xl:hidden"
               aria-label={menu === "mobile" ? t("nav.close", locale) : t("nav.menu", locale)}
               aria-expanded={menu === "mobile"}
             >

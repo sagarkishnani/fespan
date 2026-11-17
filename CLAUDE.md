@@ -167,17 +167,33 @@ Iconos: `react-icons` (Font Awesome 6, `react-icons/fa6`).
 **Tema: light.** Los componentes NO escriben colores: piden tokens
 semánticos, y por eso el tema se puede cambiar sin tocar una sola clase.
 
+**Los hex viven solo en `tailwind.config.mjs`.** Ningún archivo de `src/` escribe
+un hex (ni en clases arbitrarias `bg-[#…]`, ni en `style`, ni en atributos SVG
+como `fill`/`stroke`): usa un token existente, agrega uno al config o, si el tono
+solo existe dentro de un degradado, decláralo como `backgroundImage` con nombre.
+En SVG usa clases (`fill-brand-primary`, `stroke-white`) o `currentColor`.
+
 | Token | Para qué | Valor |
 |---|---|---|
 | `surface` | Fondo de la página | `#FFFFFF` |
-| `surface-raised` | Tarjetas, footer | `#F7F8FA` |
-| `content` | Texto principal | `#16181D` |
-| `content-muted` | Texto secundario | `#4B5563` |
-| `content-subtle` | Metadatos | `#6B7280` |
-| `line` / `line-strong` | Bordes | `#E5E7EB` / `#CBD1D9` |
+| `surface-raised` | Tarjetas, footer, hover de filas | `#F5F8F7` |
+| `surface-sunken` | Botones de ícono, chips, adjuntos | `#F1F4F3` |
+| `surface-mint` / `surface-mint-strong` | Fondo verde suave / su hover | `#E6F5EC` / `#D5F0E0` |
+| `surface-warm` | Fondo del hero de Contacto (empata con la foto) | `#F6F6F4` |
+| `surface-media` | Contenedor de imagen o mapa mientras carga | `#DFE5E3` |
+| `content` | Texto principal | `#0E2327` |
+| `content-soft` | Texto secundario fuerte, labels | `#2F4A4E` |
+| `content-muted` | Texto secundario, placeholders | `#5C7377` |
+| `content-faint` | Decorativo (crédito del footer, `.meta-dot`); no apto para texto de lectura | `#7E8F92` |
+| `line` / `line-strong` | Bordes | `#E3E9E8` / `#D6DFDD` |
 | `accent` | Marca legible sobre el fondo | `#0F5C37` |
+| `semantics-error` | Errores de validación | `#EB0E0E` |
 
-Los tonos de texto cumplen 4.5:1 sobre su fondo. Si cambias uno, vuelve a medir.
+`semantics-success`, `semantics-alert` y `semantics-error` tienen además
+variantes `-dark` y `-lightest`.
+
+Los tonos de texto cumplen 4.5:1 sobre su fondo (salvo `content-faint`, que es
+decorativo). Si cambias uno, vuelve a medir.
 
 **Nunca escribas `text-white/65` ni `bg-white/5`**: asumen fondo oscuro y rompen
 el tema. Las únicas excepciones legítimas son los bloques con fondo oscuro fijo
@@ -187,12 +203,25 @@ sobre `bg-brand-primary`.
 Para "texto en color de marca" usa `text-accent`, **no** `text-brand-primary-light`:
 sobre fondo claro ese tono es ilegible.
 
-**Rampa de marca**: `brand-primary` (`#0F7440`), `brand-primary-dark`
-(`#0F5C37`), `brand-primary-darkest` (`#0E2327`).
+**Rampa de marca**: `brand-primary-darkest` (`#0E2327`), `brand-primary-dark`
+(`#0F5C37`), `brand-primary` (`#0F7440`), `brand-primary-light` (`#2DBE6C`,
+hover `brand-primary-light-hover` `#25A85E`), `brand-primary-pale` (`#9FD9B8`,
+países sin sociedad en el mapa), `brand-primary-lightest` (`#E6F5EC`).
+
+**Degradados** (`backgroundImage`): `hero-soft`, `hero-about`, `hero-about-scrim`,
+`hero-activity`, `hero-contact-scrim` y `select-chevron` (flecha de los `select`).
 
 **Tipografías**: Outfit (títulos), Outfit (cuerpo),
 Space Mono (acentos técnicos). La escala está como utilidades de Tailwind
-(`heading-xxl` → `caption-sm`).
+(`display-xl` → `caption-sm`). `body-base` (17px), `subtitle-xs` (19px) y
+`caption-md` (14px) solo fijan el tamaño: heredan interlineado y peso. No uses
+`text-[Npx]` para un tamaño que ya tiene token.
+
+**Controles**: `h-control-sm` (46px, botones de ícono y `.btn-sm`) y
+`h-control-lg` (60px, `.btn-lg`).
+
+**Formularios**: un solo estilo. Las clases de campo (`fieldClasses` en
+`shared/FormControls.tsx`) son la referencia para cualquier campo nuevo.
 
 ### Internacionalización (ES / EN / PT)
 

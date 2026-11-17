@@ -24,7 +24,7 @@ export default function HomeNews({ query, variables, data: initialData, locale, 
               <span className="text-brand-primary" data-tina-field={tinaField(news, "highlight")}>{tField(news, "highlight", locale)}</span>
             </h2>
             {news.link?.label && (
-              <a href={localizeHref(news.link.url, locale)} className="link-arrow text-[17px]" data-tina-field={tinaField(news.link, "label")}>
+              <a href={localizeHref(news.link.url, locale)} className="link-arrow text-body-base" data-tina-field={tinaField(news.link, "label")}>
                 {tField(news.link, "label", locale)}
               </a>
             )}
@@ -46,7 +46,7 @@ export default function HomeNews({ query, variables, data: initialData, locale, 
             <p className="mt-3 text-body-lg text-white/90" data-tina-field={tinaField(transparency, "text")}>{tField(transparency, "text", locale)}</p>
           </div>
           {transparency.button?.label && (
-            <a href={localizeHref(transparency.button.url, locale)} className="btn h-[60px] shrink-0 bg-brand-primary-light text-white hover:bg-[#25A85E] hover:text-white" data-tina-field={tinaField(transparency.button, "label")}>
+            <a href={localizeHref(transparency.button.url, locale)} className="btn btn-lg shrink-0 bg-brand-primary-light text-white hover:bg-brand-primary-light-hover hover:text-white" data-tina-field={tinaField(transparency.button, "label")}>
               {tField(transparency.button, "label", locale)}
             </a>
           )}
