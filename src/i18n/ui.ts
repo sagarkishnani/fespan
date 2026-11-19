@@ -55,6 +55,7 @@ const ES = {
   "footer.developedBy": "Desarrollado por",
   "share.x": "Compartir en X",
   "share.linkedin": "Compartir en LinkedIn",
+  "home.activities.carousel": "Actividades destacadas",
 };
 
 type UIKey = keyof typeof ES;
@@ -115,6 +116,7 @@ const EN: UITable = {
   "footer.developedBy": "Developed by",
   "share.x": "Share on X",
   "share.linkedin": "Share on LinkedIn",
+  "home.activities.carousel": "Featured activities",
 };
 
 const PT: UITable = {
@@ -172,6 +174,7 @@ const PT: UITable = {
   "footer.developedBy": "Desenvolvido por",
   "share.x": "Compartilhar no X",
   "share.linkedin": "Compartilhar no LinkedIn",
+  "home.activities.carousel": "Atividades em destaque",
 };
 
 const UI: Record<Locale, UITable> = { es: ES, en: EN, pt: PT };
