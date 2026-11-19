@@ -2,6 +2,7 @@ import { useTina, tinaField } from "tinacms/dist/react";
 import { tField, localizeHref } from "../../utils/i18n";
 import { t } from "../../i18n/ui";
 import { CalendarIcon } from "../shared/icons";
+import Carousel from "../shared/Carousel";
 import { revealDelay, type TinaSectionProps } from "../../lib/tinaProps";
 import type { ActivityCardModel } from "../../lib/viewModels";
 
@@ -30,9 +31,9 @@ export default function HomeActivities({ query, variables, data: initialData, lo
             </a>
           )}
         </div>
-        <div className="-mx-5 flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0">
+        <Carousel label={t("home.activities.carousel", locale)} slideClassName="w-[300px]" gridClassName="lg:grid-cols-3 lg:gap-6">
           {activities.slice(0, 3).map((activity) => (
-            <div key={activity.slug} data-reveal className="w-[85%] shrink-0 snap-start md:w-auto">
+            <div key={activity.slug} data-reveal className="h-full">
               <a href={activity.href} className="group card-lift flex h-full flex-col overflow-hidden rounded-3xl bg-surface">
                 <div className="h-[220px] shrink-0 overflow-hidden rounded-3xl bg-surface-media lg:h-[260px]">
                   {activity.image && (
@@ -52,7 +53,7 @@ export default function HomeActivities({ query, variables, data: initialData, lo
               </a>
             </div>
           ))}
-        </div>
+        </Carousel>
       </div>
     </section>
   );
