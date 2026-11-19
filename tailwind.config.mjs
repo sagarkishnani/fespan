@@ -8,11 +8,11 @@ export default {
       mono: ['Space Mono', 'ui-monospace', 'monospace'],
     },
     fontSize: {
-      'display-xl': ['clamp(3rem, 5vw + 1.25rem, 5.25rem)',      { lineHeight: '1',    letterSpacing: '-0.035em', fontWeight: '500' }],
-      'display-lg': ['clamp(2.75rem, 4.5vw + 1rem, 4.5rem)',     { lineHeight: '1.02', letterSpacing: '-0.035em', fontWeight: '500' }],
-      'display-md': ['clamp(2.5rem, 4vw + 1rem, 4rem)',          { lineHeight: '1.06', letterSpacing: '-0.03em',  fontWeight: '500' }],
-      'heading-xl': ['clamp(2.25rem, 3.5vw + 1rem, 3.75rem)',    { lineHeight: '1.05', letterSpacing: '-0.03em',  fontWeight: '500' }],
-      'heading-lg': ['clamp(2rem, 3vw + 1rem, 3.5rem)',          { lineHeight: '1.08', letterSpacing: '-0.03em',  fontWeight: '500' }],
+      'display-xl': ['clamp(2.75rem, 5vw + 1.25rem, 5.25rem)',      { lineHeight: '1',    letterSpacing: '-0.035em', fontWeight: '500' }],
+      'display-lg': ['clamp(2.5rem, 4.5vw + 1rem, 4.5rem)',     { lineHeight: '1.02', letterSpacing: '-0.035em', fontWeight: '500' }],
+      'display-md': ['clamp(2.375rem, 4vw + 1rem, 4rem)',          { lineHeight: '1.06', letterSpacing: '-0.03em',  fontWeight: '500' }],
+      'heading-xl': ['clamp(2.125rem, 3.5vw + 1rem, 3.75rem)',    { lineHeight: '1.05', letterSpacing: '-0.03em',  fontWeight: '500' }],
+      'heading-lg': ['clamp(1.875rem, 3vw + 1rem, 3.5rem)',          { lineHeight: '1.08', letterSpacing: '-0.03em',  fontWeight: '500' }],
       'heading-md': ['clamp(1.75rem, 2vw + 1rem, 2.5rem)',       { lineHeight: '1.12', letterSpacing: '-0.02em',  fontWeight: '500' }],
       'heading-sm': ['clamp(1.625rem, 1.25vw + 1rem, 2.25rem)',  { lineHeight: '1.15', letterSpacing: '-0.02em',  fontWeight: '500' }],
 
