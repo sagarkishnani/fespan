@@ -58,6 +58,7 @@ export default function MobileDrawer({ open, onClose, nav, footer, locale, curre
       <div
         ref={panelRef}
         id="mobile-drawer"
+        data-lenis-prevent
         role="dialog"
         aria-modal="true"
         aria-label={t("nav.menu", locale)}

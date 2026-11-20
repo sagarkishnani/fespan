@@ -182,7 +182,8 @@ hijos `fixed`.
 `lockScroll`/`unlockScroll` de `utils/scrollLock.ts`, que fija `overflow` en
 `html` y detiene Lenis (`BaseLayout` expone la instancia en `window.lenis`;
 sin eso la rueda sigue moviendo la página). `unlockScroll` es idempotente:
-llámalo en el cleanup del efecto. El foco se atrapa con
+llámalo en el cleanup del efecto. La raíz del panel lleva `data-lenis-prevent`:
+Lenis detenido bloquea la rueda y el touch, también dentro del panel. El foco se atrapa con
 `hooks/useFocusTrap.ts` y vuelve al botón que abrió el panel al cerrarlo.
 
 **Gutter**: `container-xl/lg/md` usan `px-4 md:px-6` (16 px en móvil, 24 desde

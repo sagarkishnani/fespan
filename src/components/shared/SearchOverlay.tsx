@@ -42,6 +42,7 @@ export default function SearchOverlay({ open, onClose, locale, pages }: Props) {
     <div
       ref={panelRef}
       id="search-overlay"
+      data-lenis-prevent
       role="dialog"
       aria-modal="true"
       aria-label={t("search.title", locale)}
