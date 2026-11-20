@@ -65,12 +65,12 @@ export default function HeaderReact({ query, variables, data: initialData, local
     <>
       {(menu === "search" || menu === "lang") && <div className="fixed inset-0 z-[59]" onClick={close} aria-hidden="true" />}
       <header className="fixed inset-x-0 top-0 z-[60] border-b border-line bg-surface">
-        <div className="container-xl flex h-[72px] items-center gap-6 lg:h-[88px]">
+        <div className="container-xl flex h-16 items-center gap-6 md:h-[72px] lg:h-[88px]">
           <a href={localizeHref("/", locale)} className="shrink-0" aria-label="FESPAN">
             <img
               src={mediaUrl(nav?.logo) || "/images/marca/logo-fespan.svg"}
               alt={nav?.logoAlt || "FESPAN"}
-              className="block h-12 w-auto lg:h-16"
+              className="block h-[34px] w-auto md:h-12 lg:h-16"
               data-tina-field={tinaField(nav, "logo")}
             />
           </a>
@@ -112,7 +112,7 @@ export default function HeaderReact({ query, variables, data: initialData, local
             <button
               type="button"
               onClick={() => toggle("mobile")}
-              className="flex h-control-sm w-control-sm items-center justify-center rounded-full bg-surface-sunken text-content xl:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-primary text-white transition-colors hover:bg-brand-primary-dark md:h-control-sm md:w-control-sm xl:hidden"
               aria-label={menu === "mobile" ? t("nav.close", locale) : t("nav.menu", locale)}
               aria-expanded={menu === "mobile"}
             >
@@ -122,7 +122,7 @@ export default function HeaderReact({ query, variables, data: initialData, local
         </div>
 
         {menu === "mobile" && (
-          <div className="h-[calc(100dvh-72px)] overflow-y-auto border-t border-line bg-surface xl:hidden">
+          <div className="h-[calc(100dvh-64px)] overflow-y-auto md:h-[calc(100dvh-72px)] lg:h-[calc(100dvh-88px)] border-t border-line bg-surface xl:hidden">
             <nav className="container-xl flex flex-col gap-1 py-6" aria-label="Principal">
               {links.map((link: any) => (
                 <a
