@@ -4,7 +4,7 @@ import { LOCALES, type Locale } from "../i18n/config";
 import { localePrefix, localizeHref, tField } from "../utils/i18n";
 import { translateTerm } from "../i18n/ui";
 import { nodesOf } from "../lib/viewModels";
-import type { SearchEntry } from "../components/shared/SiteSearch";
+import type { SearchEntry } from "../hooks/useSiteSearch";
 
 async function loadSources() {
   const [global, activities, knowledge, societies, posts] = await Promise.all([
