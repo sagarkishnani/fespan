@@ -101,7 +101,7 @@ export default function MobileDrawer({ open, onClose, nav, footer, locale, curre
         </nav>
 
         <div className="flex items-center justify-between gap-3 px-4 pt-6 md:px-6">
-          <span className="text-caption-sm font-medium uppercase tracking-[0.1em] text-content-muted">{t("nav.language", locale)}</span>
+          <span className="text-overline uppercase text-content-muted">{t("nav.language", locale)}</span>
           <MobileLangSwitcher locale={locale} currentPath={currentPath} />
         </div>
 

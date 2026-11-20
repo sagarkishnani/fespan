@@ -259,8 +259,10 @@ países sin sociedad en el mapa), `brand-primary-lightest` (`#E6F5EC`).
 **Tipografías**: Outfit (títulos), Outfit (cuerpo),
 Space Mono (acentos técnicos). La escala está como utilidades de Tailwind
 (`display-xl` → `caption-sm`). `body-base` (17px), `subtitle-xs` (19px) y
-`caption-md` (14px) solo fijan el tamaño: heredan interlineado y peso. No uses
-`text-[Npx]` para un tamaño que ya tiene token.
+`caption-md` (14px) solo fijan el tamaño: heredan interlineado y peso.
+`eyebrow` (14px) y `overline` (13px, etiquetas de los paneles) llevan el
+tracking de 0.1em; se combinan con `uppercase`. No uses `text-[Npx]` para un
+tamaño que ya tiene token.
 
 **Controles**: `h-control-sm` (46px, botones de ícono y `.btn-sm`) y
 `h-control-lg` (60px, `.btn-lg`).

@@ -68,7 +68,7 @@ export default function SearchOverlay({ open, onClose, locale, pages }: Props) {
         </button>
       </div>
       <div className="flex-1 overflow-y-auto px-4 pb-6 pt-2">
-        <label htmlFor="site-search-overlay" className="block pb-2 pt-4 text-caption-sm font-medium uppercase tracking-[0.1em] text-content-muted">
+        <label htmlFor="site-search-overlay" className="block pb-2 pt-4 text-overline uppercase text-content-muted">
           {t("search.title", locale)}
         </label>
         {results.map((result) => (

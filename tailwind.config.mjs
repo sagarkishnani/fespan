@@ -30,6 +30,7 @@ export default {
       'caption-md': '14px',
       'caption-sm': ['13px', { lineHeight: '1.4', fontWeight: '400' }],
       'eyebrow': ['14px', { lineHeight: '1.4', letterSpacing: '0.1em', fontWeight: '500' }],
+      'overline': ['13px', { lineHeight: '1.4', letterSpacing: '0.1em', fontWeight: '500' }],
     },
     extend: {
       colors: {
