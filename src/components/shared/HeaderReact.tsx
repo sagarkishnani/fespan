@@ -8,6 +8,7 @@ import LangSwitcher, { MobileLangSwitcher } from "./LangSwitcher";
 import SiteSearch, { type QuickLink } from "./SiteSearch";
 import { CloseIcon, MenuIcon } from "./icons";
 import { lockScroll, unlockScroll } from "../../utils/scrollLock";
+import useHeaderVisibility from "../../hooks/useHeaderVisibility";
 
 interface Props {
   query: string;
@@ -29,6 +30,7 @@ export default function HeaderReact({ query, variables, data: initialData, local
   const { data } = useTina({ query, variables, data: initialData });
   const nav = data?.global?.nav;
   const [menu, setMenu] = useState<Menu>("none");
+  const { hidden, scrolled } = useHeaderVisibility(menu === "mobile" || menu === "search");
 
   const toggle = useCallback((target: Menu) => setMenu((current) => (current === target ? "none" : target)), []);
   const toggleSearch = useCallback(() => toggle("search"), [toggle]);
@@ -64,8 +66,12 @@ export default function HeaderReact({ query, variables, data: initialData, local
   return (
     <>
       {(menu === "search" || menu === "lang") && <div className="fixed inset-0 z-[59]" onClick={close} aria-hidden="true" />}
-      <header className="fixed inset-x-0 top-0 z-[60] border-b border-line bg-surface">
-        <div className="container-xl flex h-16 items-center gap-6 md:h-[72px] lg:h-[88px]">
+      <header
+        className={`fixed inset-x-0 top-0 z-[60] h-16 border-b bg-surface md:h-[72px] lg:h-[88px] transition-[transform,box-shadow,border-color] duration-[350ms] ease-smooth ${
+          hidden ? "-translate-y-full focus-within:translate-y-0" : "translate-y-0"
+        } ${scrolled ? "border-transparent shadow-header" : "border-line"}`}
+      >
+        <div className="container-xl flex h-full items-center gap-6">
           <a href={localizeHref("/", locale)} className="shrink-0" aria-label="FESPAN">
             <img
               src={mediaUrl(nav?.logo) || "/images/marca/logo-fespan.svg"}
