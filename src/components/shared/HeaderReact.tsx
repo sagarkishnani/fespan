@@ -6,6 +6,7 @@ import { DEFAULT_LOCALE, type Locale } from "../../i18n/config";
 import { t } from "../../i18n/ui";
 import LangSwitcher from "./LangSwitcher";
 import MobileDrawer from "./MobileDrawer";
+import SearchOverlay from "./SearchOverlay";
 import SiteSearch from "./SiteSearch";
 import type { QuickLink } from "../../hooks/useSiteSearch";
 import { MenuIcon } from "./icons";
@@ -20,7 +21,9 @@ interface Props {
   currentPath: string;
 }
 
-type Menu = "none" | "search" | "lang" | "mobile";
+type Menu = "none" | "search" | "searchOverlay" | "lang" | "mobile";
+
+const SEARCH_DROPDOWN_QUERY = "(min-width: 768px)";
 
 function sectionOf(path: string, locale: Locale): string {
   const relative = stripBase(path);
@@ -32,10 +35,13 @@ export default function HeaderReact({ query, variables, data: initialData, local
   const { data } = useTina({ query, variables, data: initialData });
   const nav = data?.global?.nav;
   const [menu, setMenu] = useState<Menu>("none");
-  const { hidden, scrolled } = useHeaderVisibility(menu === "mobile" || menu === "search");
+  const { hidden, scrolled } = useHeaderVisibility(menu === "mobile" || menu === "search" || menu === "searchOverlay");
 
   const toggle = useCallback((target: Menu) => setMenu((current) => (current === target ? "none" : target)), []);
-  const toggleSearch = useCallback(() => toggle("search"), [toggle]);
+  const toggleSearch = useCallback(
+    () => toggle(window.matchMedia(SEARCH_DROPDOWN_QUERY).matches ? "search" : "searchOverlay"),
+    [toggle],
+  );
   const close = useCallback(() => setMenu("none"), []);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const drawerWasOpen = useRef(false);
@@ -52,7 +58,7 @@ export default function HeaderReact({ query, variables, data: initialData, local
   }, []);
 
   useEffect(() => {
-    if (menu !== "mobile") return;
+    if (menu !== "mobile" && menu !== "searchOverlay") return;
     lockScroll();
     return unlockScroll;
   }, [menu]);
@@ -147,6 +153,7 @@ export default function HeaderReact({ query, variables, data: initialData, local
         currentPath={currentPath}
         activeSection={activeSection}
       />
+      <SearchOverlay open={menu === "searchOverlay"} onClose={close} locale={locale} pages={quickPages} />
     </>
   );
 }
