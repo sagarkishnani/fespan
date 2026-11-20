@@ -27,7 +27,7 @@
 
   .section      { @apply py-20 lg:py-[120px]; }
   .section-alt  { @apply bg-surface-raised; }
-  .page-top     { @apply pt-[136px] lg:pt-[180px]; }
+  .page-top     { @apply pt-[128px] md:pt-[136px] lg:pt-[180px]; }
 
   .btn {
     @apply inline-flex h-[52px] items-center justify-center gap-2 rounded-full px-8

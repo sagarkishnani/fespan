@@ -1,12 +1,17 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
 import { useTina, tinaField } from "tinacms/dist/react";
 import { tField, localizeHref, stripBase } from "../../utils/i18n";
 import { mediaUrl } from "../../utils/mediaUrl";
 import { DEFAULT_LOCALE, type Locale } from "../../i18n/config";
 import { t } from "../../i18n/ui";
-import LangSwitcher, { MobileLangSwitcher } from "./LangSwitcher";
-import SiteSearch, { type QuickLink } from "./SiteSearch";
-import { CloseIcon, MenuIcon } from "./icons";
+import LangSwitcher from "./LangSwitcher";
+import MobileDrawer from "./MobileDrawer";
+import SearchOverlay from "./SearchOverlay";
+import SiteSearch from "./SiteSearch";
+import type { QuickLink } from "../../hooks/useSiteSearch";
+import { MenuIcon } from "./icons";
+import { lockScroll, unlockScroll } from "../../utils/scrollLock";
+import useHeaderVisibility from "../../hooks/useHeaderVisibility";
 
 interface Props {
   query: string;
@@ -16,7 +21,9 @@ interface Props {
   currentPath: string;
 }
 
-type Menu = "none" | "search" | "lang" | "mobile";
+type Menu = "none" | "search" | "searchOverlay" | "lang" | "mobile";
+
+const SEARCH_DROPDOWN_QUERY = "(min-width: 768px)";
 
 function sectionOf(path: string, locale: Locale): string {
   const relative = stripBase(path);
@@ -28,10 +35,24 @@ export default function HeaderReact({ query, variables, data: initialData, local
   const { data } = useTina({ query, variables, data: initialData });
   const nav = data?.global?.nav;
   const [menu, setMenu] = useState<Menu>("none");
+  const { hidden, scrolled } = useHeaderVisibility(menu === "mobile" || menu === "search" || menu === "searchOverlay");
 
   const toggle = useCallback((target: Menu) => setMenu((current) => (current === target ? "none" : target)), []);
-  const toggleSearch = useCallback(() => toggle("search"), [toggle]);
-  const close = () => setMenu("none");
+  const toggleSearch = useCallback(
+    () => toggle(window.matchMedia(SEARCH_DROPDOWN_QUERY).matches ? "search" : "searchOverlay"),
+    [toggle],
+  );
+  const close = useCallback(() => setMenu("none"), []);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const searchButtonRef = useRef<HTMLButtonElement>(null);
+  const previousMenu = useRef<Menu>("none");
+
+  useEffect(() => {
+    const triggers: Partial<Record<Menu, RefObject<HTMLButtonElement | null>>> = { mobile: menuButtonRef, searchOverlay: searchButtonRef };
+    const closedPanel = previousMenu.current !== menu ? triggers[previousMenu.current] : undefined;
+    if (closedPanel && menu === "none") closedPanel.current?.focus({ preventScroll: true });
+    previousMenu.current = menu;
+  }, [menu]);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => event.key === "Escape" && setMenu("none");
@@ -40,10 +61,9 @@ export default function HeaderReact({ query, variables, data: initialData, local
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menu === "mobile" ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    if (menu !== "mobile" && menu !== "searchOverlay") return;
+    lockScroll();
+    return unlockScroll;
   }, [menu]);
 
   const links = (nav?.links || []).filter(Boolean).map((link: any) => ({
@@ -64,13 +84,17 @@ export default function HeaderReact({ query, variables, data: initialData, local
   return (
     <>
       {(menu === "search" || menu === "lang") && <div className="fixed inset-0 z-[59]" onClick={close} aria-hidden="true" />}
-      <header className="fixed inset-x-0 top-0 z-[60] border-b border-line bg-surface">
-        <div className="container-xl flex h-[72px] items-center gap-6 lg:h-[88px]">
+      <header
+        className={`fixed inset-x-0 top-0 z-[60] h-16 border-b bg-surface md:h-[72px] lg:h-[88px] transition-[transform,box-shadow,border-color] duration-[350ms] ease-smooth ${
+          hidden ? "-translate-y-full focus-within:translate-y-0" : "translate-y-0"
+        } ${scrolled ? "border-transparent shadow-header" : "border-line"}`}
+      >
+        <div className="container-xl flex h-full items-center gap-6">
           <a href={localizeHref("/", locale)} className="shrink-0" aria-label="FESPAN">
             <img
               src={mediaUrl(nav?.logo) || "/images/marca/logo-fespan.svg"}
               alt={nav?.logoAlt || "FESPAN"}
-              className="block h-12 w-auto lg:h-16"
+              className="block h-[34px] w-auto md:h-12 lg:h-16"
               data-tina-field={tinaField(nav, "logo")}
             />
           </a>
@@ -100,7 +124,15 @@ export default function HeaderReact({ query, variables, data: initialData, local
           </nav>
 
           <div className="ml-auto flex shrink-0 items-center gap-2 xl:ml-0">
-            <SiteSearch locale={locale} open={menu === "search"} onToggle={toggleSearch} pages={quickPages} footerLinks={footerLinks} />
+            <SiteSearch
+              locale={locale}
+              open={menu === "search"}
+              expanded={menu === "search" || menu === "searchOverlay"}
+              buttonRef={searchButtonRef}
+              onToggle={toggleSearch}
+              pages={quickPages}
+              footerLinks={footerLinks}
+            />
             <div className="hidden sm:block">
               <LangSwitcher locale={locale} currentPath={currentPath} open={menu === "lang"} onToggle={() => toggle("lang")} />
             </div>
@@ -110,43 +142,29 @@ export default function HeaderReact({ query, variables, data: initialData, local
               </a>
             )}
             <button
+              ref={menuButtonRef}
               type="button"
               onClick={() => toggle("mobile")}
-              className="flex h-control-sm w-control-sm items-center justify-center rounded-full bg-surface-sunken text-content xl:hidden"
-              aria-label={menu === "mobile" ? t("nav.close", locale) : t("nav.menu", locale)}
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-primary text-white transition-colors hover:bg-brand-primary-dark md:h-control-sm md:w-control-sm xl:hidden"
+              aria-label={t("nav.menu", locale)}
               aria-expanded={menu === "mobile"}
+              aria-controls="mobile-drawer"
             >
-              {menu === "mobile" ? <CloseIcon /> : <MenuIcon />}
+              <MenuIcon />
             </button>
           </div>
         </div>
-
-        {menu === "mobile" && (
-          <div className="h-[calc(100dvh-72px)] overflow-y-auto border-t border-line bg-surface xl:hidden">
-            <nav className="container-xl flex flex-col gap-1 py-6" aria-label="Principal">
-              {links.map((link: any) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className={`rounded-2xl px-4 py-3.5 text-subtitle-sm ${
-                    link.section === activeSection ? "bg-surface-mint text-brand-primary" : "text-content"
-                  }`}
-                >
-                  {link.label}
-                </a>
-              ))}
-              {ctaLabel && (
-                <a href={ctaHref} className="btn-primary mt-4">
-                  {ctaLabel}
-                </a>
-              )}
-              <div className="mt-6 border-t border-line pt-6">
-                <MobileLangSwitcher locale={locale} currentPath={currentPath} />
-              </div>
-            </nav>
-          </div>
-        )}
       </header>
+      <MobileDrawer
+        open={menu === "mobile"}
+        onClose={close}
+        nav={nav}
+        footer={data?.global?.footer}
+        locale={locale}
+        currentPath={currentPath}
+        activeSection={activeSection}
+      />
+      <SearchOverlay open={menu === "searchOverlay"} onClose={close} locale={locale} pages={quickPages} />
     </>
   );
 }

@@ -48,18 +48,19 @@ export default function LangSwitcher({ locale, currentPath, open, onToggle }: Pr
 
 export function MobileLangSwitcher({ locale, currentPath }: { locale: Locale; currentPath: string }) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-0.5 rounded-full bg-surface-sunken p-[3px]">
       {LOCALES.map((code) => (
         <a
           key={code}
           href={localizedPath(currentPath, code)}
           hrefLang={code}
+          aria-label={LOCALE_NAMES[code]}
           aria-current={code === locale ? "true" : undefined}
-          className={`rounded-full border px-4 py-2 text-body-sm ${
-            code === locale ? "border-brand-primary bg-surface-mint font-semibold text-brand-primary" : "border-line text-content"
+          className={`flex h-9 min-w-11 items-center justify-center rounded-full px-2.5 text-caption-sm transition-[background-color,box-shadow,color] duration-200 ${
+            code === locale ? "bg-surface font-semibold text-accent shadow-segment" : "font-medium text-content-muted hover:text-content"
           }`}
         >
-          {LOCALE_NAMES[code]}
+          {code.toUpperCase()}
         </a>
       ))}
     </div>

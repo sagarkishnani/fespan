@@ -1,50 +1,24 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import type { Locale } from "../../i18n/config";
 import { t } from "../../i18n/ui";
-import { normalizeForSearch } from "../../utils/format";
+import useSiteSearch, { type QuickLink } from "../../hooks/useSiteSearch";
 import { SearchIcon } from "./icons";
 import Dropdown from "./Dropdown";
-
-export interface SearchEntry {
-  kind: "page" | "activity" | "knowledge" | "member" | "blog";
-  locale: string;
-  title: string;
-  keywords: string;
-  url: string;
-}
-
-export interface QuickLink {
-  label: string;
-  url: string;
-}
 
 interface Props {
   locale: Locale;
   open: boolean;
+  expanded: boolean;
+  buttonRef: RefObject<HTMLButtonElement | null>;
   onToggle: () => void;
   pages: QuickLink[];
   footerLinks: QuickLink[];
 }
 
-const MAX_RESULTS = 7;
-
-function useSearchIndex(enabled: boolean) {
-  const [entries, setEntries] = useState<SearchEntry[] | null>(null);
-  useEffect(() => {
-    if (!enabled || entries) return;
-    const base = import.meta.env.BASE_URL || "/";
-    fetch(`${base}/search-index.json`.replace(/\/{2,}/g, "/"))
-      .then((response) => response.json())
-      .then(setEntries)
-      .catch(() => setEntries([]));
-  }, [enabled, entries]);
-  return entries;
-}
-
-export default function SiteSearch({ locale, open, onToggle, pages, footerLinks }: Props) {
+export default function SiteSearch({ locale, open, expanded, buttonRef, onToggle, pages, footerLinks }: Props) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
-  const entries = useSearchIndex(open);
+  const results = useSiteSearch(query, open, locale, pages);
 
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 30);
@@ -62,24 +36,15 @@ export default function SiteSearch({ locale, open, onToggle, pages, footerLinks 
     return () => window.removeEventListener("keydown", onKey);
   }, [onToggle]);
 
-  const results = useMemo(() => {
-    const needle = normalizeForSearch(query.trim());
-    if (!needle) return pages.map((page) => ({ title: page.label, url: page.url, hint: "" }));
-    return (entries || [])
-      .filter((entry) => entry.locale === locale)
-      .filter((entry) => normalizeForSearch(`${entry.title} ${entry.keywords}`).includes(needle))
-      .slice(0, MAX_RESULTS)
-      .map((entry) => ({ title: entry.title, url: entry.url, hint: t(`search.kind.${entry.kind}` as const, locale) }));
-  }, [query, entries, locale, pages]);
-
   return (
     <div className="relative">
       <button
+        ref={buttonRef}
         type="button"
         onClick={onToggle}
         aria-label={t("search.open", locale)}
-        aria-expanded={open}
-        className={`flex h-control-sm w-control-sm items-center justify-center rounded-full text-content transition-colors hover:bg-surface-mint ${
+        aria-expanded={expanded}
+        className={`flex h-11 w-11 items-center justify-center rounded-full text-content transition-colors hover:bg-surface-mint md:h-control-sm md:w-control-sm ${
           open ? "bg-surface-mint" : "bg-surface-sunken"
         }`}
       >
