@@ -31,10 +31,10 @@ export default function HomeActivities({ query, variables, data: initialData, lo
             </a>
           )}
         </div>
-        <Carousel label={t("home.activities.carousel", locale)} slideClassName="w-[300px]" gridClassName="lg:grid-cols-3 lg:gap-6">
-          {activities.slice(0, 3).map((activity) => (
-            <div key={activity.slug} data-reveal className="h-full">
-              <a href={activity.href} className="group card-lift flex h-full flex-col overflow-hidden rounded-3xl bg-surface">
+        <div data-reveal>
+          <Carousel label={t("home.activities.carousel", locale)} slideClassName="w-[300px]" gridClassName="lg:grid-cols-3 lg:gap-6">
+            {activities.slice(0, 3).map((activity) => (
+              <a key={activity.slug} href={activity.href} className="group card-lift flex h-full flex-col overflow-hidden rounded-3xl bg-surface">
                 <div className="h-[220px] shrink-0 overflow-hidden rounded-3xl bg-surface-media lg:h-[260px]">
                   {activity.image && (
                     <img src={activity.image} alt="" loading="lazy" className="media-zoom block h-full w-full object-cover" style={{ objectPosition: activity.imagePosition }} />
@@ -51,9 +51,9 @@ export default function HomeActivities({ query, variables, data: initialData, lo
                   <span className="mt-auto pt-6 text-body-md font-medium text-brand-primary">{t("common.moreInfo", locale)}</span>
                 </div>
               </a>
-            </div>
-          ))}
-        </Carousel>
+            ))}
+          </Carousel>
+        </div>
       </div>
     </section>
   );
