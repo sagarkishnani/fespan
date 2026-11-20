@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
 import { useTina, tinaField } from "tinacms/dist/react";
 import { tField, localizeHref, stripBase } from "../../utils/i18n";
 import { mediaUrl } from "../../utils/mediaUrl";
@@ -44,11 +44,14 @@ export default function HeaderReact({ query, variables, data: initialData, local
   );
   const close = useCallback(() => setMenu("none"), []);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const drawerWasOpen = useRef(false);
+  const searchButtonRef = useRef<HTMLButtonElement>(null);
+  const previousMenu = useRef<Menu>("none");
 
   useEffect(() => {
-    if (drawerWasOpen.current && menu !== "mobile") menuButtonRef.current?.focus({ preventScroll: true });
-    drawerWasOpen.current = menu === "mobile";
+    const triggers: Partial<Record<Menu, RefObject<HTMLButtonElement | null>>> = { mobile: menuButtonRef, searchOverlay: searchButtonRef };
+    const closedPanel = previousMenu.current !== menu ? triggers[previousMenu.current] : undefined;
+    if (closedPanel && menu === "none") closedPanel.current?.focus({ preventScroll: true });
+    previousMenu.current = menu;
   }, [menu]);
 
   useEffect(() => {
@@ -121,7 +124,15 @@ export default function HeaderReact({ query, variables, data: initialData, local
           </nav>
 
           <div className="ml-auto flex shrink-0 items-center gap-2 xl:ml-0">
-            <SiteSearch locale={locale} open={menu === "search"} onToggle={toggleSearch} pages={quickPages} footerLinks={footerLinks} />
+            <SiteSearch
+              locale={locale}
+              open={menu === "search"}
+              expanded={menu === "search" || menu === "searchOverlay"}
+              buttonRef={searchButtonRef}
+              onToggle={toggleSearch}
+              pages={quickPages}
+              footerLinks={footerLinks}
+            />
             <div className="hidden sm:block">
               <LangSwitcher locale={locale} currentPath={currentPath} open={menu === "lang"} onToggle={() => toggle("lang")} />
             </div>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import type { Locale } from "../../i18n/config";
 import { t } from "../../i18n/ui";
 import useSiteSearch, { type QuickLink } from "../../hooks/useSiteSearch";
@@ -8,12 +8,14 @@ import Dropdown from "./Dropdown";
 interface Props {
   locale: Locale;
   open: boolean;
+  expanded: boolean;
+  buttonRef: RefObject<HTMLButtonElement | null>;
   onToggle: () => void;
   pages: QuickLink[];
   footerLinks: QuickLink[];
 }
 
-export default function SiteSearch({ locale, open, onToggle, pages, footerLinks }: Props) {
+export default function SiteSearch({ locale, open, expanded, buttonRef, onToggle, pages, footerLinks }: Props) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const results = useSiteSearch(query, open, locale, pages);
@@ -37,10 +39,11 @@ export default function SiteSearch({ locale, open, onToggle, pages, footerLinks 
   return (
     <div className="relative">
       <button
+        ref={buttonRef}
         type="button"
         onClick={onToggle}
         aria-label={t("search.open", locale)}
-        aria-expanded={open}
+        aria-expanded={expanded}
         className={`flex h-11 w-11 items-center justify-center rounded-full text-content transition-colors hover:bg-surface-mint md:h-control-sm md:w-control-sm ${
           open ? "bg-surface-mint" : "bg-surface-sunken"
         }`}
