@@ -1,12 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTina, tinaField } from "tinacms/dist/react";
 import { tField, localizeHref, stripBase } from "../../utils/i18n";
 import { mediaUrl } from "../../utils/mediaUrl";
 import { DEFAULT_LOCALE, type Locale } from "../../i18n/config";
 import { t } from "../../i18n/ui";
-import LangSwitcher, { MobileLangSwitcher } from "./LangSwitcher";
+import LangSwitcher from "./LangSwitcher";
+import MobileDrawer from "./MobileDrawer";
 import SiteSearch, { type QuickLink } from "./SiteSearch";
-import { CloseIcon, MenuIcon } from "./icons";
+import { MenuIcon } from "./icons";
 import { lockScroll, unlockScroll } from "../../utils/scrollLock";
 import useHeaderVisibility from "../../hooks/useHeaderVisibility";
 
@@ -34,7 +35,14 @@ export default function HeaderReact({ query, variables, data: initialData, local
 
   const toggle = useCallback((target: Menu) => setMenu((current) => (current === target ? "none" : target)), []);
   const toggleSearch = useCallback(() => toggle("search"), [toggle]);
-  const close = () => setMenu("none");
+  const close = useCallback(() => setMenu("none"), []);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const drawerWasOpen = useRef(false);
+
+  useEffect(() => {
+    if (drawerWasOpen.current && menu !== "mobile") menuButtonRef.current?.focus({ preventScroll: true });
+    drawerWasOpen.current = menu === "mobile";
+  }, [menu]);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => event.key === "Escape" && setMenu("none");
@@ -116,42 +124,28 @@ export default function HeaderReact({ query, variables, data: initialData, local
               </a>
             )}
             <button
+              ref={menuButtonRef}
               type="button"
               onClick={() => toggle("mobile")}
               className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-primary text-white transition-colors hover:bg-brand-primary-dark md:h-control-sm md:w-control-sm xl:hidden"
-              aria-label={menu === "mobile" ? t("nav.close", locale) : t("nav.menu", locale)}
+              aria-label={t("nav.menu", locale)}
               aria-expanded={menu === "mobile"}
+              aria-controls="mobile-drawer"
             >
-              {menu === "mobile" ? <CloseIcon /> : <MenuIcon />}
+              <MenuIcon />
             </button>
           </div>
         </div>
       </header>
-      {menu === "mobile" && (
-        <div className="fixed inset-x-0 bottom-0 top-16 z-[60] overflow-y-auto border-t border-line bg-surface md:top-[72px] lg:top-[88px] xl:hidden">
-          <nav className="container-xl flex flex-col gap-1 py-6" aria-label="Principal">
-            {links.map((link: any) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={`rounded-2xl px-4 py-3.5 text-subtitle-sm ${
-                  link.section === activeSection ? "bg-surface-mint text-brand-primary" : "text-content"
-                }`}
-              >
-                {link.label}
-              </a>
-            ))}
-            {ctaLabel && (
-              <a href={ctaHref} className="btn-primary mt-4">
-                {ctaLabel}
-              </a>
-            )}
-            <div className="mt-6 border-t border-line pt-6">
-              <MobileLangSwitcher locale={locale} currentPath={currentPath} />
-            </div>
-          </nav>
-        </div>
-      )}
+      <MobileDrawer
+        open={menu === "mobile"}
+        onClose={close}
+        nav={nav}
+        footer={data?.global?.footer}
+        locale={locale}
+        currentPath={currentPath}
+        activeSection={activeSection}
+      />
     </>
   );
 }

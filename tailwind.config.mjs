@@ -93,9 +93,11 @@ export default {
         float: '0 24px 60px rgba(14, 35, 39, 0.16)',
         media: '0 30px 60px rgba(14, 35, 39, 0.14)',
         header: '0 6px 24px rgba(14, 35, 39, 0.08)',
+        drawer: '-20px 0 60px rgba(14, 35, 39, 0.12)',
       },
       transitionTimingFunction: {
         smooth: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
+        drawer: 'cubic-bezier(0.32, 0.72, 0, 1)',
       },
       keyframes: {
         'fade-up': {
