@@ -18,7 +18,7 @@ Se tomaron como referencia los headers de Medical Digital, ERES y Fiberlux:
 | Leer `scrollY` al montar | Sí | — | Sí (lección de su spec 25) | Sí |
 | No se oculta con un panel abierto | — | Sí | Sí | Sí |
 | Drawer y overlay como hermanos del `<header>` | Sí | Sí | — | Sí |
-| Bloqueo de scroll | `scrollLock.ts` sobre `html` | Igual | `body.overflow` | Portar `scrollLock.ts`, sin Lenis |
+| Bloqueo de scroll | `scrollLock.ts` sobre `html` | Igual | `body.overflow` | Portar `scrollLock.ts`, con Lenis |
 | `Esc` devuelve el foco al botón | Sí | Sí, más foco atrapado | — | Sí, más foco atrapado en el drawer y el overlay |
 | Cerrar al pasar a desktop | — | Sí | Sí | Sí, al llegar a `xl` |
 | Redes de `footer.social` | — | Sí | — | Sí |
@@ -56,8 +56,8 @@ No hay datos de contenido nuevos ni cambios en el schema de Tina. El drawer lee 
 ### Archivos nuevos
 
 ```ts
-// src/utils/scrollLock.ts — portado de Medical, sin Lenis
-export function lockScroll(): void;    // html.style.overflow = "hidden"
+// src/utils/scrollLock.ts — portado de Medical, con Lenis
+export function lockScroll(): void;    // html.style.overflow = "hidden" + window.lenis?.stop()
 export function unlockScroll(): void;  // idempotente: siempre libera
 
 // src/hooks/useHeaderVisibility.ts
@@ -122,7 +122,7 @@ Las transiciones del diseño son: header en 350 ms `cubic-bezier(.2,.8,.2,1)`, d
 Cada paso deja el sitio compilando y se puede commitear por separado.
 
 1. **Línea base visual.** Con `npm run build:local` y `astro preview`, capturar la home, Nosotros, el blog y una página legal en 320, 390, 768, 1024, 1280 y 1536 px, con el menú cerrado y abierto. El script de capturas va fuera del repo, igual que en las specs 00 y 01.
-2. **`scrollLock`.** Crear `src/utils/scrollLock.ts` y reemplazar el `document.body.style.overflow` de `HeaderReact.tsx` por `lockScroll` y `unlockScroll`. El menú actual sigue funcionando igual.
+2. **`scrollLock`.** Crear `src/utils/scrollLock.ts` y reemplazar el `document.body.style.overflow` de `HeaderReact.tsx` por `lockScroll` y `unlockScroll`, y exponer la instancia de Lenis en `window.lenis` desde `BaseLayout`. El menú actual sigue funcionando igual.
 3. **Header de 64 px y botón verde.** Alto `h-16 md:h-[72px] lg:h-[88px]`, logo `h-[34px] md:h-12 lg:h-16`, botón de menú en `bg-brand-primary` con ícono blanco y `.page-top` a `pt-[128px] md:pt-[136px]`. Comparar contra la línea base: desde `md` solo cambia el color del botón.
 4. **Fragmento y hermanos.** `HeaderReact` devuelve un fragmento y el panel mobile actual sale del `<header>` como hermano, todavía con el diseño viejo. Verificar que se sigue abriendo y cerrando.
 5. **`useHeaderVisibility`.** Crear el hook y aplicar `translate-y` y la sombra al `<header>`. Probar en 390 y 820 px que se oculta al bajar y reaparece al subir, y que en 1280 px no se mueve. Revisar que `#nosotros` (`scroll-mt-[88px]`) no quede tapado.
@@ -190,7 +190,7 @@ Cada paso deja el sitio compilando y se puede commitear por separado.
 - **Sí: drawer de 420 px desde `md`.** En tablet, un panel a todo el ancho estira los items de 60 px sin necesidad. ERES usa un valor parecido (`min(88vw, 420px)`).
 - **Sí: el drawer y el overlay como hermanos del `<header>`.** El `transform` que oculta el header volvería relativos a sus hijos `fixed` (riesgo documentado en ERES).
 - **Sí: mantener `fixed` y `.page-top`.** Pasar a `sticky` como Medical y ERES cambiaría el espaciado de las 9 páginas y no lo pide el diseño.
-- **Sí: `scrollLock.ts` sobre `html`, portado de Medical.** Es idempotente y evita el error de Fiberlux, donde el scroll quedó bloqueado. FESPAN no usa Lenis, así que se porta sin él.
+- **Sí: `scrollLock.ts` sobre `html`, portado de Medical.** Es idempotente y evita el error de Fiberlux, donde el scroll quedó bloqueado. FESPAN usa Lenis con `smoothWheel`, que desplaza la página aunque `html` tenga `overflow: hidden`; por eso `BaseLayout` expone la instancia en `window.lenis` y `scrollLock` la detiene y la reanuda.
 - **Sí: `useFocusTrap` propio, sin dependencia.** Son unas 25 líneas y el presupuesto no justifica sumar `focus-trap-react`.
 - **Sí: idiomas en el orden de `LOCALES` (ES, EN, PT).** Coincide con el selector de escritorio. La referencia mobile usa ES, PT, EN, pero dos órdenes distintos confunden.
 - **Sí: el scrim con `bg-content/40`.** Siempre va sobre la página, igual que el scrim del hero. Se documenta como excepción.
