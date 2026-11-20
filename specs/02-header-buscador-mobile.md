@@ -1,6 +1,6 @@
 # SPEC 02 — Header y buscador mobile
 
-> **Estado:** Approved · **Depende de:** SPEC 01 · **Fecha:** 2026-11-19
+> **Estado:** Implemented · **Depende de:** SPEC 01 · **Fecha:** 2026-11-19
 > **Objetivo:** llevar el header del tramo con hamburguesa (`< xl`) al diseño mobile: drawer lateral, header de 64 px que se oculta al bajar y buscador a pantalla completa por debajo de `md`.
 
 ## Por qué existe esta spec
