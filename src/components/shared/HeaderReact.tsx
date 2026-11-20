@@ -7,6 +7,7 @@ import { t } from "../../i18n/ui";
 import LangSwitcher, { MobileLangSwitcher } from "./LangSwitcher";
 import SiteSearch, { type QuickLink } from "./SiteSearch";
 import { CloseIcon, MenuIcon } from "./icons";
+import { lockScroll, unlockScroll } from "../../utils/scrollLock";
 
 interface Props {
   query: string;
@@ -40,10 +41,9 @@ export default function HeaderReact({ query, variables, data: initialData, local
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menu === "mobile" ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    if (menu !== "mobile") return;
+    lockScroll();
+    return unlockScroll;
   }, [menu]);
 
   const links = (nav?.links || []).filter(Boolean).map((link: any) => ({
