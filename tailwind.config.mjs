@@ -94,6 +94,7 @@ export default {
         media: '0 30px 60px rgba(14, 35, 39, 0.14)',
         header: '0 6px 24px rgba(14, 35, 39, 0.08)',
         drawer: '-20px 0 60px rgba(14, 35, 39, 0.12)',
+        segment: '0 1px 4px rgba(14, 35, 39, 0.12)',
       },
       transitionTimingFunction: {
         smooth: 'cubic-bezier(0.2, 0.8, 0.2, 1)',

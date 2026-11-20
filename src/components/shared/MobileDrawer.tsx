@@ -6,6 +6,8 @@ import { localizeHref, tField } from "../../utils/i18n";
 import { mediaUrl } from "../../utils/mediaUrl";
 import useFocusTrap from "../../hooks/useFocusTrap";
 import { CloseIcon } from "./icons";
+import { MobileLangSwitcher } from "./LangSwitcher";
+import SocialLinks from "./SocialLinks";
 
 interface Props {
   open: boolean;
@@ -23,7 +25,7 @@ function sectionOfUrl(url: string | null | undefined): string {
   return (url || "/").replace(/^\//, "").split(/[/#?]/)[0];
 }
 
-export default function MobileDrawer({ open, onClose, nav, locale, activeSection }: Props) {
+export default function MobileDrawer({ open, onClose, nav, footer, locale, currentPath, activeSection }: Props) {
   const panelRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   useFocusTrap(panelRef, open);
@@ -43,6 +45,8 @@ export default function MobileDrawer({ open, onClose, nav, locale, activeSection
   }, [open, onClose]);
 
   const links = (nav?.links || []).filter(Boolean);
+  const ctaLabel = tField(nav?.cta, "label", locale);
+  const phoneHref = `tel:${(footer?.phone || "").replace(/[^\d+]/g, "")}`;
 
   return (
     <>
@@ -94,6 +98,41 @@ export default function MobileDrawer({ open, onClose, nav, locale, activeSection
             );
           })}
         </nav>
+
+        <div className="flex items-center justify-between gap-3 px-4 pt-6 md:px-6">
+          <span className="text-caption-sm font-medium uppercase tracking-[0.1em] text-content-muted">{t("nav.language", locale)}</span>
+          <MobileLangSwitcher locale={locale} currentPath={currentPath} />
+        </div>
+
+        <div className="mt-auto flex flex-col gap-5 px-4 pb-8 pt-7 md:px-6">
+          {ctaLabel && (
+            <a href={localizeHref(nav?.cta?.url, locale)} onClick={onClose} className="btn-primary btn-block" data-tina-field={tinaField(nav?.cta, "label")}>
+              {ctaLabel}
+            </a>
+          )}
+          {(footer?.phone || footer?.email) && (
+            <div className="flex flex-col gap-1 text-body-sm">
+              {footer?.phone && (
+                <a href={phoneHref} className="flex min-h-11 items-center gap-2.5 text-accent hover:text-brand-primary">
+                  <img src="/images/iconos/telefono.svg" alt="" className="h-[18px] w-[18px]" />
+                  {footer.phone}
+                </a>
+              )}
+              {footer?.email && (
+                <a href={`mailto:${footer.email}`} className="flex min-h-11 items-center gap-2.5 break-all text-accent hover:text-brand-primary">
+                  <img src="/images/iconos/correo.svg" alt="" className="h-[18px] w-[18px]" />
+                  {footer.email}
+                </a>
+              )}
+            </div>
+          )}
+          {footer?.social?.length > 0 && (
+            <div className="flex items-center gap-2.5 border-t border-line pt-4">
+              <span className="mr-auto text-caption-md text-content-muted">{t("nav.follow", locale)}</span>
+              <SocialLinks items={footer.social} size="lg" />
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

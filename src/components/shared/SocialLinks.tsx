@@ -14,7 +14,14 @@ const SOCIAL_ICONS: Record<string, IconComponent> = {
   whatsapp: FaWhatsapp as IconComponent,
 };
 
-export default function SocialLinks({ items }: { items: Array<{ network?: string | null; url?: string | null }> }) {
+const SIZE_CLASSES = { md: "h-10 w-10", lg: "h-11 w-11" };
+
+interface Props {
+  items: Array<{ network?: string | null; url?: string | null }>;
+  size?: keyof typeof SIZE_CLASSES;
+}
+
+export default function SocialLinks({ items, size = "md" }: Props) {
   const valid = items.filter((item) => item?.url && item.network && SOCIAL_ICONS[item.network]);
   return (
     <>
@@ -27,7 +34,7 @@ export default function SocialLinks({ items }: { items: Array<{ network?: string
             target="_blank"
             rel="noopener noreferrer"
             aria-label={item.network!}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-line text-content-muted transition-colors hover:bg-surface-mint hover:text-brand-primary"
+            className={`flex ${SIZE_CLASSES[size]} items-center justify-center rounded-full bg-line text-content-muted transition-colors hover:bg-surface-mint hover:text-brand-primary`}
           >
             <Icon size={16} />
           </a>
