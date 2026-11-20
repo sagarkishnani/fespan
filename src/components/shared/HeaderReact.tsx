@@ -120,33 +120,32 @@ export default function HeaderReact({ query, variables, data: initialData, local
             </button>
           </div>
         </div>
-
-        {menu === "mobile" && (
-          <div className="h-[calc(100dvh-64px)] overflow-y-auto md:h-[calc(100dvh-72px)] lg:h-[calc(100dvh-88px)] border-t border-line bg-surface xl:hidden">
-            <nav className="container-xl flex flex-col gap-1 py-6" aria-label="Principal">
-              {links.map((link: any) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className={`rounded-2xl px-4 py-3.5 text-subtitle-sm ${
-                    link.section === activeSection ? "bg-surface-mint text-brand-primary" : "text-content"
-                  }`}
-                >
-                  {link.label}
-                </a>
-              ))}
-              {ctaLabel && (
-                <a href={ctaHref} className="btn-primary mt-4">
-                  {ctaLabel}
-                </a>
-              )}
-              <div className="mt-6 border-t border-line pt-6">
-                <MobileLangSwitcher locale={locale} currentPath={currentPath} />
-              </div>
-            </nav>
-          </div>
-        )}
       </header>
+      {menu === "mobile" && (
+        <div className="fixed inset-x-0 bottom-0 top-16 z-[60] overflow-y-auto border-t border-line bg-surface md:top-[72px] lg:top-[88px] xl:hidden">
+          <nav className="container-xl flex flex-col gap-1 py-6" aria-label="Principal">
+            {links.map((link: any) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className={`rounded-2xl px-4 py-3.5 text-subtitle-sm ${
+                  link.section === activeSection ? "bg-surface-mint text-brand-primary" : "text-content"
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
+            {ctaLabel && (
+              <a href={ctaHref} className="btn-primary mt-4">
+                {ctaLabel}
+              </a>
+            )}
+            <div className="mt-6 border-t border-line pt-6">
+              <MobileLangSwitcher locale={locale} currentPath={currentPath} />
+            </div>
+          </nav>
+        </div>
+      )}
     </>
   );
 }
