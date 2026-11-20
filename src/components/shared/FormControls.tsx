@@ -1,7 +1,7 @@
 export const fieldClasses = {
   label: "block text-body-sm text-content-soft mb-2.5",
   input:
-    "w-full min-h-14 border rounded-xl px-[18px] py-3.5 text-body-md text-content placeholder:text-content-muted focus:outline-none transition-colors bg-surface",
+    "w-full min-h-[52px] border rounded-[14px] md:min-h-14 md:rounded-xl px-[18px] py-3 md:py-3.5 text-body-md text-content placeholder:text-content-muted focus:outline-none transition-colors bg-surface",
   ok: "border-line focus:border-brand-primary",
   err: "border-semantics-error focus:border-semantics-error",
   error: "text-caption-sm text-semantics-error mt-1",

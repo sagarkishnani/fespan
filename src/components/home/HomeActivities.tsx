@@ -2,6 +2,7 @@ import { useTina, tinaField } from "tinacms/dist/react";
 import { tField, localizeHref } from "../../utils/i18n";
 import { t } from "../../i18n/ui";
 import { CalendarIcon } from "../shared/icons";
+import Carousel from "../shared/Carousel";
 import { revealDelay, type TinaSectionProps } from "../../lib/tinaProps";
 import type { ActivityCardModel } from "../../lib/viewModels";
 
@@ -30,10 +31,10 @@ export default function HomeActivities({ query, variables, data: initialData, lo
             </a>
           )}
         </div>
-        <div className="-mx-5 flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0">
-          {activities.slice(0, 3).map((activity) => (
-            <div key={activity.slug} data-reveal className="w-[85%] shrink-0 snap-start md:w-auto">
-              <a href={activity.href} className="group card-lift flex h-full flex-col overflow-hidden rounded-3xl bg-surface">
+        <div data-reveal>
+          <Carousel label={t("home.activities.carousel", locale)} slideClassName="w-[300px]" gridClassName="lg:grid-cols-3 lg:gap-6">
+            {activities.slice(0, 3).map((activity) => (
+              <a key={activity.slug} href={activity.href} className="group card-lift flex h-full flex-col overflow-hidden rounded-3xl bg-surface">
                 <div className="h-[220px] shrink-0 overflow-hidden rounded-3xl bg-surface-media lg:h-[260px]">
                   {activity.image && (
                     <img src={activity.image} alt="" loading="lazy" className="media-zoom block h-full w-full object-cover" style={{ objectPosition: activity.imagePosition }} />
@@ -50,8 +51,8 @@ export default function HomeActivities({ query, variables, data: initialData, lo
                   <span className="mt-auto pt-6 text-body-md font-medium text-brand-primary">{t("common.moreInfo", locale)}</span>
                 </div>
               </a>
-            </div>
-          ))}
+            ))}
+          </Carousel>
         </div>
       </div>
     </section>

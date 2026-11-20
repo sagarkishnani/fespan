@@ -26,7 +26,7 @@ const seo = seoOf(data.home.seo, locale);
 <BaseLayout title={seo.title} description={seo.description} image={data.home.hero?.image ?? undefined}>
   <HomeHero {...sectionProps} client:tina />
   <HomeAbout {...sectionProps} client:tina />
-  <HomeActivities {...sectionProps} activities={activities} client:tina />
+  <HomeActivities {...sectionProps} activities={activities} client:visible />
   <HomeVideo {...sectionProps} client:visible />
   <HomeNews {...sectionProps} posts={posts} client:tina />
 </BaseLayout>

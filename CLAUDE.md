@@ -86,7 +86,7 @@ Cada sección alimentada por el CMS son dos archivos:
   `useTina()`, que es lo que habilita la edición visual en el panel.
 
 Las secciones estáticas usan `client:tina` (en producción no cargan React);
-solo hidratan en el navegador el header, el video de la home, los listados con
+solo hidratan en el navegador el header, el video de la home, los carruseles, los listados con
 filtros (blog, conocimiento, miembros), el formulario y el botón de compartir.
 Las animaciones de entrada son `data-reveal` + un script vanilla en
 `BaseLayout` (y `data-count` para los contadores).
@@ -163,6 +163,33 @@ reutilizables (`btn-primary`, `btn-secondary`, `card`, `section`, `container-xl`
 un CSS que nadie importa no se bundlea y no llega al sitio.
 
 Iconos: `react-icons` (Font Awesome 6, `react-icons/fa6`).
+
+**Tramos**: móvil `< md` (menos de 768 px, referencia mobile), tablet
+`md`–`lg` (768–1023 px, bloques de desktop en 2 columnas) y desktop `≥ lg`
+(1024 px o más, referencia desktop). Los componentes que cambian de estructura
+(header y carruseles) pasan a desktop en `lg`.
+
+**Gutter**: `container-xl/lg/md` usan `px-4 md:px-6` (16 px en móvil, 24 desde
+`md`). Lo que sangra hasta el borde usa el mismo valor en negativo
+(`-mx-4 md:-mx-6`).
+
+**Títulos**: `display-xl`, `display-lg`, `display-md`, `heading-xl` y
+`heading-lg` son `clamp()` cuyo mínimo (44, 40, 38, 34 y 30 px) solo actúa por
+debajo de ~550 px. Un título usa un solo token: no cambies de clase por
+breakpoint.
+
+**Botones**: `.btn` mide 52 px en móvil y 56 desde `md`. `.btn-block` lo lleva
+a ancho completo solo en móvil; úsalo donde el diseño mobile pida el botón a
+todo el ancho, no por defecto. Tailwind solo emite la clase cuando algún
+archivo la usa.
+
+**Carrusel**: toda fila deslizable usa `shared/Carousel.tsx` (Embla vía
+`hooks/useSlider.ts`), nunca un `snap-x` hecho a mano. Recibe las tarjetas como
+`children`, el ancho móvil en `slideClassName` (p. ej. `w-[300px]`), la grilla
+desde `lg` en `gridClassName` y un `label` traducido con `t()`. Embla está
+activo por debajo de `lg`; desde `lg` es grilla sin arrastre. Sin flechas,
+puntos ni autoplay. La isla que lo use se hidrata con `client:visible`, no
+`client:tina`.
 
 **Tema: light.** Los componentes NO escriben colores: piden tokens
 semánticos, y por eso el tema se puede cambiar sin tocar una sola clase.
