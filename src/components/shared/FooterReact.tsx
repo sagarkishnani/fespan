@@ -44,13 +44,13 @@ export default function FooterReact({ query, variables, data: initialData, local
                   data-tina-field={tinaField(column, "title")}
                 >
                   {tField(column, "title", locale)}
-                  <ChevronDownIcon width={16} height={16} className={open ? "rotate-180" : ""} />
+                  <ChevronDownIcon width={16} height={16} className={`shrink-0 transition-transform duration-[250ms] motion-reduce:transition-none ${open ? "rotate-180" : ""}`} />
                 </button>
                 <span className="mb-1.5 hidden text-body-base font-medium text-accent md:block" data-tina-field={tinaField(column, "title")}>
                   {tField(column, "title", locale)}
                 </span>
-                <div id={panelId} className={`grid ${open ? "grid-rows-[1fr]" : "max-md:grid-rows-[0fr]"}`}>
-                  <div className={`flex min-h-0 flex-col gap-4 max-md:overflow-hidden ${open ? "" : "max-md:invisible"}`}>
+                <div id={panelId} className={`grid transition-[grid-template-rows] duration-[250ms] motion-reduce:transition-none ${open ? "grid-rows-[1fr]" : "max-md:grid-rows-[0fr]"}`}>
+                  <div className={`flex min-h-0 flex-col gap-4 transition-[visibility] duration-[250ms] motion-reduce:transition-none max-md:overflow-hidden ${open ? "" : "max-md:invisible"}`}>
                     {(column.links || []).filter(Boolean).map((link: any, j: number) => (
                       <a key={j} href={localizeHref(link.url, locale)} className="text-body-sm text-content-muted hover:text-brand-primary">
                         {tField(link, "label", locale)}
