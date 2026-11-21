@@ -23,11 +23,11 @@ export default function FooterReact({ query, variables, data: initialData, local
   const phoneHref = `tel:${(footer?.phone || "").replace(/[^\d+]/g, "")}`;
 
   return (
-    <footer className="bg-surface-raised pb-10 pt-20">
+    <footer className="bg-surface-raised pb-8 pt-12 md:pb-10 md:pt-20">
       <div className="container-xl">
         <div className="grid md:grid-cols-2 md:gap-10 lg:grid-cols-[1.2fr_1fr_1fr_1.1fr_1.4fr]">
           <div className="max-md:border-b max-md:border-line max-md:pb-8">
-            <img src={mediaUrl(nav?.logo) || "/images/marca/logo-fespan.svg"} alt={nav?.logoAlt || "FESPAN"} className="block h-[104px] w-auto" loading="lazy" />
+            <img src={mediaUrl(nav?.logo) || "/images/marca/logo-fespan.svg"} alt={nav?.logoAlt || "FESPAN"} className="block h-10 w-auto md:h-[104px]" loading="lazy" />
           </div>
 
           {columns.map((column: any, i: number) => {
@@ -50,19 +50,21 @@ export default function FooterReact({ query, variables, data: initialData, local
                   {tField(column, "title", locale)}
                 </span>
                 <div id={panelId} className={`grid transition-[grid-template-rows] duration-[250ms] motion-reduce:transition-none ${open ? "grid-rows-[1fr]" : "max-md:grid-rows-[0fr]"}`}>
-                  <div className={`flex min-h-0 flex-col gap-4 transition-[visibility] duration-[250ms] motion-reduce:transition-none max-md:overflow-hidden ${open ? "" : "max-md:invisible"}`}>
-                    {(column.links || []).filter(Boolean).map((link: any, j: number) => (
-                      <a key={j} href={localizeHref(link.url, locale)} className="text-body-sm text-content-muted hover:text-brand-primary">
-                        {tField(link, "label", locale)}
-                      </a>
-                    ))}
+                  <div className={`min-h-0 transition-[visibility] duration-[250ms] motion-reduce:transition-none max-md:overflow-hidden ${open ? "" : "max-md:invisible"}`}>
+                    <div className="flex flex-col max-md:pb-3 md:gap-4">
+                      {(column.links || []).filter(Boolean).map((link: any, j: number) => (
+                        <a key={j} href={localizeHref(link.url, locale)} className="text-content-muted hover:text-brand-primary max-md:flex max-md:min-h-11 max-md:items-center max-md:text-body-md md:text-body-sm">
+                          {tField(link, "label", locale)}
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
             );
           })}
 
-          <div className="flex flex-col gap-3.5 max-md:mt-7">
+          <div className="flex flex-col gap-3 max-md:mt-7 md:gap-3.5">
             <span className="text-body-base font-medium text-accent" data-tina-field={tinaField(footer, "helpTitle")}>
               {tField(footer, "helpTitle", locale)}
             </span>
@@ -70,13 +72,13 @@ export default function FooterReact({ query, variables, data: initialData, local
               {tField(footer, "helpText", locale)}
             </span>
             {footer?.phone && (
-              <a href={phoneHref} className="mt-3.5 flex items-center gap-3 text-body-sm text-accent hover:text-brand-primary">
+              <a href={phoneHref} className="flex items-center gap-3 text-accent hover:text-brand-primary max-md:min-h-11 max-md:text-body-md md:mt-3.5 md:text-body-sm">
                 <img src="/images/iconos/telefono.svg" alt="" className="h-5 w-5" loading="lazy" />
                 {footer.phone}
               </a>
             )}
             {footer?.email && (
-              <a href={`mailto:${footer.email}`} className="flex items-center gap-3 break-all text-body-sm text-accent hover:text-brand-primary">
+              <a href={`mailto:${footer.email}`} className="flex items-center gap-3 break-all text-accent hover:text-brand-primary max-md:min-h-11 max-md:text-body-md md:text-body-sm">
                 <img src="/images/iconos/correo.svg" alt="" className="h-5 w-5" loading="lazy" />
                 {footer.email}
               </a>
@@ -84,12 +86,12 @@ export default function FooterReact({ query, variables, data: initialData, local
           </div>
         </div>
 
-        <div className="mt-16 flex items-center gap-5 lg:mt-[72px]">
+        <div className="mt-6 flex items-center gap-3 md:mt-16 md:gap-5 lg:mt-[72px]">
           <span className="text-caption-md text-content-muted">{t("footer.followUs", locale)}</span>
-          <SocialLinks items={footer?.social || []} />
+          <SocialLinks items={footer?.social || []} size="responsive" />
         </div>
 
-        <div className="mt-7 flex flex-col gap-4 border-t border-line pt-7 text-caption-sm text-content-muted md:flex-row md:items-center md:justify-between md:gap-6">
+        <div className="mt-7 flex flex-col gap-2.5 border-t border-line pt-5 text-caption-sm text-content-muted md:flex-row md:items-center md:justify-between md:gap-6 md:pt-7">
           <span data-tina-field={tinaField(footer, "legal")}>{tField(footer, "legal", locale)}</span>
           <span className="flex shrink-0 items-center gap-2">
             {t("footer.developedBy", locale)}
