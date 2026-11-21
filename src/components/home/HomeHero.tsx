@@ -11,7 +11,7 @@ export default function HomeHero({ query, variables, data: initialData, locale }
   return (
     <section className="relative flex min-h-[640px] overflow-hidden bg-brand-primary-dark lg:min-h-[760px]">
       {hero.image && (
-        <img src={mediaUrl(hero.image)} alt="" className="absolute inset-0 h-full w-full object-cover" fetchPriority="high" data-tina-field={tinaField(hero, "image")} />
+        <img src={mediaUrl(hero.image)} alt={tField(hero, "imageAlt", locale)} className="absolute inset-0 h-full w-full object-cover" fetchPriority="high" data-tina-field={tinaField(hero, "image")} />
       )}
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,30,27,.78)_0%,rgba(10,30,27,.55)_42%,rgba(10,30,27,.1)_80%)] lg:bg-[linear-gradient(90deg,rgba(10,30,27,.78)_0%,rgba(10,30,27,.45)_42%,rgba(10,30,27,0)_70%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(10,30,27,.55)_0%,rgba(10,30,27,0)_40%)]" />

@@ -46,7 +46,7 @@ export default function HomeAbout({ query, variables, data: initialData, locale 
         </div>
         {about.image && (
           <div data-reveal style={revealDelay(150)} className="group h-[420px] overflow-hidden rounded-3xl lg:h-[660px]">
-            <img src={mediaUrl(about.image)} alt="" loading="lazy" className="block h-full w-full object-cover transition-transform duration-[1200ms] ease-smooth group-hover:scale-105" data-tina-field={tinaField(about, "image")} />
+            <img src={mediaUrl(about.image)} alt={tField(about, "imageAlt", locale)} loading="lazy" className="block h-full w-full object-cover transition-transform duration-[1200ms] ease-smooth group-hover:scale-105" data-tina-field={tinaField(about, "image")} />
           </div>
         )}
       </div>
