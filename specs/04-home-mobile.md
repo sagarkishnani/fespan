@@ -1,6 +1,6 @@
 # SPEC 04 — Home mobile
 
-> **Estado:** Approved · **Depende de:** SPEC 01 · **Fecha:** 2026-11-21
+> **Estado:** Implemented · **Depende de:** SPEC 01 · **Fecha:** 2026-11-21
 > **Objetivo:** llevar la home al diseño mobile (`< md`): hero de 620 px con degradado vertical y botones apilados, cifras en 2 columnas, botones de sección abajo a todo el ancho, video y transparencia compactos, y `alt` editable en las imágenes del hero y de Sobre nosotros.
 
 ## Alcance
@@ -114,34 +114,34 @@ Cada paso deja el sitio compilando y se puede commitear por separado.
 
 **Hero**
 
-- [ ] En 390 px, el hero mide 620 px de alto como mínimo, con el degradado de abajo hacia arriba.
-- [ ] En 390 px, "Conoce más" y "Ver eventos" están apilados, a todo el ancho, con 10 px entre ellos.
-- [ ] La imagen del hero tiene `alt="Congreso FESPAN"` en `/`, `alt="FESPAN congress"` en `/en/` y `alt="Congresso FESPAN"` en `/pt/`.
+- [x] En 390 px, el hero mide 620 px de alto como mínimo, con el degradado de abajo hacia arriba.
+- [x] En 390 px, "Conoce más" y "Ver eventos" están apilados, a todo el ancho, con 10 px entre ellos.
+- [x] La imagen del hero tiene `alt="Congreso FESPAN"` en `/`, `alt="FESPAN congress"` en `/en/` y `alt="Congresso FESPAN"` en `/pt/`.
 
 **Sobre nosotros**
 
-- [ ] En 390 px se ve un solo párrafo; en 768 y 1280 se ven los dos.
-- [ ] En 390 px, las cifras están en 2 columnas, con borde arriba y abajo, y el número mide 48 px.
-- [ ] En 390 px, el botón ocupa todo el ancho y la imagen está 32 px debajo.
-- [ ] La imagen tiene `alt` traducido en los 3 idiomas ("Alimentos saludables", "Healthy food", "Alimentos saudáveis").
-- [ ] Con `imageAlt` vacío en Tina, las imágenes quedan con `alt=""`.
+- [x] En 390 px se ve un solo párrafo; en 768 y 1280 se ven los dos.
+- [x] En 390 px, las cifras están en 2 columnas, con borde arriba y abajo, y el número mide 48 px.
+- [x] En 390 px, el botón ocupa todo el ancho y la imagen está 32 px debajo.
+- [x] La imagen tiene `alt` traducido en los 3 idiomas ("Alimentos saludables", "Healthy food", "Alimentos saudáveis").
+- [ ] Con `imageAlt` vacío en Tina, las imágenes quedan con `alt=""`. Pendiente: verificado solo en código (`tField` devuelve `""`), falta probarlo desde Tina.
 
 **Actividades, video, noticias y transparencia**
 
-- [ ] En 390 px, el botón de actividades está debajo del carrusel, a todo el ancho, y no se ve en el encabezado. En 768 px está en el encabezado, como hoy.
-- [ ] En 390 px, la imagen de la tarjeta de actividades mide 200 px.
-- [ ] En 390 px, el video tiene el degradado vertical y el botón "Ver video" a todo el ancho, y abre el modal.
-- [ ] En 390 px, "Ver todas las publicaciones" es un botón a todo el ancho debajo de las tarjetas. En 768 px es el link del encabezado, como hoy.
-- [ ] En 390 px, el botón de transparencia mide 52 px y ocupa todo el ancho.
-- [ ] En 390 px, las secciones de la home tienen 64 px de padding vertical.
+- [x] En 390 px, el botón de actividades está debajo del carrusel, a todo el ancho, y no se ve en el encabezado. En 768 px está en el encabezado, como hoy.
+- [x] En 390 px, la imagen de la tarjeta de actividades mide 200 px.
+- [x] En 390 px, el video tiene el degradado vertical y el botón "Ver video" a todo el ancho, y abre el modal.
+- [x] En 390 px, "Ver todas las publicaciones" es un botón a todo el ancho debajo de las tarjetas. En 768 px es el link del encabezado, como hoy.
+- [x] En 390 px, el botón de transparencia mide 52 px y ocupa todo el ancho.
+- [x] En 390 px, las secciones de la home tienen 64 px de padding vertical.
 
 **Repo**
 
-- [ ] Desde 768 px, las capturas de la home son iguales a la línea base, salvo el `alt`.
-- [ ] `npm run typecheck`, `npm run build:local` y `npm run check:standard` pasan sin errores.
-- [ ] No hay dependencias nuevas ni hex fuera de `tailwind.config.mjs`.
-- [ ] `imageAlt` es editable en `/admin`, en el hero y en Sobre nosotros, con sus versiones EN y PT.
-- [ ] No hay scroll horizontal en la home en 320, 360, 390, 768, 1024, 1280 y 1536 px.
+- [x] Desde 768 px, las capturas de la home son iguales a la línea base, salvo el `alt`.
+- [x] `npm run typecheck`, `npm run build:local` y `npm run check:standard` pasan sin errores.
+- [x] No hay dependencias nuevas ni hex fuera de `tailwind.config.mjs`.
+- [ ] `imageAlt` es editable en `/admin`, en el hero y en Sobre nosotros, con sus versiones EN y PT. Pendiente: probar con `npm run dev`; el schema y `tina-lock.json` ya tienen los campos.
+- [x] No hay scroll horizontal en la home en 320, 360, 390, 768, 1024, 1280 y 1536 px.
 
 ## Decisiones
 
