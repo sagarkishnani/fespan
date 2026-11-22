@@ -11,7 +11,7 @@ export default function AboutHero({ query, variables, data: initialData, locale 
   return (
     <section className="relative flex min-h-[560px] overflow-hidden bg-hero-about lg:min-h-[620px]">
       {hero.image && (
-        <img src={mediaUrl(hero.image)} alt="" fetchPriority="high" className="absolute right-0 top-0 h-full w-full object-cover opacity-40 md:w-[52%] md:opacity-100" data-tina-field={tinaField(hero, "image")} />
+        <img src={mediaUrl(hero.image)} alt={tField(hero, "imageAlt", locale)} fetchPriority="high" className="absolute right-0 top-0 h-full w-full object-cover opacity-40 md:w-[52%] md:opacity-100" data-tina-field={tinaField(hero, "image")} />
       )}
       <div className="absolute inset-0 bg-hero-about-scrim" />
       <div className="container-xl relative flex flex-col justify-end pb-16 pt-[160px] lg:pb-[100px] lg:pt-[180px]">

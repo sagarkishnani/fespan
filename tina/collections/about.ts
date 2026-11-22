@@ -33,7 +33,11 @@ export const aboutCollection: Collection = {
   format: "json",
   ui: singleDocument,
   fields: [
-    heroObject([{ name: "image", label: "Imagen", type: "image" }, ...text("buttonLabel", "Texto del botón")]),
+    heroObject([
+      { name: "image", label: "Imagen", type: "image" },
+      ...text("imageAlt", "Texto alternativo de la imagen"),
+      ...text("buttonLabel", "Texto del botón"),
+    ]),
     {
       type: "object",
       name: "intro",
