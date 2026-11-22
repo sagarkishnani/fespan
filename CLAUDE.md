@@ -166,8 +166,25 @@ Iconos: `react-icons` (Font Awesome 6, `react-icons/fa6`).
 
 **Tramos**: móvil `< md` (menos de 768 px, referencia mobile), tablet
 `md`–`lg` (768–1023 px, bloques de desktop en 2 columnas) y desktop `≥ lg`
-(1024 px o más, referencia desktop). Los componentes que cambian de estructura
-(header y carruseles) pasan a desktop en `lg`.
+(1024 px o más, referencia desktop). Los carruseles pasan a desktop en `lg`.
+El header pasa a desktop en `xl` (1280 px): entre 1024 y 1279 px no entran los
+seis enlaces, el buscador, el idioma y el CTA.
+
+**Header**: 64 px por debajo de `md`, 72 en `md` y 88 desde `lg`. Por debajo
+de `xl` se oculta al bajar (`hooks/useHeaderVisibility.ts`) y el menú es
+`shared/MobileDrawer.tsx`; por debajo de `md` la búsqueda abre
+`shared/SearchOverlay.tsx`, y desde `md`, el dropdown de `SiteSearch`. Ambos
+filtran con `hooks/useSiteSearch.ts`. El drawer y el overlay son hermanos del
+`<header>`, nunca hijos: el `transform` que lo oculta volvería relativos a sus
+hijos `fixed`.
+
+**Paneles modales** (drawer, overlay y lo que venga): bloquean el scroll con
+`lockScroll`/`unlockScroll` de `utils/scrollLock.ts`, que fija `overflow` en
+`html` y detiene Lenis (`BaseLayout` expone la instancia en `window.lenis`;
+sin eso la rueda sigue moviendo la página). `unlockScroll` es idempotente:
+llámalo en el cleanup del efecto. La raíz del panel lleva `data-lenis-prevent`:
+Lenis detenido bloquea la rueda y el touch, también dentro del panel. El foco se atrapa con
+`hooks/useFocusTrap.ts` y vuelve al botón que abrió el panel al cerrarlo.
 
 **Gutter**: `container-xl/lg/md` usan `px-4 md:px-6` (16 px en móvil, 24 desde
 `md`). Lo que sangra hasta el borde usa el mismo valor en negativo
@@ -225,7 +242,8 @@ decorativo). Si cambias uno, vuelve a medir.
 **Nunca escribas `text-white/65` ni `bg-white/5`**: asumen fondo oscuro y rompen
 el tema. Las únicas excepciones legítimas son los bloques con fondo oscuro fijo
 (el scrim del hero sobre una foto, el degradado de marca del CTA) y el texto
-sobre `bg-brand-primary`.
+sobre `bg-brand-primary`. El scrim de los paneles modales usa `bg-content/40`:
+siempre va sobre la página, así que también es una excepción.
 
 Para "texto en color de marca" usa `text-accent`, **no** `text-brand-primary-light`:
 sobre fondo claro ese tono es ilegible.
@@ -241,8 +259,10 @@ países sin sociedad en el mapa), `brand-primary-lightest` (`#E6F5EC`).
 **Tipografías**: Outfit (títulos), Outfit (cuerpo),
 Space Mono (acentos técnicos). La escala está como utilidades de Tailwind
 (`display-xl` → `caption-sm`). `body-base` (17px), `subtitle-xs` (19px) y
-`caption-md` (14px) solo fijan el tamaño: heredan interlineado y peso. No uses
-`text-[Npx]` para un tamaño que ya tiene token.
+`caption-md` (14px) solo fijan el tamaño: heredan interlineado y peso.
+`eyebrow` (14px) y `overline` (13px, etiquetas de los paneles) llevan el
+tracking de 0.1em; se combinan con `uppercase`. No uses `text-[Npx]` para un
+tamaño que ya tiene token.
 
 **Controles**: `h-control-sm` (46px, botones de ícono y `.btn-sm`) y
 `h-control-lg` (60px, `.btn-lg`).

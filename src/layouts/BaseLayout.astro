@@ -129,6 +129,7 @@ try {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         lenis?.destroy();
         lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+        (window as any).lenis = lenis;
         const raf = (time: number) => {
           lenis?.raf(time);
           requestAnimationFrame(raf);
