@@ -1,6 +1,6 @@
 # SPEC 03 — Footer y banda CTA mobile
 
-> **Estado:** Approved · **Depende de:** SPEC 02 · **Fecha:** 2026-11-20
+> **Estado:** Implemented · **Depende de:** SPEC 02 · **Fecha:** 2026-11-20
 > **Objetivo:** llevar el footer y la banda CTA al diseño mobile: acordeón de un grupo abierto, logo de 40 px, contacto y redes de 44 px, y banda con el isotipo a la derecha y el botón a todo el ancho.
 
 ## Alcance
@@ -99,31 +99,31 @@ Cada paso deja el sitio compilando y se puede commitear por separado.
 
 **Footer**
 
-- [ ] En 390 px, el footer tiene 48 px de padding arriba y 32 abajo, y el logo mide 40 px de alto.
-- [ ] En 390 px, al cargar, los 3 grupos están cerrados y no se ven sus links, ni siquiera antes de hidratar (probado con JS desactivado).
-- [ ] Cada título mide 56 px y es un `<button>` con `aria-expanded` y `aria-controls`, que apunta a su panel.
-- [ ] Tocar un grupo lo abre y gira el chevron 180°. Tocar otro cierra el primero. Tocar el abierto lo cierra.
-- [ ] Los links abiertos miden como mínimo 44 px y llevan a su página en el idioma actual.
-- [ ] Con `prefers-reduced-motion: reduce`, el acordeón abre y cierra sin transición.
-- [ ] En 768 y 1280 px no hay `<button>` visible y todas las columnas se ven abiertas, igual que en la línea base.
-- [ ] El teléfono abre `tel:`, el correo abre `mailto:` y los dos miden como mínimo 44 px en 390 px.
-- [ ] En 390 px las redes miden 44 px; desde 768 px, 40 px, como en la línea base.
-- [ ] Los títulos, los links, "Estamos para ayudarte" y el copyright se ven traducidos en `/en/` y `/pt/`.
+- [x] En 390 px, el footer tiene 48 px de padding arriba y 32 abajo, y el logo mide 40 px de alto.
+- [x] En 390 px, al cargar, los 3 grupos están cerrados y no se ven sus links, ni siquiera antes de hidratar (probado con JS desactivado).
+- [x] Cada título mide 56 px y es un `<button>` con `aria-expanded` y `aria-controls`, que apunta a su panel.
+- [x] Tocar un grupo lo abre y gira el chevron 180°. Tocar otro cierra el primero. Tocar el abierto lo cierra.
+- [x] Los links abiertos miden como mínimo 44 px y llevan a su página en el idioma actual.
+- [x] Con `prefers-reduced-motion: reduce`, el acordeón abre y cierra sin transición.
+- [x] En 768 y 1280 px no hay `<button>` visible y todas las columnas se ven abiertas, igual que en la línea base.
+- [x] El teléfono abre `tel:`, el correo abre `mailto:` y los dos miden como mínimo 44 px en 390 px.
+- [x] En 390 px las redes miden 44 px; desde 768 px, 40 px, como en la línea base.
+- [x] Los títulos, los links, "Estamos para ayudarte" y el copyright se ven traducidos en `/en/` y `/pt/`.
 
 **Banda CTA**
 
-- [ ] En 390 px, la banda tiene 56 px de padding vertical, el isotipo arriba a la derecha con 280 px y el botón ocupa todo el ancho.
-- [ ] Desde 768 px, la banda se ve igual que en la línea base.
-- [ ] "Conversemos" lleva a `/contacto` en el idioma actual.
+- [x] En 390 px, la banda tiene 56 px de padding vertical, el isotipo arriba a la derecha con 280 px y el botón ocupa todo el ancho.
+- [x] Desde 768 px, la banda se ve igual que en la línea base.
+- [x] "Conversemos" lleva a `/contacto` en el idioma actual.
 
 **Repo**
 
-- [ ] `npm run typecheck`, `npm run build:local` y `npm run check:standard` pasan sin errores.
-- [ ] No hay dependencias nuevas en `package.json`.
-- [ ] No hay hex en los archivos que cambian.
-- [ ] Los títulos de las columnas, los links, el bloque de ayuda, el copyright y la banda siguen editables en `/admin` (`data-tina-field`).
-- [ ] No hay scroll horizontal en 320, 360, 390, 768, 1024, 1280 y 1536 px, con los grupos abiertos o cerrados.
-- [ ] El `CLAUDE.md` lista el footer entre las islas que hidratan y documenta el patrón del acordeón.
+- [x] `npm run typecheck`, `npm run build:local` y `npm run check:standard` pasan sin errores.
+- [x] No hay dependencias nuevas en `package.json`.
+- [x] No hay hex en los archivos que cambian.
+- [x] Los títulos de las columnas, los links, el bloque de ayuda, el copyright y la banda siguen editables en `/admin` (`data-tina-field`).
+- [x] No hay scroll horizontal en 320, 360, 390, 768, 1024, 1280 y 1536 px, con los grupos abiertos o cerrados.
+- [x] El `CLAUDE.md` lista el footer entre las islas que hidratan y documenta el patrón del acordeón.
 
 ## Decisiones
 
