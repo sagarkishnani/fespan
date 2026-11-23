@@ -82,6 +82,8 @@ export default {
         'hero-about-scrim': 'linear-gradient(90deg, #E2F0EA 40%, rgba(226, 240, 234, .6) 52%, rgba(226, 240, 234, 0) 72%)',
         'hero-activity': 'linear-gradient(120deg, #E6F5EC 0%, #F5F8F7 60%, #EEF7F2 100%)',
         'hero-contact-scrim': 'linear-gradient(90deg, #F6F6F4 38%, rgba(246, 246, 244, .7) 50%, rgba(246, 246, 244, 0) 66%)',
+        'hero-home-mobile': 'linear-gradient(0deg, rgba(10,30,27,.92) 0%, rgba(10,30,27,.6) 45%, rgba(10,30,27,.1) 75%)',
+        'video-scrim-mobile': 'linear-gradient(0deg, rgba(14,35,39,.9) 0%, rgba(14,35,39,.45) 60%, rgba(14,35,39,.2) 100%)',
       },
       maxWidth: {
         site: '1268px',

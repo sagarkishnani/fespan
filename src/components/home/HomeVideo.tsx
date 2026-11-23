@@ -39,7 +39,7 @@ export default function HomeVideo({ query, variables, data: initialData, locale 
   const src = mediaUrl(video.video);
 
   return (
-    <section className="container-xl pt-20 lg:pt-[120px]">
+    <section className="container-xl pt-16 md:pt-20 lg:pt-[120px]">
       <div data-reveal className="relative h-[460px] overflow-hidden rounded-4xl bg-content lg:h-[560px] lg:rounded-5xl">
         <video
           ref={playMutedBackground}
@@ -53,13 +53,14 @@ export default function HomeVideo({ query, variables, data: initialData, locale 
           aria-hidden="true"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(14,35,39,.85)_0%,rgba(14,35,39,.55)_50%,rgba(14,35,39,.15)_100%)]" />
-        <div className="relative flex h-full flex-col justify-end p-8 lg:p-[72px]">
+        <div className="absolute inset-0 bg-video-scrim-mobile md:hidden" />
+        <div className="absolute inset-0 max-md:hidden bg-[linear-gradient(90deg,rgba(14,35,39,.85)_0%,rgba(14,35,39,.55)_50%,rgba(14,35,39,.15)_100%)]" />
+        <div className="relative flex h-full flex-col justify-end px-6 py-7 md:p-8 lg:p-[72px]">
           <h2 className="max-w-[640px] text-heading-xl text-white" data-tina-field={tinaField(video, "title")}>
             {tField(video, "title", locale)}
           </h2>
           <div className="mt-10">
-            <button type="button" onClick={() => setOpen(true)} className="btn-light" data-tina-field={tinaField(video, "buttonLabel")}>
+            <button type="button" onClick={() => setOpen(true)} className="btn-light btn-block" data-tina-field={tinaField(video, "buttonLabel")}>
               {tField(video, "buttonLabel", locale) || t("video.watch", locale)}
             </button>
           </div>

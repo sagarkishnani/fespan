@@ -16,7 +16,7 @@ export default function HomeActivities({ query, variables, data: initialData, lo
   if (!section) return <div hidden />;
 
   return (
-    <section className="section bg-surface-raised">
+    <section className="section bg-surface-raised max-md:py-16">
       <div className="container-xl">
         <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end md:gap-10 lg:mb-14">
           <div>
@@ -26,7 +26,7 @@ export default function HomeActivities({ query, variables, data: initialData, lo
             </h2>
           </div>
           {section.button?.label && (
-            <a href={localizeHref(section.button.url, locale)} className="btn-secondary shrink-0 px-7" data-tina-field={tinaField(section.button, "label")}>
+            <a href={localizeHref(section.button.url, locale)} className="btn-secondary hidden shrink-0 px-7 md:inline-flex" data-tina-field={tinaField(section.button, "label")}>
               {tField(section.button, "label", locale)}
             </a>
           )}
@@ -35,12 +35,12 @@ export default function HomeActivities({ query, variables, data: initialData, lo
           <Carousel label={t("home.activities.carousel", locale)} slideClassName="w-[300px]" gridClassName="lg:grid-cols-3 lg:gap-6">
             {activities.slice(0, 3).map((activity) => (
               <a key={activity.slug} href={activity.href} className="group card-lift flex h-full flex-col overflow-hidden rounded-3xl bg-surface">
-                <div className="h-[220px] shrink-0 overflow-hidden rounded-3xl bg-surface-media lg:h-[260px]">
+                <div className="h-[200px] shrink-0 overflow-hidden rounded-3xl bg-surface-media md:h-[220px] lg:h-[260px]">
                   {activity.image && (
                     <img src={activity.image} alt="" loading="lazy" className="media-zoom block h-full w-full object-cover" style={{ objectPosition: activity.imagePosition }} />
                   )}
                 </div>
-                <div className="flex flex-1 flex-col px-7 pb-[30px] pt-[26px]">
+                <div className="flex flex-1 flex-col p-5 md:px-7 md:pb-[30px] md:pt-[26px]">
                   <div className="flex items-center gap-2.5 border-b border-line pb-[18px] text-body-sm text-content-muted">
                     <CalendarIcon />
                     {activity.date}
@@ -54,6 +54,11 @@ export default function HomeActivities({ query, variables, data: initialData, lo
             ))}
           </Carousel>
         </div>
+        {section.button?.label && (
+          <a href={localizeHref(section.button.url, locale)} className="btn-secondary btn-block mt-8 md:hidden">
+            {tField(section.button, "label", locale)}
+          </a>
+        )}
       </div>
     </section>
   );

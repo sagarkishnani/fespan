@@ -7,6 +7,9 @@
     "subtitle_en": "We bring together the nutrition societies of the Americas to improve the health of our populations.",
     "subtitle_pt": "Reunimos as sociedades de nutrição das Américas para melhorar a saúde de nossas populações.",
     "image": "/images/home/hero.webp",
+    "imageAlt": "Congreso FESPAN",
+    "imageAlt_en": "FESPAN congress",
+    "imageAlt_pt": "Congresso FESPAN",
     "primaryButton": {
       "label": "Conoce más",
       "label_en": "Learn more",
@@ -52,7 +55,10 @@
       "label_pt": "Saiba mais",
       "url": "/nosotros"
     },
-    "image": "/images/home/sobre-nosotros.webp"
+    "image": "/images/home/sobre-nosotros.webp",
+    "imageAlt": "Alimentos saludables",
+    "imageAlt_en": "Healthy food",
+    "imageAlt_pt": "Alimentos saudáveis"
   },
   "activities": {
     "eyebrow": "Actividades",

@@ -10,6 +10,7 @@ export const homeCollection: Collection = {
   fields: [
     heroObject([
       { name: "image", label: "Imagen de fondo", type: "image" },
+      ...text("imageAlt", "Texto alternativo de la imagen"),
       linkObject("primaryButton", "Botón principal"),
       linkObject("secondaryButton", "Botón secundario"),
     ]),
@@ -35,6 +36,7 @@ export const homeCollection: Collection = {
         },
         linkObject("button", "Botón"),
         { name: "image", label: "Imagen", type: "image" },
+        ...text("imageAlt", "Texto alternativo de la imagen"),
       ],
     },
     {
