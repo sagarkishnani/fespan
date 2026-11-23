@@ -14,7 +14,7 @@ const SOCIAL_ICONS: Record<string, IconComponent> = {
   whatsapp: FaWhatsapp as IconComponent,
 };
 
-const SIZE_CLASSES = { md: "h-10 w-10", lg: "h-11 w-11" };
+const SIZE_CLASSES = { md: "h-10 w-10", lg: "h-11 w-11", responsive: "h-11 w-11 md:h-10 md:w-10" };
 
 interface Props {
   items: Array<{ network?: string | null; url?: string | null }>;

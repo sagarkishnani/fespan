@@ -87,7 +87,8 @@ Cada sección alimentada por el CMS son dos archivos:
 
 Las secciones estáticas usan `client:tina` (en producción no cargan React);
 solo hidratan en el navegador el header, el video de la home, los carruseles, los listados con
-filtros (blog, conocimiento, miembros), el formulario y el botón de compartir.
+filtros (blog, conocimiento, miembros), el formulario, el botón de compartir y el
+footer (`client:visible`, por el acordeón).
 Las animaciones de entrada son `data-reveal` + un script vanilla en
 `BaseLayout` (y `data-count` para los contadores).
 
@@ -207,6 +208,13 @@ desde `lg` en `gridClassName` y un `label` traducido con `t()`. Embla está
 activo por debajo de `lg`; desde `lg` es grilla sin arrastre. Sin flechas,
 puntos ni autoplay. La isla que lo use se hidrata con `client:visible`, no
 `client:tina`.
+
+**Acordeón** (columnas del footer, por debajo de `md`): el estado cerrado sale
+de CSS (`max-md:grid-rows-[0fr]` + `max-md:invisible`), así no hay grupos
+abiertos antes de hidratar y `Tab` no entra en uno cerrado. El título es un
+`<button>` `md:hidden` con `aria-expanded`/`aria-controls` y, desde `md`, un
+`<span>` aparte: así no queda un `aria-expanded` falso. Un solo grupo abierto
+a la vez y todos cerrados al cargar.
 
 **Tema: light.** Los componentes NO escriben colores: piden tokens
 semánticos, y por eso el tema se puede cambiar sin tocar una sola clase.
