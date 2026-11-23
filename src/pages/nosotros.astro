@@ -18,7 +18,7 @@ const seo = seoOf(data.about.seo, locale);
   <AboutHero {...sectionProps} client:tina />
   <AboutIntro {...sectionProps} client:tina />
   <AboutValues {...sectionProps} client:tina />
-  <AboutTeam {...sectionProps} group="board" client:tina />
-  <AboutTeam {...sectionProps} group="committees" client:tina />
+  <AboutTeam {...sectionProps} group="board" client:visible />
+  <AboutTeam {...sectionProps} group="committees" client:visible />
   <AboutTransparency {...sectionProps} client:tina />
 </BaseLayout>

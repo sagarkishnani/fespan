@@ -59,6 +59,8 @@ const ES = {
   "share.x": "Compartir en X",
   "share.linkedin": "Compartir en LinkedIn",
   "home.activities.carousel": "Actividades destacadas",
+  "about.board.carousel": "Junta directiva",
+  "about.committees.carousel": "Comités",
 };
 
 type UIKey = keyof typeof ES;
@@ -123,6 +125,8 @@ const EN: UITable = {
   "share.x": "Share on X",
   "share.linkedin": "Share on LinkedIn",
   "home.activities.carousel": "Featured activities",
+  "about.board.carousel": "Board of directors",
+  "about.committees.carousel": "Committees",
 };
 
 const PT: UITable = {
@@ -184,6 +188,8 @@ const PT: UITable = {
   "share.x": "Compartilhar no X",
   "share.linkedin": "Compartilhar no LinkedIn",
   "home.activities.carousel": "Atividades em destaque",
+  "about.board.carousel": "Diretoria",
+  "about.committees.carousel": "Comitês",
 };
 
 const UI: Record<Locale, UITable> = { es: ES, en: EN, pt: PT };
