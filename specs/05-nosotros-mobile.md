@@ -1,6 +1,6 @@
 # SPEC 05 — Nosotros mobile
 
-> **Estado:** Approved · **Depende de:** SPEC 01 · **Fecha:** 2026-11-21
+> **Estado:** Implemented · **Depende de:** SPEC 01 · **Fecha:** 2026-11-21
 > **Objetivo:** llevar la página Nosotros al diseño mobile (`< md`): hero apilado con la imagen debajo, intro sin imagen, valores apilados, junta y comités en carrusel, documentos y alianzas compactos; y en todos los tamaños, el texto de los valores en `content-muted` y `alt` editable en la imagen del hero.
 
 ## Alcance
@@ -128,35 +128,35 @@ Cada paso deja el sitio compilando y se puede commitear por separado.
 
 **Hero**
 
-- [ ] En 390 px, el hero no tiene alto mínimo y la imagen de 260 px está debajo del subtítulo, sin el botón "Conoce más".
-- [ ] En 768 y 1280 px, el hero se ve como en la línea base (imagen a la derecha y botón visible).
-- [ ] La imagen del hero tiene `alt="Frutas y vegetales"` en `/nosotros/`, `alt="Fruits and vegetables"` en `/en/nosotros/` y `alt="Frutas e vegetais"` en `/pt/nosotros/`.
-- [ ] Con `imageAlt` vacío en Tina, las imágenes del hero quedan con `alt=""`.
-- [ ] `imageAlt` es editable en `/admin`, en el hero de Nosotros, con sus versiones EN y PT.
+- [x] En 390 px, el hero no tiene alto mínimo y la imagen de 260 px está debajo del subtítulo, sin el botón "Conoce más".
+- [x] En 768 y 1280 px, el hero se ve como en la línea base (imagen a la derecha y botón visible).
+- [x] La imagen del hero tiene `alt="Frutas y vegetales"` en `/nosotros/`, `alt="Fruits and vegetables"` en `/en/nosotros/` y `alt="Frutas e vegetais"` en `/pt/nosotros/`.
+- [ ] Con `imageAlt` vacío en Tina, las imágenes del hero quedan con `alt=""`. Pendiente: verificado solo en código (`tField` devuelve `""`), falta probarlo desde Tina.
+- [ ] `imageAlt` es editable en `/admin`, en el hero de Nosotros, con sus versiones EN y PT. Pendiente: probar con `npm run dev`; el schema y `tina-lock.json` ya tienen los campos.
 
 **Intro y valores**
 
-- [ ] En 390 px, la intro no muestra imagen y el botón ocupa todo el ancho.
-- [ ] En 390 px, las tarjetas de valores están apiladas con 12 px entre ellas, el ícono mide 64 px y no se ven "Ver más" ni "Conoce más".
-- [ ] En 768 y 1280 px se ven "Ver más" y los links "Conoce más" de las tarjetas.
-- [ ] En 390 y 1280 px, el texto de las tarjetas de valores es `content-muted` (`#5C7377`).
+- [x] En 390 px, la intro no muestra imagen y el botón ocupa todo el ancho.
+- [x] En 390 px, las tarjetas de valores están apiladas con 12 px entre ellas, el ícono mide 64 px y no se ven "Ver más" ni "Conoce más".
+- [x] En 768 y 1280 px se ven "Ver más" y los links "Conoce más" de las tarjetas.
+- [x] En 390 y 1280 px, el texto de las tarjetas de valores es `content-muted` (`#5C7377`).
 
 **Junta, comités, documentos y alianzas**
 
-- [ ] En 390 y 768 px, junta y comités son carruseles que se arrastran, con tarjetas de 260 × 340 px.
-- [ ] En 1024 y 1280 px, junta y comités son una grilla de 4 columnas con tarjetas de 400 px de alto, sin arrastre.
-- [ ] Los carruseles tienen `aria-label` traducido en ES, EN y PT.
-- [ ] En 390 px, "Descargar PDF" mide al menos 44 px de alto.
-- [ ] En 390 px, las fichas de alianzas miden 160 × 80 px.
-- [ ] En 390 px, las secciones de Nosotros tienen 64 px de padding vertical.
+- [x] En 390 y 768 px, junta y comités son carruseles que se arrastran, con tarjetas de 260 × 340 px.
+- [x] En 1024 y 1280 px, junta y comités son una grilla de 4 columnas con tarjetas de 400 px de alto, sin arrastre.
+- [x] Los carruseles tienen `aria-label` traducido en ES, EN y PT.
+- [x] En 390 px, "Descargar PDF" mide al menos 44 px de alto. Medido con un link inyectado con las mismas clases: hoy los documentos no tienen archivo.
+- [x] En 390 px, las fichas de alianzas miden 160 × 80 px.
+- [x] En 390 px, las secciones de Nosotros tienen 64 px de padding vertical.
 
 **Repo**
 
-- [ ] Desde 1024 px, las capturas son iguales a la línea base, salvo el color del texto de los valores.
-- [ ] En 768 px, las capturas son iguales a la línea base, salvo junta, comités y el color de los valores.
-- [ ] `npm run typecheck`, `npm run build:local` y `npm run check:standard` pasan sin errores.
-- [ ] No hay dependencias nuevas ni hex fuera de `tailwind.config.mjs`.
-- [ ] No hay scroll horizontal en `/nosotros/` en 320, 360, 390, 768, 1024, 1280 y 1536 px.
+- [x] Desde 1024 px, las capturas son iguales a la línea base, salvo el color del texto de los valores.
+- [x] En 768 px, las capturas son iguales a la línea base, salvo junta, comités y el color de los valores.
+- [x] `npm run typecheck`, `npm run build:local` y `npm run check:standard` pasan sin errores.
+- [x] No hay dependencias nuevas ni hex fuera de `tailwind.config.mjs`.
+- [x] No hay scroll horizontal en `/nosotros/` en 320, 360, 390, 768, 1024, 1280 y 1536 px.
 
 ## Decisiones
 
