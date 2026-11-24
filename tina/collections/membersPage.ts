@@ -1,5 +1,5 @@
 import type { Collection } from "tinacms";
-import { seoObject, heroObject, singleDocument } from "./shared";
+import { seoObject, heroObject, longText, singleDocument } from "./shared";
 
 export const membersPageCollection: Collection = {
   name: "membersPage",
@@ -7,5 +7,8 @@ export const membersPageCollection: Collection = {
   path: "src/content/members-page",
   format: "json",
   ui: singleDocument,
-  fields: [heroObject(), seoObject()],
+  fields: [
+    heroObject([...longText("touchSubtitle", "Subtítulo en pantallas táctiles")]),
+    seoObject(),
+  ],
 };

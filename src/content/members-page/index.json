@@ -5,7 +5,10 @@
     "title_pt": "Sociedades membros",
     "subtitle": "Pasa el cursor sobre un país o una sociedad para ver su ubicación.",
     "subtitle_en": "Hover over a country or society to see its location.",
-    "subtitle_pt": "Passe o cursor sobre um país ou uma sociedade para ver sua localização."
+    "subtitle_pt": "Passe o cursor sobre um país ou uma sociedade para ver sua localização.",
+    "touchSubtitle": "Toca un país o una sociedad para ver su ubicación.",
+    "touchSubtitle_en": "Tap a country or society to see its location.",
+    "touchSubtitle_pt": "Toque em um país ou sociedade para ver sua localização."
   },
   "seo": {
     "title": "Miembros — FESPAN",

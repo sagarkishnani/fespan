@@ -7,13 +7,17 @@ const VIEW_X = 100;
 const VIEW_Y = 20;
 const VIEW_WIDTH = 280;
 const VIEW_HEIGHT = 430;
+const TOOLTIP_WIDTH = "min(300px, 70vw)";
+const TOOLTIP_ANCHOR = "36px";
 const COUNTRY_PATHS = Object.entries(americaMap as Record<string, { d: string }>).map(([code, value]) => ({ code, d: value.d }));
 
 interface Props {
   societies: SocietyModel[];
   visibleCodes: Set<string>;
-  hovered: string | null;
+  highlighted: string | null;
+  showTooltip: boolean;
   onHover: (code: string | null) => void;
+  onCountryClick: (code: string) => void;
   mapImage: string;
   mapAlt: string;
 }
@@ -27,8 +31,8 @@ function MapTooltip({ society }: { society: SocietyModel }) {
   if (!pin) return null;
   return (
     <div
-      className="pointer-events-none absolute w-[min(300px,70vw)] -translate-x-[calc(100%-36px)] -translate-y-[calc(100%+22px)]"
-      style={{ left: percent(pin.x, VIEW_X, VIEW_WIDTH), top: percent(pin.y, VIEW_Y, VIEW_HEIGHT) }}
+      className="pointer-events-none absolute -translate-x-[calc(100%-36px)] -translate-y-[calc(100%+22px)]"
+      style={{ width: TOOLTIP_WIDTH, left: `clamp(${TOOLTIP_WIDTH} - ${TOOLTIP_ANCHOR}, ${percent(pin.x, VIEW_X, VIEW_WIDTH)}, 100% - ${TOOLTIP_ANCHOR})`, top: percent(pin.y, VIEW_Y, VIEW_HEIGHT) }}
     >
       <div className="animate-fade-up rounded-[18px] bg-surface px-5 py-4 shadow-[0_18px_40px_rgba(15,46,42,.16)] [text-wrap:balance]">
         <div className="text-[12px] font-medium uppercase tracking-[0.1em] text-brand-primary">{society.country}</div>
@@ -42,15 +46,10 @@ function MapTooltip({ society }: { society: SocietyModel }) {
   );
 }
 
-export default function MembersMap({ societies, visibleCodes, hovered, onHover, mapImage, mapAlt }: Props) {
+export default function MembersMap({ societies, visibleCodes, highlighted, showTooltip, onHover, onCountryClick, mapImage, mapAlt }: Props) {
   const bySociety = new Map(societies.map((society) => [society.countryCode, society]));
-  const active = hovered ? bySociety.get(hovered) : undefined;
+  const active = highlighted ? bySociety.get(highlighted) : undefined;
   const pin = active ? COUNTRY_PINS[active.countryCode] : undefined;
-
-  const openSite = (code: string) => {
-    const url = bySociety.get(code)?.url;
-    if (url) window.open(url, "_blank", "noopener");
-  };
 
   return (
     <div className="relative mx-auto aspect-[520/799] w-full max-w-[520px]">
@@ -63,7 +62,7 @@ export default function MembersMap({ societies, visibleCodes, hovered, onHover, 
             strokeWidth={0.35}
             strokeLinejoin="round"
             className={`cursor-pointer stroke-white transition-[fill] duration-300 ${
-              hovered === country.code
+              highlighted === country.code
                 ? "fill-brand-primary"
                 : visibleCodes.has(country.code)
                 ? "fill-brand-primary-light"
@@ -71,11 +70,11 @@ export default function MembersMap({ societies, visibleCodes, hovered, onHover, 
             }`}
             onMouseEnter={() => onHover(country.code)}
             onMouseLeave={() => onHover(null)}
-            onClick={() => openSite(country.code)}
+            onClick={() => onCountryClick(country.code)}
           />
         ))}
         {pin && (
-          <g key={hovered} transform={`translate(${pin.x} ${pin.y})`} className="pointer-events-none">
+          <g key={highlighted} transform={`translate(${pin.x} ${pin.y})`} className="pointer-events-none">
             <circle r={4} fill="rgba(14,35,39,.35)" className="origin-center animate-pulse-ring [transform-box:fill-box]" />
             <g className="animate-drop">
               <circle r={2.6} strokeWidth={1} className="fill-content stroke-white" />
@@ -83,7 +82,7 @@ export default function MembersMap({ societies, visibleCodes, hovered, onHover, 
           </g>
         )}
       </svg>
-      {active && <MapTooltip society={active} />}
+      {showTooltip && active && <MapTooltip society={active} />}
     </div>
   );
 }

@@ -27,7 +27,7 @@ const seo = seoOf(data.membersPage.seo, locale);
 ---
 
 <BaseLayout title={seo.title} description={seo.description}>
-  <section class="container-xl pb-20 pt-[130px] lg:pb-[120px] lg:pt-[170px]">
+  <section class="container-xl pb-16 pt-[104px] md:pb-20 md:pt-[130px] lg:pb-[120px] lg:pt-[170px]">
     <MembersDirectory societies={societies} locale={locale} mapImage="/images/miembros/mapa-america.webp" client:load>
       <MembersHero query={query} variables={variables} data={data} locale={locale} client:tina />
     </MembersDirectory>
