@@ -1,7 +1,8 @@
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Locale } from "../../i18n/config";
 import { t } from "../../i18n/ui";
 import { normalizeForSearch } from "../../utils/format";
+import useCanHover from "../../hooks/useCanHover";
 import { ChevronDownIcon, SearchIcon } from "../shared/icons";
 import MembersMap from "./MembersMap";
 
@@ -22,10 +23,42 @@ interface Props {
   children?: ReactNode;
 }
 
+const rowClasses = "flex min-h-16 rounded-xl px-4 py-3.5 transition-colors duration-300 md:rounded-[18px] md:py-4 md:pl-6 md:pr-4";
+
+function rowBackground(active: boolean) {
+  return active ? "bg-surface-mint" : "bg-surface-raised";
+}
+
+function SocietyName({ society, active }: { society: SocietyModel; active: boolean }) {
+  return (
+    <>
+      <span className={`text-body-base text-content md:text-subtitle-xs ${active ? "font-medium" : ""}`}>{society.name}</span>
+      <span className="text-caption-md text-content-muted">{society.city}</span>
+    </>
+  );
+}
+
+function SocietyCard({ society, locale }: { society: SocietyModel; locale: Locale }) {
+  return (
+    <div className="mt-3 flex animate-fade-up flex-col gap-1.5 rounded-[20px] bg-accent p-5 text-white">
+      <span className="text-overline uppercase text-brand-primary-pale">{society.country}</span>
+      <span className="text-subtitle-xs font-medium">{society.name}</span>
+      <span className="text-body-sm text-white/85">{society.city}</span>
+      {society.url && (
+        <a href={society.url} target="_blank" rel="noopener noreferrer" className="btn mt-2.5 w-full bg-surface text-content hover:text-content">
+          {t("members.visitSite", locale)}
+        </a>
+      )}
+    </div>
+  );
+}
+
 export default function MembersDirectory({ societies, locale, mapImage, children }: Props) {
   const [query, setQuery] = useState("");
   const [country, setCountry] = useState("");
   const [hovered, setHovered] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const canHover = useCanHover();
 
   const countries = useMemo(() => [...new Set(societies.map((society) => society.country))], [societies]);
   const visible = useMemo(() => {
@@ -35,6 +68,22 @@ export default function MembersDirectory({ societies, locale, mapImage, children
       .filter((society) => !needle || normalizeForSearch(`${society.name} ${society.city} ${society.country}`).includes(needle));
   }, [societies, query, country]);
   const visibleCodes = useMemo(() => new Set(visible.map((society) => society.countryCode)), [visible]);
+  const selected = canHover ? undefined : visible.find((society) => society.id === selectedId);
+  const highlighted = canHover ? hovered : selected?.countryCode ?? null;
+
+  useEffect(() => {
+    if (selectedId && !visible.some((society) => society.id === selectedId)) setSelectedId(null);
+  }, [visible, selectedId]);
+
+  const selectCountry = (code: string) => {
+    const society = visible.find((item) => item.countryCode === code);
+    if (society) setSelectedId(society.id);
+  };
+
+  const openCountrySite = (code: string) => {
+    const url = societies.find((society) => society.countryCode === code)?.url;
+    if (url) window.open(url, "_blank", "noopener");
+  };
 
   return (
     <div className="flex flex-col lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,620px)] lg:items-center lg:gap-[60px]">
@@ -72,6 +121,27 @@ export default function MembersDirectory({ societies, locale, mapImage, children
         <div className="order-last mt-5 lg:mt-0">
           <ul className="flex flex-col gap-2">
             {visible.map((society) => {
+              if (!canHover) {
+                const active = society.id === selected?.id;
+                return (
+                  <li key={society.id}>
+                    <button
+                      type="button"
+                      aria-pressed={active}
+                      onClick={() => setSelectedId(society.id)}
+                      className={`${rowClasses} w-full items-center gap-3 text-left ${rowBackground(active)}`}
+                    >
+                      <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+                        <SocietyName society={society} active={active} />
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className={`h-3 w-3 shrink-0 rounded-full border-2 border-brand-primary ${active ? "bg-brand-primary-light" : "bg-surface"}`}
+                      />
+                    </button>
+                  </li>
+                );
+              }
               const active = hovered === society.countryCode;
               const Tag = society.url ? "a" : "div";
               return (
@@ -82,10 +152,9 @@ export default function MembersDirectory({ societies, locale, mapImage, children
                     onMouseLeave={() => setHovered(null)}
                     onFocus={() => setHovered(society.countryCode)}
                     onBlur={() => setHovered(null)}
-                    className={`flex min-h-16 flex-col gap-0.5 rounded-xl px-4 py-3.5 transition-colors duration-300 md:rounded-[18px] md:py-4 md:pl-6 md:pr-4 ${active ? "bg-surface-mint" : "bg-surface-raised"}`}
+                    className={`${rowClasses} flex-col gap-0.5 ${rowBackground(active)}`}
                   >
-                    <span className={`text-body-base text-content md:text-subtitle-xs ${active ? "font-medium" : ""}`}>{society.name}</span>
-                    <span className="text-caption-md text-content-muted">{society.city}</span>
+                    <SocietyName society={society} active={active} />
                     {society.site && <span className="mt-0.5 text-caption-sm text-brand-primary">{society.site}</span>}
                   </Tag>
                 </li>
@@ -97,15 +166,20 @@ export default function MembersDirectory({ societies, locale, mapImage, children
           )}
         </div>
       </div>
-      <div className="flex items-center justify-center overflow-hidden rounded-2xl bg-surface-raised p-4 md:rounded-4xl md:px-6 md:py-10 lg:h-[860px] lg:rounded-5xl lg:px-12 lg:py-0">
-        <MembersMap
-          societies={societies}
-          visibleCodes={visibleCodes}
-          hovered={hovered}
-          onHover={setHovered}
-          mapImage={mapImage}
-          mapAlt={t("members.mapAlt", locale)}
-        />
+      <div>
+        <div className="flex items-center justify-center overflow-hidden rounded-2xl bg-surface-raised p-4 md:rounded-4xl md:px-6 md:py-10 lg:h-[860px] lg:rounded-5xl lg:px-12 lg:py-0">
+          <MembersMap
+            societies={societies}
+            visibleCodes={visibleCodes}
+            highlighted={highlighted}
+            showTooltip={canHover}
+            onHover={canHover ? setHovered : () => {}}
+            onCountryClick={canHover ? openCountrySite : selectCountry}
+            mapImage={mapImage}
+            mapAlt={t("members.mapAlt", locale)}
+          />
+        </div>
+        <div aria-live="polite">{selected && <SocietyCard key={selected.id} society={selected} locale={locale} />}</div>
       </div>
     </div>
   );
