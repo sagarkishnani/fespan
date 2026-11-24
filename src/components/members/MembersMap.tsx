@@ -7,6 +7,8 @@ const VIEW_X = 100;
 const VIEW_Y = 20;
 const VIEW_WIDTH = 280;
 const VIEW_HEIGHT = 430;
+const TOOLTIP_WIDTH = "min(300px, 70vw)";
+const TOOLTIP_ANCHOR = "36px";
 const COUNTRY_PATHS = Object.entries(americaMap as Record<string, { d: string }>).map(([code, value]) => ({ code, d: value.d }));
 
 interface Props {
@@ -29,8 +31,8 @@ function MapTooltip({ society }: { society: SocietyModel }) {
   if (!pin) return null;
   return (
     <div
-      className="pointer-events-none absolute w-[min(300px,70vw)] -translate-x-[calc(100%-36px)] -translate-y-[calc(100%+22px)]"
-      style={{ left: percent(pin.x, VIEW_X, VIEW_WIDTH), top: percent(pin.y, VIEW_Y, VIEW_HEIGHT) }}
+      className="pointer-events-none absolute -translate-x-[calc(100%-36px)] -translate-y-[calc(100%+22px)]"
+      style={{ width: TOOLTIP_WIDTH, left: `clamp(${TOOLTIP_WIDTH} - ${TOOLTIP_ANCHOR}, ${percent(pin.x, VIEW_X, VIEW_WIDTH)}, 100% - ${TOOLTIP_ANCHOR})`, top: percent(pin.y, VIEW_Y, VIEW_HEIGHT) }}
     >
       <div className="animate-fade-up rounded-[18px] bg-surface px-5 py-4 shadow-[0_18px_40px_rgba(15,46,42,.16)] [text-wrap:balance]">
         <div className="text-[12px] font-medium uppercase tracking-[0.1em] text-brand-primary">{society.country}</div>
