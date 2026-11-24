@@ -1,6 +1,6 @@
 # SPEC 06 — Miembros mobile y mapa
 
-> **Estado:** Approved · **Depende de:** SPEC 01 · **Fecha:** 2026-11-23
+> **Estado:** Implemented · **Depende de:** SPEC 01 · **Fecha:** 2026-11-23
 > **Objetivo:** llevar Miembros al diseño mobile (mapa, tarjeta de la sociedad y lista, hasta `lg`) y hacer que el mapa funcione con toques cuando no hay mouse; en desktop, mantener el tooltip dentro del mapa y dejar de recortarlo.
 
 ## Alcance
@@ -121,37 +121,38 @@ No hay datos nuevos en `society`. Antes de hidratar, la página se renderiza en 
 
 ### Mobile y tablet
 
-- [ ] En 390 y 768 px, el orden es título, subtítulo, buscador, filtro, mapa y lista; en 1024 px, la lista está a la izquierda y el mapa a la derecha.
-- [ ] En 390 px, la sección empieza 40 px bajo el header y el panel del mapa tiene 16 px de padding y radio de 24.
-- [ ] En 390 px, las filas miden al menos 64 px de alto, con 8 px entre ellas.
+- [x] En 390 y 768 px, el orden es título, subtítulo, buscador, filtro, mapa y lista; en 1024 px, la lista está a la izquierda y el mapa a la derecha.
+- [x] En 390 px, la sección empieza 40 px bajo el header y el panel del mapa tiene 16 px de padding y radio de 24.
+- [x] En 390 px, las filas miden al menos 64 px de alto, con 8 px entre ellas.
 
 ### Modo táctil (sin mouse, `(hover: none)`)
 
-- [ ] Se ve "Toca un país o una sociedad…" en ES, EN y PT, y no se ve "Pasa el cursor…".
-- [ ] Tocar una fila la pone en `surface-mint`, pinta su país en `brand-primary`, muestra el pin y la tarjeta verde debajo del mapa, y no abre ninguna pestaña.
-- [ ] Tocar un país selecciona su sociedad y muestra la misma tarjeta.
-- [ ] "Visitar sitio web" abre la web de la sociedad en una pestaña nueva y no aparece si la sociedad no tiene `url`.
-- [ ] Las filas no muestran el dominio, tienen el indicador de 12 px y `aria-pressed` refleja la selección.
-- [ ] Si el filtro saca de la lista a la sociedad seleccionada, la tarjeta desaparece.
-- [ ] No aparece el tooltip.
+- [x] Se ve "Toca un país o una sociedad…" en ES, EN y PT, y no se ve "Pasa el cursor…".
+- [x] Tocar una fila la pone en `surface-mint`, pinta su país en `brand-primary`, muestra el pin y la tarjeta verde debajo del mapa, y no abre ninguna pestaña.
+- [x] Tocar un país selecciona su sociedad y muestra la misma tarjeta.
+- [x] "Visitar sitio web" abre la web de la sociedad en una pestaña nueva y no aparece si la sociedad no tiene `url`.
+- [x] Las filas no muestran el dominio, tienen el indicador de 12 px y `aria-pressed` refleja la selección.
+- [x] Si el filtro saca de la lista a la sociedad seleccionada, la tarjeta desaparece.
+- [x] No aparece el tooltip.
 
 ### Modo mouse
 
-- [ ] Se ve "Pasa el cursor…" y no "Toca un país…".
-- [ ] Hover o foco en una fila o un país muestra el tooltip, y el clic abre la web, como hoy.
-- [ ] Las filas son links, muestran el dominio y no tienen indicador.
-- [ ] En 1024, 1280 y 1536 px, el tooltip de cada uno de los 4 países queda dentro del recuadro del mapa.
-- [ ] Desde 1024 px, el mapa se ve completo (799 px, sin recorte arriba ni abajo).
-- [ ] Desde 1024 px, las capturas son iguales a la línea base, salvo el mapa sin recorte.
+- [x] Se ve "Pasa el cursor…" y no "Toca un país…".
+- [x] Hover o foco en una fila o un país muestra el tooltip, y el clic abre la web, como hoy.
+- [x] Las filas son links, muestran el dominio y no tienen indicador.
+- [x] En 1024, 1280 y 1536 px, el tooltip de cada uno de los 4 países queda dentro del recuadro del mapa.
+- [x] Desde 1024 px, el mapa se ve completo (799 px, sin recorte arriba ni abajo).
+  - Nota de implementación: el mapa no estaba recortado. `overflow-hidden` corta en el borde del padding, no del contenido, así que los 799 px ya entraban. Quitar el `py-10` no cambia nada visible.
+- [x] Desde 1024 px, las capturas son iguales a la línea base, salvo el mapa sin recorte. Salieron idénticas píxel a píxel.
 
 ### General
 
 - [ ] `touchSubtitle` es editable en `/admin`, en el hero de Miembros, con sus versiones EN y PT.
 - [ ] Con `touchSubtitle` vacío, en táctil se ve `subtitle`.
-- [ ] `npm run typecheck`, `npm run build:local` y `npm run check:standard` pasan sin errores.
-- [ ] El JS de `/miembros/` no crece más de 1 KB gzip respecto de la línea base.
-- [ ] No hay dependencias nuevas ni hex fuera de `tailwind.config.mjs`.
-- [ ] No hay scroll horizontal en `/miembros/` en 320, 360, 390, 768, 1024, 1280 y 1536 px.
+- [x] `npm run typecheck`, `npm run build:local` y `npm run check:standard` pasan sin errores.
+- [x] El JS de `/miembros/` no crece más de 1 KB gzip respecto de la línea base.
+- [x] No hay dependencias nuevas ni hex fuera de `tailwind.config.mjs`.
+- [x] No hay scroll horizontal en `/miembros/` en 320, 360, 390, 768, 1024, 1280 y 1536 px.
 
 ## Decisiones
 
