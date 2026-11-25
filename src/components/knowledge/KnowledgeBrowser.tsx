@@ -29,7 +29,7 @@ const KINDS = ["guia", "investigacion"] as const;
 
 function KindTabs({ docs, kind, locale, onChange }: { docs: KnowledgeDocModel[]; kind: string; locale: Locale; onChange: (kind: (typeof KINDS)[number]) => void }) {
   return (
-    <div role="tablist" className="flex gap-2 overflow-x-auto border-b border-line">
+    <div role="tablist" className="grid grid-cols-2 border-b border-line md:flex md:gap-2 md:overflow-x-auto">
       {KINDS.map((id) => {
         const active = kind === id;
         return (
@@ -39,12 +39,12 @@ function KindTabs({ docs, kind, locale, onChange }: { docs: KnowledgeDocModel[];
             role="tab"
             aria-selected={active}
             onClick={() => onChange(id)}
-            className={`-mb-px flex items-center gap-2.5 whitespace-nowrap border-b-[3px] px-[22px] py-4 text-subtitle-xs transition-colors hover:text-content ${
+            className={`-mb-px flex h-[52px] items-center justify-center gap-2 whitespace-nowrap border-b-[3px] px-2 text-body-md transition-colors md:h-auto md:justify-start md:gap-2.5 md:px-[22px] md:py-4 md:text-subtitle-xs hover:text-content ${
               active ? "border-brand-primary-light font-medium text-content" : "border-transparent text-content-muted"
             }`}
           >
             {t(`knowledge.tab.${id}`, locale)}
-            <span className={`flex h-[26px] min-w-[28px] items-center justify-center rounded-full px-2 text-caption-sm ${active ? "bg-surface-mint text-brand-primary" : "bg-surface-sunken text-content-muted"}`}>
+            <span className={`flex h-6 min-w-[26px] items-center md:h-[26px] md:min-w-[28px] justify-center rounded-full px-2 text-caption-sm ${active ? "bg-surface-mint text-brand-primary" : "bg-surface-sunken text-content-muted"}`}>
               {docs.filter((doc) => doc.kind === id).length}
             </span>
           </button>
@@ -131,29 +131,29 @@ export default function KnowledgeBrowser({ docs, areas, locale }: Props) {
   };
 
   return (
-    <section ref={listRef} className="container-xl scroll-mt-[100px] pb-20 pt-[72px] lg:pb-[120px]">
+    <section ref={listRef} className="container-xl scroll-mt-[100px] pb-16 pt-6 md:pb-20 md:pt-[72px] lg:pb-[120px]">
       <KindTabs docs={docs} kind={kind} locale={locale} onChange={(next) => { setKind(next); setPage(0); }} />
-      <div className="mt-12 grid gap-6 border-b border-line pb-10 md:grid-cols-2">
-        <label className="flex flex-col gap-3 text-body-md font-medium">
+      <div className="mt-6 grid gap-4 border-b border-line pb-6 md:mt-12 md:grid-cols-2 md:gap-6 md:pb-10">
+        <label className="flex flex-col gap-2 text-body-sm font-medium md:gap-3 md:text-body-md md:font-medium">
           {t("knowledge.searchLabel", locale)}
           <div className="relative">
-            <SearchIcon className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-content-muted" />
+            <SearchIcon className="pointer-events-none absolute left-4 top-1/2 md:left-5 -translate-y-1/2 text-content-muted" />
             <input
               type="search"
               value={query}
               onChange={(event) => { setQuery(event.target.value); setPage(0); }}
               placeholder={t("knowledge.searchPlaceholder", locale)}
-              className="field field-with-icon h-[58px] rounded-xl border-line-strong text-body-base font-normal"
+              className="field field-with-icon rounded-[14px] border-line-strong font-normal md:h-[58px] md:rounded-xl md:text-body-base"
             />
           </div>
         </label>
-        <label className="flex flex-col gap-3 text-body-md font-medium">
+        <label className="flex flex-col gap-2 text-body-sm font-medium md:gap-3 md:text-body-md md:font-medium">
           {t("knowledge.area", locale)}
           <div className="relative">
             <select
               value={area}
               onChange={(event) => { setArea(event.target.value); setPage(0); }}
-              className="field h-[58px] cursor-pointer appearance-none rounded-xl border-line-strong pr-12 text-body-base font-normal"
+              className="field cursor-pointer appearance-none rounded-[14px] border-line-strong pr-12 font-normal md:h-[58px] md:rounded-xl md:text-body-base"
             >
               <option value={ALL}>{t("common.all", locale)}</option>
               {areas.map((value) => (
