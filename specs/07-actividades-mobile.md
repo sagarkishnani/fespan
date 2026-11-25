@@ -1,6 +1,6 @@
 # SPEC 07 — Actividades y detalle mobile
 
-> **Estado:** Approved · **Depende de:** SPEC 01 · **Fecha:** 2026-11-24
+> **Estado:** Implemented · **Depende de:** SPEC 01 · **Fecha:** 2026-11-24
 > **Objetivo:** llevar el listado de Actividades y el detalle de cada actividad al diseño mobile, con una barra fija "Inscribirme" en el detalle por debajo de `lg`.
 
 ## Alcance
@@ -68,39 +68,39 @@ Cada paso de código deja el sitio funcionando y lleva su propio commit.
 
 ### Listado (`/actividades`)
 
-- [ ] En 390 px, la sección empieza 40 px bajo el header; el subtítulo está a 16 px del título y a 40 px del h2; la primera tarjeta, a 20 px del h2.
-- [ ] En 390 px, las tarjetas de congresos van en 1 columna, a 16 px entre sí, con `p-3 pb-5`, radio de 24 e imagen de 200 px con radio de 18.
-- [ ] En 390 px, las tarjetas de formación van a 28 px entre sí, con imagen de 200 px y radio de 20.
-- [ ] En 390 px, "Más información" ocupa todo el ancho de la tarjeta y mide 52 px.
-- [ ] En 768 px hay 2 columnas; desde 1024 px, 3.
-- [ ] Desde 768 px, el listado es igual a la línea base.
+- [x] En 390 px, la sección empieza 40 px bajo el header; el subtítulo está a 16 px del título y a 40 px del h2; la primera tarjeta, a 20 px del h2.
+- [x] En 390 px, las tarjetas de congresos van en 1 columna, a 16 px entre sí, con `p-3 pb-5`, radio de 24 e imagen de 200 px con radio de 18.
+- [x] En 390 px, las tarjetas de formación van a 28 px entre sí, con imagen de 200 px y radio de 20.
+- [x] En 390 px, "Más información" ocupa todo el ancho de la tarjeta y mide 52 px.
+- [x] En 768 px hay 2 columnas; desde 1024 px, 3.
+- [x] Desde 768 px, el listado es igual a la línea base.
 
 ### Detalle (`/actividades/<slug>`)
 
-- [ ] En 390 px, "Volver a Actividades" lleva el chevron y mide al menos 44 px; la sección empieza 20 px bajo el header; fecha y lugar van apilados; la imagen mide 240 px y queda después del resumen.
-- [ ] En 390 px, los facts van en 1 columna, a 10 px entre sí; la etiqueta mide 13 px y el valor 17 px.
-- [ ] En 768 px hay 2 columnas de facts; desde 1024 px, 4. Desde 768 px, el valor mide 19 px.
-- [ ] Por debajo de 1024 px, el hero no muestra botones.
-- [ ] En el congreso panamericano, "Enviar un resumen" aparece después de los facts a ancho completo. En el curso de aditivos (sin `abstractUrl`) no aparece.
-- [ ] Desde 1024 px, el hero muestra "Inscribirme" y "Enviar un resumen", y la página es igual a la línea base salvo el chevron y el valor de los facts.
-- [ ] "Volver a Actividades" lleva el chevron también desde 1024 px.
+- [x] En 390 px, "Volver a Actividades" lleva el chevron y mide al menos 44 px; la sección empieza 20 px bajo el header; fecha y lugar van apilados; la imagen mide 240 px y queda después del resumen.
+- [x] En 390 px, los facts van en 1 columna, a 10 px entre sí; la etiqueta mide 13 px y el valor 17 px.
+- [x] En 768 px hay 2 columnas de facts; desde 1024 px, 4. Desde 768 px, el valor mide 19 px.
+- [x] Por debajo de 1024 px, el hero no muestra botones.
+- [x] En el congreso panamericano, "Enviar un resumen" aparece después de los facts a ancho completo. En el curso de aditivos (sin `abstractUrl`) no aparece.
+- [x] Desde 1024 px, el hero muestra "Inscribirme" y "Enviar un resumen", y la página es igual a la línea base salvo el chevron y el valor de los facts.
+- [x] "Volver a Actividades" lleva el chevron también desde 1024 px.
 
 ### Barra fija
 
-- [ ] En 390 y 768 px, la barra queda fija abajo al hacer scroll y muestra la fecha, el título truncado a una línea y "Inscribirme" de 52 px, que lleva a la `registerUrl` localizada.
-- [ ] Desde 1024 px no hay barra.
-- [ ] Una actividad sin `registerUrl` no tiene barra y el `body` no reserva espacio.
-- [ ] Al final de la página, el footer se ve completo por encima de la barra.
-- [ ] El drawer, la búsqueda y el banner de cookies quedan por encima de la barra.
-- [ ] En 320 px, la barra no desborda.
+- [x] En 390 y 768 px, la barra queda fija abajo al hacer scroll y muestra la fecha, el título truncado a una línea y "Inscribirme" de 52 px, que lleva a la `registerUrl` localizada.
+- [x] Desde 1024 px no hay barra.
+- [ ] Una actividad sin `registerUrl` no tiene barra y el `body` no reserva espacio. _(Revisado en el código: las 6 actividades tienen `registerUrl`.)_
+- [x] Al final de la página, el footer se ve completo por encima de la barra.
+- [x] El drawer, la búsqueda y el banner de cookies quedan por encima de la barra.
+- [x] En 320 px, la barra no desborda.
 
 ### General
 
-- [ ] ES, EN y PT muestran "Inscribirme", "Enviar un resumen" y "Volver" traducidos.
-- [ ] Sin scroll horizontal en 320, 360, 390, 768, 1024, 1280 y 1536 px.
-- [ ] El JS de `/actividades/` y del detalle no crece más de 1 KB gzip respecto de la línea base.
-- [ ] `typecheck`, `build:local` y `check:standard` pasan; sin hex nuevos en `src/`.
-- [ ] El `CLAUDE.md` describe la barra fija.
+- [x] ES, EN y PT muestran "Inscribirme", "Enviar un resumen" y "Volver" traducidos.
+- [x] Sin scroll horizontal en 320, 360, 390, 768, 1024, 1280 y 1536 px.
+- [x] El JS de `/actividades/` y del detalle no crece más de 1 KB gzip respecto de la línea base.
+- [x] `typecheck`, `build:local` y `check:standard` pasan; sin hex nuevos en `src/`.
+- [x] El `CLAUDE.md` describe la barra fija.
 
 ## Decisiones tomadas y descartadas
 
