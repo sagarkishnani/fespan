@@ -76,6 +76,18 @@ export default function ActivityDetail({ query, variables, data: initialData, lo
           )}
         </section>
       )}
+      {activity.registerUrl && (
+        <div
+          data-mobile-bottom-bar
+          className="fixed inset-x-0 bottom-0 z-50 flex items-center gap-3 border-t border-line bg-surface/95 px-4 pb-[max(16px,env(safe-area-inset-bottom))] pt-3 backdrop-blur-md lg:hidden"
+        >
+          <div className="flex min-w-0 flex-1 flex-col">
+            <span className="text-caption-sm text-content-muted">{tField(activity, "dateLabel", locale)}</span>
+            <span className="truncate text-body-sm font-medium text-content">{title}</span>
+          </div>
+          <a href={localizeHref(activity.registerUrl, locale)} className="btn-primary h-[52px] shrink-0 px-6">{t("activity.register", locale)}</a>
+        </div>
+      )}
     </>
   );
 }
