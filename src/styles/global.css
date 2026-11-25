@@ -42,6 +42,7 @@
   .btn-primary   { @apply btn bg-brand-primary text-white hover:bg-brand-primary-dark hover:text-white; }
   .btn-secondary { @apply btn border border-line bg-surface text-content hover:border-brand-primary; }
   .btn-outline   { @apply btn border-[1.5px] border-content bg-transparent text-content hover:bg-content hover:text-white; }
+  .btn-outline-brand { @apply btn border-[1.5px] border-brand-primary bg-transparent text-brand-primary hover:bg-brand-primary hover:text-white; }
   .btn-light     { @apply btn bg-white text-content hover:scale-[1.04]; }
   .btn-ghost-light { @apply btn border border-white/40 bg-transparent text-white hover:border-white hover:bg-white/10; }
   .btn-lg { @apply h-control-lg; }

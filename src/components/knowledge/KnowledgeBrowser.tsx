@@ -69,10 +69,16 @@ function DocRow({ doc, locale }: { doc: KnowledgeDocModel; locale: Locale }) {
         {doc.languages && <span className="text-caption-md text-content-muted md:text-body-sm">{doc.languages}</span>}
       </div>
       {doc.file ? (
-        <a href={doc.file} download className="flex items-center gap-2.5 whitespace-nowrap text-body-lg font-medium text-brand-primary hover:text-brand-primary-dark">
-          <DownloadIcon />
-          {t("common.downloadPdf", locale)}
-        </a>
+        <>
+          <a href={doc.file} download className="btn-outline-brand btn-block mt-2.5 md:mt-0 md:justify-self-start lg:hidden">
+            <DownloadIcon />
+            {t("common.downloadPdf", locale)}
+          </a>
+          <a href={doc.file} download className="hidden items-center gap-2.5 whitespace-nowrap text-body-lg font-medium text-brand-primary hover:text-brand-primary-dark lg:flex">
+            <DownloadIcon />
+            {t("common.downloadPdf", locale)}
+          </a>
+        </>
       ) : (
         <span />
       )}
