@@ -18,13 +18,13 @@ export default function ActivityDetail({ query, variables, data: initialData, lo
       <section className="bg-hero-activity pb-10 pt-[84px] md:pb-20 md:pt-[130px] lg:pb-[100px] lg:pt-[150px]">
         <div className="container-xl grid items-center gap-7 md:gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-[72px]">
           <div>
-            <a href={localizeHref("/actividades", locale)} className="link-arrow min-h-11 text-body-md md:text-body-base">
+            <a href={localizeHref("/actividades", locale)} className="link-arrow min-h-11 text-body-md font-medium md:min-h-0 md:text-body-base">
               <FaChevronLeft aria-hidden="true" className="h-3.5 w-3.5" />
               {t("activity.back", locale)}
             </a>
             {activity.badge && (
               <div className="mt-3 md:mt-7">
-                <span className="inline-flex rounded-full bg-content px-3.5 py-2 text-caption-md font-medium text-white md:px-4 md:py-[9px] md:text-body-sm" data-tina-field={tinaField(activity, "badge")}>
+                <span className="inline-flex rounded-full bg-content px-3.5 py-2 text-caption-md font-medium text-white md:px-4 md:py-[9px] md:text-body-sm md:font-medium" data-tina-field={tinaField(activity, "badge")}>
                   {tField(activity, "badge", locale)}
                 </span>
               </div>
