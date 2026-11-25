@@ -59,16 +59,21 @@ export default function ActivityDetail({ query, variables, data: initialData, lo
           )}
         </div>
       </section>
-      {facts.length > 0 && (
-        <section className="container-xl pb-20 pt-16 lg:pb-[130px] lg:pt-24">
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {facts.map((fact: any, i: number) => (
-              <div key={i} data-reveal className="flex flex-col gap-2.5 rounded-[22px] border border-line px-7 py-[26px]">
-                <span className="text-eyebrow uppercase text-accent" data-tina-field={tinaField(fact, "label")}>{tField(fact, "label", locale)}</span>
-                <span className="text-[20px] font-medium leading-snug [text-wrap:pretty]" data-tina-field={tinaField(fact, "value")}>{tField(fact, "value", locale)}</span>
-              </div>
-            ))}
-          </div>
+      {(facts.length > 0 || activity.abstractUrl) && (
+        <section className={`container-xl pb-12 pt-8 md:pb-20 md:pt-16 lg:pb-[130px] lg:pt-24 ${facts.length > 0 ? "" : "lg:hidden"}`}>
+          {facts.length > 0 && (
+            <div className="grid gap-2.5 md:grid-cols-2 md:gap-5 lg:grid-cols-4">
+              {facts.map((fact: any, i: number) => (
+                <div key={i} data-reveal className="flex flex-col gap-1.5 rounded-[18px] border border-line px-5 py-[18px] md:gap-2.5 md:rounded-[22px] md:px-7 md:py-[26px]">
+                  <span className="text-overline uppercase text-accent md:text-eyebrow" data-tina-field={tinaField(fact, "label")}>{tField(fact, "label", locale)}</span>
+                  <span className="text-body-base font-medium leading-snug [text-wrap:pretty] md:text-subtitle-xs" data-tina-field={tinaField(fact, "value")}>{tField(fact, "value", locale)}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          {activity.abstractUrl && (
+            <a href={localizeHref(activity.abstractUrl, locale)} className="btn-outline mt-3.5 w-full lg:hidden">{t("activity.abstract", locale)}</a>
+          )}
         </section>
       )}
     </>
