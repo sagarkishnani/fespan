@@ -57,16 +57,16 @@ function KindTabs({ docs, kind, locale, onChange }: { docs: KnowledgeDocModel[];
 function DocRow({ doc, locale }: { doc: KnowledgeDocModel; locale: Locale }) {
   const category = `${translateTerm(doc.kind === "guia" ? "Guía" : "Investigación", locale)} · ${translateTerm(doc.area, locale)}`;
   return (
-    <div className="grid gap-4 border-b border-line py-9 transition-colors hover:bg-surface-raised lg:grid-cols-[300px_minmax(0,1fr)_auto] lg:items-center lg:gap-12">
-      <span className="text-body-sm font-medium uppercase leading-normal tracking-[0.06em] text-accent">{category}</span>
+    <div className="grid gap-1.5 border-b border-line py-6 transition-colors md:gap-4 md:py-9 hover:bg-surface-raised lg:grid-cols-[300px_minmax(0,1fr)_auto] lg:items-center lg:gap-12">
+      <span className="text-caption-sm font-medium uppercase leading-normal tracking-[0.06em] text-accent md:text-body-sm md:font-medium md:leading-normal">{category}</span>
       <div className="flex flex-col gap-1.5">
-        <h3 className="mb-1 text-subtitle-md [text-wrap:pretty]">{doc.title}</h3>
-        <span className="text-body-md text-content-muted">
+        <h3 className="text-subtitle-md [text-wrap:pretty] md:mb-1">{doc.title}</h3>
+        <span className="text-body-sm text-content-muted md:text-body-md">
           {t("knowledge.published", locale)} {doc.published} · {t("knowledge.revision", locale)} {doc.revision}
         </span>
-        <span className="text-body-md text-content-muted">{t("knowledge.authors", locale)} {doc.authors}</span>
-        <span className="text-body-md text-content-muted">{t("knowledge.conflicts", locale)} {doc.conflicts}</span>
-        {doc.languages && <span className="text-body-sm text-content-muted">{doc.languages}</span>}
+        <span className="text-body-sm text-content-muted md:text-body-md">{t("knowledge.authors", locale)} {doc.authors}</span>
+        <span className="text-body-sm text-content-muted md:text-body-md">{t("knowledge.conflicts", locale)} {doc.conflicts}</span>
+        {doc.languages && <span className="text-caption-md text-content-muted md:text-body-sm">{doc.languages}</span>}
       </div>
       {doc.file ? (
         <a href={doc.file} download className="flex items-center gap-2.5 whitespace-nowrap text-body-lg font-medium text-brand-primary hover:text-brand-primary-dark">
@@ -164,13 +164,13 @@ export default function KnowledgeBrowser({ docs, areas, locale }: Props) {
           </div>
         </label>
       </div>
-      <div className="pb-1 pt-5 text-body-sm text-content-muted" aria-live="polite">{range}</div>
+      <div className="pb-1 pt-4 text-caption-md text-content-muted md:pt-5 md:text-body-sm" aria-live="polite">{range}</div>
       <div className="flex flex-col">
         {visible.map((doc) => (
           <DocRow key={doc.id} doc={doc} locale={locale} />
         ))}
         {filtered.length === 0 && (
-          <div className="mt-8 rounded-2xl bg-surface-raised p-14 text-center text-body-lg text-content-muted">{t("common.noResults", locale)}</div>
+          <div className="mt-6 rounded-2xl bg-surface-raised px-4 py-8 text-center text-body-md text-content-muted md:mt-8 md:p-14 md:text-body-lg">{t("common.noResults", locale)}</div>
         )}
       </div>
       {pageCount > 1 && <Pager page={currentPage} count={pageCount} locale={locale} onChange={goToPage} />}
