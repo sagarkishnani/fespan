@@ -2,6 +2,7 @@ import { useTina, tinaField } from "tinacms/dist/react";
 import { tField, localizeHref } from "../../utils/i18n";
 import { mediaUrl } from "../../utils/mediaUrl";
 import { t } from "../../i18n/ui";
+import { FaChevronLeft } from "react-icons/fa6";
 import { CalendarIcon, PinIcon } from "../shared/icons";
 import { revealDelay, type TinaSectionProps } from "../../lib/tinaProps";
 
@@ -14,22 +15,22 @@ export default function ActivityDetail({ query, variables, data: initialData, lo
 
   return (
     <>
-      <section className="bg-hero-activity pb-20 pt-[130px] lg:pb-[100px] lg:pt-[150px]">
-        <div className="container-xl grid items-center gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-[72px]">
+      <section className="bg-hero-activity pb-10 pt-[84px] md:pb-20 md:pt-[130px] lg:pb-[100px] lg:pt-[150px]">
+        <div className="container-xl grid items-center gap-7 md:gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-[72px]">
           <div>
-            <a href={localizeHref("/actividades", locale)} className="link-arrow text-body-base">
-              <span aria-hidden="true">←</span>
+            <a href={localizeHref("/actividades", locale)} className="link-arrow min-h-11 text-body-md font-medium md:min-h-0 md:text-body-base">
+              <FaChevronLeft aria-hidden="true" className="h-3.5 w-3.5" />
               {t("activity.back", locale)}
             </a>
             {activity.badge && (
-              <div className="mt-7">
-                <span className="inline-flex rounded-full bg-content px-4 py-[9px] text-body-sm font-medium text-white" data-tina-field={tinaField(activity, "badge")}>
+              <div className="mt-3 md:mt-7">
+                <span className="inline-flex rounded-full bg-content px-3.5 py-2 text-caption-md font-medium text-white md:px-4 md:py-[9px] md:text-body-sm md:font-medium" data-tina-field={tinaField(activity, "badge")}>
                   {tField(activity, "badge", locale)}
                 </span>
               </div>
             )}
-            <h1 data-reveal className="mt-6 text-display-md text-accent [text-wrap:balance]" data-tina-field={tinaField(activity, "title")}>{title}</h1>
-            <div data-reveal style={revealDelay(100)} className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-3 text-subtitle-xs">
+            <h1 data-reveal className="mt-[18px] text-display-md text-accent md:mt-6 [text-wrap:balance]" data-tina-field={tinaField(activity, "title")}>{title}</h1>
+            <div data-reveal style={revealDelay(100)} className="mt-5 flex flex-col gap-2.5 text-body-md md:mt-7 md:flex-row md:flex-wrap md:items-center md:gap-x-7 md:gap-y-3 md:text-subtitle-xs">
               <span className="flex items-center gap-2.5" data-tina-field={tinaField(activity, "dateLabel")}>
                 <CalendarIcon width={20} height={20} className="text-accent" />
                 {tField(activity, "dateLabel", locale)}
@@ -39,10 +40,10 @@ export default function ActivityDetail({ query, variables, data: initialData, lo
                 {tField(activity, "place", locale)}
               </span>
             </div>
-            <p data-reveal style={revealDelay(150)} className="mt-[22px] max-w-[620px] text-subtitle-xs leading-relaxed text-content-soft [text-wrap:pretty]" data-tina-field={tinaField(activity, "summary")}>
+            <p data-reveal style={revealDelay(150)} className="mt-[18px] max-w-[620px] text-body-md leading-relaxed md:mt-[22px] md:text-subtitle-xs text-content-soft [text-wrap:pretty]" data-tina-field={tinaField(activity, "summary")}>
               {tField(activity, "summary", locale)}
             </p>
-            <div data-reveal style={revealDelay(200)} className="mt-10 flex flex-wrap gap-3.5">
+            <div data-reveal style={revealDelay(200)} className="mt-10 hidden flex-wrap gap-3.5 lg:flex">
               {activity.registerUrl && (
                 <a href={localizeHref(activity.registerUrl, locale)} className="btn-primary btn-lg px-[34px]">{t("activity.register", locale)}</a>
               )}
@@ -52,23 +53,40 @@ export default function ActivityDetail({ query, variables, data: initialData, lo
             </div>
           </div>
           {activity.image && (
-            <div data-reveal style={revealDelay(150)} className="h-[360px] overflow-hidden rounded-3xl bg-surface-media shadow-media lg:h-[520px]">
+            <div data-reveal style={revealDelay(150)} className="h-[240px] overflow-hidden rounded-2xl bg-surface-media shadow-media md:h-[360px] md:rounded-3xl lg:h-[520px]">
               <img src={mediaUrl(activity.image)} alt={title} fetchPriority="high" className="block h-full w-full object-cover" style={{ objectPosition: activity.imagePosition || "center" }} data-tina-field={tinaField(activity, "image")} />
             </div>
           )}
         </div>
       </section>
-      {facts.length > 0 && (
-        <section className="container-xl pb-20 pt-16 lg:pb-[130px] lg:pt-24">
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {facts.map((fact: any, i: number) => (
-              <div key={i} data-reveal className="flex flex-col gap-2.5 rounded-[22px] border border-line px-7 py-[26px]">
-                <span className="text-eyebrow uppercase text-accent" data-tina-field={tinaField(fact, "label")}>{tField(fact, "label", locale)}</span>
-                <span className="text-[20px] font-medium leading-snug [text-wrap:pretty]" data-tina-field={tinaField(fact, "value")}>{tField(fact, "value", locale)}</span>
-              </div>
-            ))}
-          </div>
+      {(facts.length > 0 || activity.abstractUrl) && (
+        <section className={`container-xl pb-12 pt-8 md:pb-20 md:pt-16 lg:pb-[130px] lg:pt-24 ${facts.length > 0 ? "" : "lg:hidden"}`}>
+          {facts.length > 0 && (
+            <div className="grid gap-2.5 md:grid-cols-2 md:gap-5 lg:grid-cols-4">
+              {facts.map((fact: any, i: number) => (
+                <div key={i} data-reveal className="flex flex-col gap-1.5 rounded-[18px] border border-line px-5 py-[18px] md:gap-2.5 md:rounded-[22px] md:px-7 md:py-[26px]">
+                  <span className="text-overline uppercase text-accent md:text-eyebrow" data-tina-field={tinaField(fact, "label")}>{tField(fact, "label", locale)}</span>
+                  <span className="text-body-base font-medium leading-snug [text-wrap:pretty] md:text-subtitle-xs" data-tina-field={tinaField(fact, "value")}>{tField(fact, "value", locale)}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          {activity.abstractUrl && (
+            <a href={localizeHref(activity.abstractUrl, locale)} className="btn-outline mt-3.5 w-full lg:hidden">{t("activity.abstract", locale)}</a>
+          )}
         </section>
+      )}
+      {activity.registerUrl && (
+        <div
+          data-mobile-bottom-bar
+          className="fixed inset-x-0 bottom-0 z-50 flex items-center gap-3 border-t border-line bg-surface/95 px-4 pb-[max(16px,env(safe-area-inset-bottom))] pt-3 backdrop-blur-md lg:hidden"
+        >
+          <div className="flex min-w-0 flex-1 flex-col">
+            <span className="text-caption-sm text-content-muted">{tField(activity, "dateLabel", locale)}</span>
+            <span className="truncate text-body-sm font-medium text-content">{title}</span>
+          </div>
+          <a href={localizeHref(activity.registerUrl, locale)} className="btn-primary h-[52px] shrink-0 px-6">{t("activity.register", locale)}</a>
+        </div>
       )}
     </>
   );

@@ -179,6 +179,13 @@ filtran con `hooks/useSiteSearch.ts`. El drawer y el overlay son hermanos del
 `<header>`, nunca hijos: el `transform` que lo oculta volvería relativos a sus
 hijos `fixed`.
 
+**Barra fija inferior** (detalle de actividad, por debajo de `lg`): un elemento
+con `data-mobile-bottom-bar`, `fixed`, `z-50` (debajo del header, los paneles
+modales y el banner de cookies) y `lg:hidden`. El `body` reserva su alto con
+`body:has([data-mobile-bottom-bar])` en `global.css`; si cambia el alto de la
+barra, actualiza ese `padding-bottom`. Va fuera de todo `data-reveal`: un
+ancestro con `transform` rompe el `position: fixed`. Solo CSS, sin isla.
+
 **Paneles modales** (drawer, overlay y lo que venga): bloquean el scroll con
 `lockScroll`/`unlockScroll` de `utils/scrollLock.ts`, que fija `overflow` en
 `html` y detiene Lenis (`BaseLayout` expone la instancia en `window.lenis`;
