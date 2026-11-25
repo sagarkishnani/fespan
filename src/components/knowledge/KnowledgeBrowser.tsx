@@ -2,7 +2,8 @@ import { useMemo, useRef, useState } from "react";
 import type { Locale } from "../../i18n/config";
 import { t, translateTerm } from "../../i18n/ui";
 import { normalizeForSearch } from "../../utils/format";
-import { ArrowRightIcon, ChevronDownIcon, DownloadIcon, SearchIcon } from "../shared/icons";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import { ChevronDownIcon, DownloadIcon, SearchIcon } from "../shared/icons";
 
 export interface KnowledgeDocModel {
   id: string;
@@ -87,11 +88,11 @@ function DocRow({ doc, locale }: { doc: KnowledgeDocModel; locale: Locale }) {
 }
 
 function Pager({ page, count, locale, onChange }: { page: number; count: number; locale: Locale; onChange: (page: number) => void }) {
-  const circle = "flex h-12 w-12 items-center justify-center rounded-full border text-body-md font-medium transition-colors";
+  const circle = "flex h-11 w-11 items-center justify-center rounded-full border text-body-md font-medium transition-colors md:h-12 md:w-12";
   return (
-    <nav className="mt-12 flex items-center justify-center gap-2" aria-label="Paginación">
+    <nav className="mt-8 flex items-center justify-center gap-2 md:mt-12" aria-label="Paginación">
       <button type="button" disabled={page === 0} onClick={() => onChange(page - 1)} aria-label={t("common.previous", locale)} className={`${circle} border-line bg-surface hover:border-brand-primary disabled:opacity-35`}>
-        <ArrowRightIcon className="rotate-180" />
+        <FaChevronLeft aria-hidden="true" className="h-3.5 w-3.5" />
       </button>
       {Array.from({ length: count }, (_, index) => (
         <button
@@ -105,7 +106,7 @@ function Pager({ page, count, locale, onChange }: { page: number; count: number;
         </button>
       ))}
       <button type="button" disabled={page === count - 1} onClick={() => onChange(page + 1)} aria-label={t("common.next", locale)} className={`${circle} border-line bg-surface hover:border-brand-primary disabled:opacity-35`}>
-        <ArrowRightIcon />
+        <FaChevronRight aria-hidden="true" className="h-3.5 w-3.5" />
       </button>
     </nav>
   );
