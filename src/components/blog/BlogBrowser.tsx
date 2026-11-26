@@ -27,13 +27,13 @@ function PostMeta({ post, inverted = false }: { post: PostCardModel; inverted?: 
 
 function FeaturedPost({ post, locale }: { post: PostCardModel; locale: Locale }) {
   return (
-    <a href={post.href} className="group relative block h-[420px] overflow-hidden rounded-4xl bg-brand-primary-dark lg:h-[480px]">
+    <a href={post.href} className="group relative block h-[420px] overflow-hidden rounded-2xl bg-brand-primary-dark md:rounded-4xl lg:h-[480px]">
       {post.image && <img src={post.image} alt={post.imageAlt} className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ease-smooth group-hover:scale-105" />}
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(0deg,rgba(15,46,42,.92)_0%,rgba(15,46,42,.35)_55%,rgba(15,46,42,.1)_100%)]" />
-      <div className="absolute inset-x-7 bottom-7 text-white lg:inset-x-11 lg:bottom-11">
+      <div className="absolute inset-x-5 bottom-5 text-white md:inset-x-7 md:bottom-7 lg:inset-x-11 lg:bottom-11">
         <PostMeta post={post} inverted />
         <h2 className="mt-4 max-w-[640px] text-heading-lg">{post.title}</h2>
-        <span className="mt-7 inline-flex items-center rounded-full bg-white py-3 pl-6 pr-6 text-body-md font-medium text-content">
+        <span className="mt-7 flex w-full items-center justify-center rounded-full bg-white px-6 py-3 text-body-md font-medium text-content md:inline-flex md:w-auto">
           {t("common.readMore", locale)}
         </span>
       </div>
@@ -43,7 +43,7 @@ function FeaturedPost({ post, locale }: { post: PostCardModel; locale: Locale })
 
 function SidePost({ post, locale }: { post: PostCardModel; locale: Locale }) {
   return (
-    <a href={post.href} className="group card-lift flex h-full flex-col overflow-hidden rounded-4xl bg-surface-raised">
+    <a href={post.href} className="group card-lift hidden h-full flex-col overflow-hidden rounded-4xl bg-surface-raised md:flex">
       <div className="h-[250px] overflow-hidden rounded-4xl">
         {post.image && <img src={post.image} alt={post.imageAlt} className="media-zoom block h-full w-full object-cover" />}
       </div>
@@ -76,10 +76,10 @@ export default function BlogBrowser({ posts, categories, locale, children }: Pro
 
   return (
     <div>
-      <div className="mb-12">
+      <div className="mb-6 md:mb-12">
         {children}
-        <div className="mt-9 flex flex-wrap items-center justify-between gap-5">
-          <div className="relative min-w-[260px] max-w-[460px] flex-1">
+        <div className="mt-6 flex flex-col gap-3.5 md:mt-9 md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-5">
+          <div className="relative w-full md:w-auto md:min-w-[260px] md:max-w-[460px] md:flex-1">
             <SearchIcon className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-content-muted" />
             <input
               type="search"
@@ -90,7 +90,7 @@ export default function BlogBrowser({ posts, categories, locale, children }: Pro
               className="field field-with-icon"
             />
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="-mx-4 flex gap-2 overflow-x-auto px-4 [scrollbar-width:none] md:mx-0 md:flex-wrap md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden">
             {chips.map((chip) => {
               const active = chip.key === category;
               return (
@@ -99,7 +99,7 @@ export default function BlogBrowser({ posts, categories, locale, children }: Pro
                   type="button"
                   aria-pressed={active}
                   onClick={() => setCategory(chip.key)}
-                  className={`h-11 rounded-full border px-5 text-body-sm transition-colors ${
+                  className={`h-11 shrink-0 rounded-full border px-5 text-body-sm transition-colors ${
                     active ? "border-brand-primary bg-brand-primary text-white" : "border-line bg-surface text-content hover:border-brand-primary"
                   }`}
                 >
@@ -118,12 +118,17 @@ export default function BlogBrowser({ posts, categories, locale, children }: Pro
         </div>
       )}
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+        {!filtering && side && (
+          <div className="md:hidden">
+            <PostCard post={side} ctaLabel={t("common.readMore", locale)} variant="categorized" />
+          </div>
+        )}
         {listed.map((post) => (
           <PostCard key={post.slug} post={post} ctaLabel={t("common.readMore", locale)} variant="categorized" />
         ))}
         {filtering && listed.length === 0 && (
-          <div className="col-span-full rounded-2xl bg-surface-raised p-14 text-center text-body-lg text-content-muted">{t("common.noResults", locale)}</div>
+          <div className="col-span-full rounded-2xl bg-surface-raised px-4 py-8 text-center text-body-md text-content-muted md:p-14 md:text-body-lg">{t("common.noResults", locale)}</div>
         )}
       </div>
     </div>
