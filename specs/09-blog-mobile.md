@@ -1,6 +1,6 @@
 # SPEC 09 — Blog mobile (listado)
 
-> **Estado:** Approved · **Depende de:** SPEC 01 · **Fecha:** 2026-11-26
+> **Estado:** Implemented · **Depende de:** SPEC 01 · **Fecha:** 2026-11-26
 > **Objetivo:** llevar el listado del blog (`/blog`) al diseño mobile, con los chips en una fila deslizable, el destacado con "Leer más" a todo el ancho y los posts como filas horizontales por debajo de `md`.
 
 ## Alcance
@@ -77,33 +77,33 @@ Cada paso de código deja el sitio funcionando y lleva su propio commit.
 
 ### Cabecera y chips
 
-- [ ] En 390 px, el título empieza 40 px bajo el header y el buscador está 24 px debajo, a todo el ancho, con 52 px de alto.
-- [ ] En 320 y 390 px, los chips van en una sola fila que se desliza de lado, empieza alineada con el contenido y llega hasta el borde de la pantalla, sin barra visible.
-- [ ] En 390 px, los chips están a 14 px del buscador y la lista empieza 24 px debajo.
-- [ ] Desde 768 px, la cabecera y los chips son iguales a la línea base.
+- [x] En 390 px, el título empieza 40 px bajo el header y el buscador está 24 px debajo, a todo el ancho, con 52 px de alto.
+- [x] En 320 y 390 px, los chips van en una sola fila que se desliza de lado, empieza alineada con el contenido y llega hasta el borde de la pantalla, sin barra visible.
+- [x] En 390 px, los chips están a 14 px del buscador y la lista empieza 24 px debajo.
+- [x] Desde 768 px, la cabecera y los chips son iguales a la línea base.
 
 ### Destacado
 
-- [ ] En 390 px, el destacado mide 420 px de alto, con radio de 24 y el texto a 20 px de los bordes.
-- [ ] En 390 px, "Leer más" ocupa todo el ancho del texto y mide 48 px.
-- [ ] Desde 768 px, el destacado y el post lateral son iguales a la línea base.
+- [x] En 390 px, el destacado mide 420 px de alto, con radio de 24 y el texto a 20 px de los bordes.
+- [x] En 390 px, "Leer más" ocupa todo el ancho del texto y mide 48 px.
+- [x] Desde 768 px, el destacado y el post lateral son iguales a la línea base.
 
 ### Filas
 
-- [ ] En 390 px, el post lateral no aparece como tarjeta y es la primera fila.
-- [ ] En 390 px, cada fila tiene una miniatura de 120×120 con radio de 16 y el texto a 14 px.
-- [ ] En 390 px, la categoría mide 13 px, el título 17 px (peso 500) y "Leer más" 15 px (peso 500), con 8 px entre líneas.
-- [ ] En 390 px, las filas no tienen fondo, llevan un borde inferior y quedan a 16 px entre sí.
-- [ ] Desde 768 px, la lista es igual a la línea base (2 columnas en tablet y 3 en desktop) y ningún post se repite.
-- [ ] Al filtrar por categoría en 390 px, los resultados salen como filas; si no hay resultados, el estado vacío lleva `px-4 py-8` y `body-md`.
+- [x] En 390 px, el post lateral no aparece como tarjeta y es la primera fila.
+- [x] En 390 px, cada fila tiene una miniatura de 120×120 con radio de 16 y el texto a 14 px.
+- [x] En 390 px, la categoría mide 13 px, el título 17 px (peso 500) y "Leer más" 15 px (peso 500), con 8 px entre líneas.
+- [x] En 390 px, las filas no tienen fondo, llevan un borde inferior y quedan a 16 px entre sí.
+- [x] Desde 768 px, la lista es igual a la línea base (2 columnas en tablet y 3 en desktop) y ningún post se repite.
+- [x] Al filtrar por categoría en 390 px, los resultados salen como filas; si no hay resultados, el estado vacío lleva `px-4 py-8` y `body-md`.
 
 ### General
 
-- [ ] ES, EN y PT muestran los chips, "Leer más" y el buscador traducidos.
-- [ ] Sin scroll horizontal de la página en 320, 360, 390, 768, 1024, 1280 y 1536 px.
-- [ ] El JS de `/blog/` no crece más de 1 KB gzip respecto de la línea base.
-- [ ] La home y el artículo (`/blog/<slug>`) son iguales a la línea base en todos los anchos.
-- [ ] `typecheck`, `build:local` y `check:standard` pasan; sin hex nuevos en `src/`.
+- [x] ES, EN y PT muestran los chips, "Leer más" y el buscador traducidos.
+- [x] Sin scroll horizontal de la página en 320, 360, 390, 768, 1024, 1280 y 1536 px.
+- [x] El JS de `/blog/` no crece más de 1 KB gzip respecto de la línea base.
+- [x] La home y el artículo (`/blog/<slug>`) son iguales a la línea base en todos los anchos.
+- [x] `typecheck`, `build:local` y `check:standard` pasan; sin hex nuevos en `src/`.
 
 ## Decisiones tomadas y descartadas
 
