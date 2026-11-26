@@ -27,13 +27,13 @@ function PostMeta({ post, inverted = false }: { post: PostCardModel; inverted?: 
 
 function FeaturedPost({ post, locale }: { post: PostCardModel; locale: Locale }) {
   return (
-    <a href={post.href} className="group relative block h-[420px] overflow-hidden rounded-4xl bg-brand-primary-dark lg:h-[480px]">
+    <a href={post.href} className="group relative block h-[420px] overflow-hidden rounded-2xl bg-brand-primary-dark md:rounded-4xl lg:h-[480px]">
       {post.image && <img src={post.image} alt={post.imageAlt} className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ease-smooth group-hover:scale-105" />}
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(0deg,rgba(15,46,42,.92)_0%,rgba(15,46,42,.35)_55%,rgba(15,46,42,.1)_100%)]" />
-      <div className="absolute inset-x-7 bottom-7 text-white lg:inset-x-11 lg:bottom-11">
+      <div className="absolute inset-x-5 bottom-5 text-white md:inset-x-7 md:bottom-7 lg:inset-x-11 lg:bottom-11">
         <PostMeta post={post} inverted />
         <h2 className="mt-4 max-w-[640px] text-heading-lg">{post.title}</h2>
-        <span className="mt-7 inline-flex items-center rounded-full bg-white py-3 pl-6 pr-6 text-body-md font-medium text-content">
+        <span className="mt-7 flex w-full items-center justify-center rounded-full bg-white px-6 py-3 text-body-md font-medium text-content md:inline-flex md:w-auto">
           {t("common.readMore", locale)}
         </span>
       </div>
@@ -43,7 +43,7 @@ function FeaturedPost({ post, locale }: { post: PostCardModel; locale: Locale })
 
 function SidePost({ post, locale }: { post: PostCardModel; locale: Locale }) {
   return (
-    <a href={post.href} className="group card-lift flex h-full flex-col overflow-hidden rounded-4xl bg-surface-raised">
+    <a href={post.href} className="group card-lift hidden h-full flex-col overflow-hidden rounded-4xl bg-surface-raised md:flex">
       <div className="h-[250px] overflow-hidden rounded-4xl">
         {post.image && <img src={post.image} alt={post.imageAlt} className="media-zoom block h-full w-full object-cover" />}
       </div>
@@ -119,6 +119,11 @@ export default function BlogBrowser({ posts, categories, locale, children }: Pro
       )}
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {!filtering && side && (
+          <div className="md:hidden">
+            <PostCard post={side} ctaLabel={t("common.readMore", locale)} variant="categorized" />
+          </div>
+        )}
         {listed.map((post) => (
           <PostCard key={post.slug} post={post} ctaLabel={t("common.readMore", locale)} variant="categorized" />
         ))}
