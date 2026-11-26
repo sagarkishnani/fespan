@@ -76,10 +76,10 @@ export default function BlogBrowser({ posts, categories, locale, children }: Pro
 
   return (
     <div>
-      <div className="mb-12">
+      <div className="mb-6 md:mb-12">
         {children}
-        <div className="mt-9 flex flex-wrap items-center justify-between gap-5">
-          <div className="relative min-w-[260px] max-w-[460px] flex-1">
+        <div className="mt-6 flex flex-col gap-3.5 md:mt-9 md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-5">
+          <div className="relative w-full md:w-auto md:min-w-[260px] md:max-w-[460px] md:flex-1">
             <SearchIcon className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-content-muted" />
             <input
               type="search"
@@ -90,7 +90,7 @@ export default function BlogBrowser({ posts, categories, locale, children }: Pro
               className="field field-with-icon"
             />
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="-mx-4 flex gap-2 overflow-x-auto px-4 [scrollbar-width:none] md:mx-0 md:flex-wrap md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden">
             {chips.map((chip) => {
               const active = chip.key === category;
               return (
@@ -99,7 +99,7 @@ export default function BlogBrowser({ posts, categories, locale, children }: Pro
                   type="button"
                   aria-pressed={active}
                   onClick={() => setCategory(chip.key)}
-                  className={`h-11 rounded-full border px-5 text-body-sm transition-colors ${
+                  className={`h-11 shrink-0 rounded-full border px-5 text-body-sm transition-colors ${
                     active ? "border-brand-primary bg-brand-primary text-white" : "border-line bg-surface text-content hover:border-brand-primary"
                   }`}
                 >
