@@ -1,6 +1,6 @@
 # SPEC 08 — Conocimiento mobile
 
-> **Estado:** Approved · **Depende de:** SPEC 01 · **Fecha:** 2026-11-25
+> **Estado:** Implemented · **Depende de:** SPEC 01 · **Fecha:** 2026-11-25
 > **Objetivo:** llevar Conocimiento al diseño mobile (hero, pestañas, filtros, filas y paginador), con "Descargar PDF" como botón con borde por debajo de `lg` y chevrons en el paginador en todos los anchos.
 
 ## Alcance
@@ -93,37 +93,37 @@ Cada paso de código deja el sitio funcionando y lleva su propio commit.
 
 ### Hero
 
-- [ ] En 390 px, el título empieza 48 px bajo el header, el subtítulo mide 17 px (peso 300) y está a 16 px del título, y la sección cierra 40 px después.
-- [ ] En 390 px, el círculo mide 300 px.
-- [ ] Desde 768 px, el hero es igual a la línea base.
+- [x] En 390 px, el título empieza 48 px bajo el header, el subtítulo mide 17 px (peso 300) y está a 16 px del título, y la sección cierra 40 px después.
+- [x] En 390 px, el círculo mide 300 px.
+- [x] Desde 768 px, el hero es igual a la línea base.
 
 ### Pestañas y filtros
 
-- [ ] En 320 y 390 px, las dos pestañas ocupan la mitad del ancho cada una, miden 52 px y no hay scroll lateral.
-- [ ] En 390 px, los campos van apilados a 16 px entre sí, miden 52 px y tienen radio de 14; el texto escrito mide 16 px.
-- [ ] Desde 768 px, las pestañas y los campos son iguales a la línea base.
+- [x] En 320 y 390 px, las dos pestañas ocupan la mitad del ancho cada una, miden 52 px y no hay scroll lateral.
+- [x] En 390 px, los campos van apilados a 16 px entre sí, miden 52 px y tienen radio de 14; el texto escrito mide 16 px.
+- [x] Desde 768 px, las pestañas y los campos son iguales a la línea base.
 
 ### Filas
 
-- [ ] En 390 px, la categoría mide 13 px, el título 20 px, los metadatos 15 px y los idiomas 14 px.
-- [ ] En 390 px, "Descargar PDF" ocupa todo el ancho, mide 52 px y tiene borde y texto `brand-primary`; en hover, el fondo es `brand-primary` y el texto blanco.
-- [ ] En 768 px, "Descargar PDF" es un botón con borde de ancho automático.
-- [ ] Desde 1024 px, "Descargar PDF" es el enlace de hoy y las filas son iguales a la línea base.
-- [ ] Un documento sin `file` no muestra botón.
+- [x] En 390 px, la categoría mide 13 px, el título 20 px, los metadatos 15 px y los idiomas 14 px.
+- [x] En 390 px, "Descargar PDF" ocupa todo el ancho, mide 52 px y tiene borde y texto `brand-primary`; en hover, el fondo es `brand-primary` y el texto blanco.
+- [x] En 768 px, "Descargar PDF" es un botón con borde de ancho automático.
+- [x] Desde 1024 px, "Descargar PDF" es el enlace de hoy y las filas son iguales a la línea base.
+- [x] Un documento sin `file` no muestra botón.
 
 ### Paginador (con `PAGE_SIZE = 4` en local)
 
-- [ ] Anterior y siguiente llevan chevrons en todos los anchos.
-- [ ] En 390 px, los círculos miden 44 px; desde 768 px, 48.
-- [ ] Al cambiar de página, la lista sube al inicio de la sección.
+- [x] Anterior y siguiente llevan chevrons en todos los anchos.
+- [x] En 390 px, los círculos miden 44 px; desde 768 px, 48.
+- [x] Al cambiar de página, la lista sube al inicio de la sección.
 
 ### General
 
-- [ ] ES, EN y PT muestran "Descargar PDF", las pestañas y las etiquetas traducidas.
-- [ ] Sin scroll horizontal en 320, 360, 390, 768, 1024, 1280 y 1536 px.
-- [ ] El JS de `/conocimiento/` no crece más de 1 KB gzip respecto de la línea base.
-- [ ] `typecheck`, `build:local` y `check:standard` pasan; sin hex nuevos en `src/`.
-- [ ] `PAGE_SIZE` sigue en 10 en el commit final.
+- [x] ES, EN y PT muestran "Descargar PDF", las pestañas y las etiquetas traducidas.
+- [x] Sin scroll horizontal en 320, 360, 390, 768, 1024, 1280 y 1536 px.
+- [x] El JS de `/conocimiento/` no crece más de 1 KB gzip respecto de la línea base.
+- [x] `typecheck`, `build:local` y `check:standard` pasan; sin hex nuevos en `src/`.
+- [x] `PAGE_SIZE` sigue en 10 en el commit final.
 
 ## Decisiones tomadas y descartadas
 
