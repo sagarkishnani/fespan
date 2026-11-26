@@ -46,14 +46,6 @@ export function ChevronDownIcon(props: IconProps) {
   );
 }
 
-export function ArrowRightIcon(props: IconProps) {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <path d="M4 12H20M13 19L20 12L13 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 export function DownloadIcon(props: IconProps) {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
