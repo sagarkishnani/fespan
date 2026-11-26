@@ -118,7 +118,7 @@ export default function BlogBrowser({ posts, categories, locale, children }: Pro
         </div>
       )}
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
         {!filtering && side && (
           <div className="md:hidden">
             <PostCard post={side} ctaLabel={t("common.readMore", locale)} variant="categorized" />
@@ -128,7 +128,7 @@ export default function BlogBrowser({ posts, categories, locale, children }: Pro
           <PostCard key={post.slug} post={post} ctaLabel={t("common.readMore", locale)} variant="categorized" />
         ))}
         {filtering && listed.length === 0 && (
-          <div className="col-span-full rounded-2xl bg-surface-raised p-14 text-center text-body-lg text-content-muted">{t("common.noResults", locale)}</div>
+          <div className="col-span-full rounded-2xl bg-surface-raised px-4 py-8 text-center text-body-md text-content-muted md:p-14 md:text-body-lg">{t("common.noResults", locale)}</div>
         )}
       </div>
     </div>
