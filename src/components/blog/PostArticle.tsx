@@ -65,7 +65,7 @@ export default function PostArticle({ query, variables, data: initialData, local
 
       <article className="container-md pt-8 md:pt-16 lg:pt-20">
         <div
-          className="prose prose-lg max-w-none prose-headings:font-medium prose-headings:tracking-[-0.02em] prose-headings:text-content prose-h2:mt-12 prose-h2:text-heading-sm prose-p:text-content-soft prose-p:leading-[1.7] max-md:prose-p:text-body-base prose-a:text-brand-primary prose-a:underline prose-strong:text-content [&>div>p:first-child]:border-b [&>div>p:first-child]:border-line [&>div>p:first-child]:pb-6 md:[&>div>p:first-child]:pb-9 [&>div>p:first-child]:text-body-xl [&>div>p:first-child]:text-content"
+          className="prose prose-lg max-w-none prose-headings:font-medium prose-headings:tracking-[-0.02em] prose-headings:text-content prose-h2:mt-12 prose-h2:text-heading-sm prose-p:text-content-soft prose-p:leading-[1.7] max-md:prose-p:text-body-base prose-a:text-brand-primary prose-a:underline prose-strong:text-content [&>p:first-child]:border-b [&>p:first-child]:border-line [&>p:first-child]:pb-6 md:[&>p:first-child]:pb-9 [&>p:first-child]:text-body-xl [&>p:first-child]:text-content"
           data-tina-field={tinaField(post, "body")}
         >
           <PostBody content={richField(post, "body", locale)} />
