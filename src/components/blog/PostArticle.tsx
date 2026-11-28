@@ -3,6 +3,7 @@ import { tField, richField, localizeHref } from "../../utils/i18n";
 import { mediaUrl } from "../../utils/mediaUrl";
 import { formatShortDate } from "../../utils/format";
 import { t, translateTerm } from "../../i18n/ui";
+import { FaChevronLeft } from "react-icons/fa6";
 import PostBody from "./PostBody";
 import { revealDelay, type TinaSectionProps } from "../../lib/tinaProps";
 import type { ReactNode } from "react";
@@ -20,26 +21,39 @@ export default function PostArticle({ query, variables, data: initialData, local
   const author = post.author;
 
   return (
-    <div className="pt-[120px] lg:pt-[150px]">
+    <div className="pt-[76px] md:pt-[120px] lg:pt-[150px]">
       <div className="container-xl">
-        <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-body-sm text-content-muted">
+        <a href={localizeHref("/blog", locale)} className="link-arrow min-h-11 text-body-md font-medium md:hidden">
+          <FaChevronLeft aria-hidden="true" className="h-3.5 w-3.5" />
+          {t("blog.back", locale)}
+        </a>
+        <nav aria-label="Breadcrumb" className="hidden flex-wrap items-center gap-2 text-body-sm text-content-muted md:flex">
           <a href={localizeHref("/", locale)} className="text-content hover:text-brand-primary">{t("nav.home", locale)}</a>
           <span>/</span>
           <a href={localizeHref("/blog", locale)} className="text-content hover:text-brand-primary">Blog</a>
           <span>/</span>
           <span aria-current="page">{title}</span>
         </nav>
-        <header className="mx-auto mt-14 flex max-w-[860px] flex-col items-center text-center">
+        <header className="mx-auto mt-4 flex max-w-[860px] flex-col items-start text-left md:mt-14 md:items-center md:text-center">
           <div data-reveal className="flex items-center gap-2.5 text-caption-md tracking-[0.08em] text-content-muted">
             <span className="uppercase text-brand-primary" data-tina-field={tinaField(post, "category")}>{translateTerm(post.category || "", locale)}</span>
             <span className="meta-dot" />
             <time dateTime={post.date}>{formatShortDate(post.date, locale)}</time>
           </div>
-          <h1 data-reveal style={revealDelay(100)} className="mt-[18px] text-display-md [text-wrap:balance]" data-tina-field={tinaField(post, "title")}>{title}</h1>
+          <h1 data-reveal style={revealDelay(100)} className="mt-3 text-display-md md:mt-[18px] [text-wrap:balance]" data-tina-field={tinaField(post, "title")}>{title}</h1>
           {post.excerpt && (
-            <p data-reveal style={revealDelay(200)} className="mt-[22px] max-w-[620px] text-body-xl text-content-muted" data-tina-field={tinaField(post, "excerpt")}>
+            <p data-reveal style={revealDelay(200)} className="mt-3.5 max-w-[620px] text-body-xl md:mt-[22px] text-content-muted" data-tina-field={tinaField(post, "excerpt")}>
               {tField(post, "excerpt", locale)}
             </p>
+          )}
+          {author?.name && (
+            <div data-reveal style={revealDelay(300)} className="mt-5 flex items-center gap-3 md:hidden">
+              {author.photo && <img src={mediaUrl(author.photo)} alt={author.name} className="h-11 w-11 rounded-full object-cover object-[center_20%]" />}
+              <div>
+                <div className="text-body-sm font-medium" data-tina-field={tinaField(author, "name")}>{author.name}</div>
+                <div className="text-caption-md text-content-muted" data-tina-field={tinaField(author, "role")}>{tField(author, "role", locale)}</div>
+              </div>
+            </div>
           )}
         </header>
         {post.coverImage && (
