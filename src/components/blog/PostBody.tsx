@@ -9,7 +9,7 @@ const components: Components<{
   Callout: ({ title, text }) => (
     <div className="not-prose mt-5 rounded-2xl bg-surface-mint p-6 md:rounded-3xl md:px-8 md:py-9 lg:px-11 lg:py-10">
       {title && <h3 className="text-subtitle-lg">{title}</h3>}
-      {text && <p className="mt-4 text-body-md leading-[1.7] text-content-soft md:text-body-lg">{text}</p>}
+      {text && <p className="mt-4 text-body-md leading-[1.7] text-content-soft md:text-body-lg md:leading-[1.7]">{text}</p>}
     </div>
   ),
   Figure: ({ src, alt, caption, creditUrl }) => (
