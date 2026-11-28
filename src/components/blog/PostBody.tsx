@@ -7,14 +7,14 @@ const components: Components<{
   Quote: { text?: string; author?: string };
 }> = {
   Callout: ({ title, text }) => (
-    <div className="not-prose mt-5 rounded-3xl bg-surface-mint px-8 py-9 lg:px-11 lg:py-10">
+    <div className="not-prose mt-5 rounded-2xl bg-surface-mint p-6 md:rounded-3xl md:px-8 md:py-9 lg:px-11 lg:py-10">
       {title && <h3 className="text-subtitle-lg">{title}</h3>}
-      {text && <p className="mt-4 text-body-lg leading-[1.7] text-content-soft">{text}</p>}
+      {text && <p className="mt-4 text-body-md leading-[1.7] text-content-soft md:text-body-lg">{text}</p>}
     </div>
   ),
   Figure: ({ src, alt, caption, creditUrl }) => (
     <figure className="not-prose my-6">
-      <div className="h-[280px] overflow-hidden rounded-3xl lg:h-[440px]">
+      <div className="h-[220px] overflow-hidden rounded-2xl md:h-[280px] md:rounded-3xl lg:h-[440px]">
         {src && <img src={mediaUrl(src)} alt={alt || ""} loading="lazy" className="block h-full w-full object-cover" />}
       </div>
       {caption && (
@@ -25,7 +25,7 @@ const components: Components<{
     </figure>
   ),
   Quote: ({ text, author }) => (
-    <blockquote className="not-prose my-4 border-l-[3px] border-brand-primary py-2 pl-8">
+    <blockquote className="not-prose my-4 border-l-[3px] border-brand-primary py-2 pl-5 md:pl-8">
       <p className="text-[clamp(1.25rem,1vw+1rem,1.625rem)] font-light italic leading-[1.45] tracking-[-0.01em] text-content">“{text}”</p>
       {author && <footer className="mt-5 text-body-sm text-content-muted">— {author}</footer>}
     </blockquote>

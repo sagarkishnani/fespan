@@ -57,15 +57,15 @@ export default function PostArticle({ query, variables, data: initialData, local
           )}
         </header>
         {post.coverImage && (
-          <div data-reveal className="mt-14 h-[300px] overflow-hidden rounded-4xl lg:h-[560px] lg:rounded-5xl">
+          <div data-reveal className="mt-7 h-[260px] overflow-hidden rounded-2xl md:mt-14 md:h-[300px] md:rounded-4xl lg:h-[560px] lg:rounded-5xl">
             <img src={mediaUrl(post.coverImage)} alt={post.coverAlt || ""} fetchPriority="high" className="block h-full w-full object-cover" data-tina-field={tinaField(post, "coverImage")} />
           </div>
         )}
       </div>
 
-      <article className="container-md pt-16 lg:pt-20">
+      <article className="container-md pt-8 md:pt-16 lg:pt-20">
         <div
-          className="prose prose-lg max-w-none prose-headings:font-medium prose-headings:tracking-[-0.02em] prose-headings:text-content prose-h2:mt-12 prose-h2:text-heading-sm prose-p:text-content-soft prose-p:leading-[1.7] prose-a:text-brand-primary prose-a:underline prose-strong:text-content [&>div>p:first-child]:border-b [&>div>p:first-child]:border-line [&>div>p:first-child]:pb-9 [&>div>p:first-child]:text-body-xl [&>div>p:first-child]:text-content"
+          className="prose prose-lg max-w-none prose-headings:font-medium prose-headings:tracking-[-0.02em] prose-headings:text-content prose-h2:mt-12 prose-h2:text-heading-sm prose-p:text-content-soft prose-p:leading-[1.7] max-md:prose-p:text-body-base prose-a:text-brand-primary prose-a:underline prose-strong:text-content [&>div>p:first-child]:border-b [&>div>p:first-child]:border-line [&>div>p:first-child]:pb-6 md:[&>div>p:first-child]:pb-9 [&>div>p:first-child]:text-body-xl [&>div>p:first-child]:text-content"
           data-tina-field={tinaField(post, "body")}
         >
           <PostBody content={richField(post, "body", locale)} />
