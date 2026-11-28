@@ -2,7 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PostArticle from "../../components/blog/PostArticle";
 import ShareBar from "../../components/blog/ShareBar";
-import PostCard from "../../components/cards/PostCard";
+import RelatedPosts from "../../components/blog/RelatedPosts";
 import client from "../../../tina/__generated__/client";
 import { pageLocale } from "../../lib/pageLocale";
 import { nodesOf, sortByDateDesc, toPostCard } from "../../lib/viewModels";
@@ -33,15 +33,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <ShareBar url={canonical} title={title} locale={locale} client:visible />
   </PostArticle>
   {related.length > 0 && (
-    <section class="container-xl pb-20 pt-24 lg:pb-[120px] lg:pt-[130px]">
-      <h2 data-reveal class="mb-12 text-heading-lg">{t("blog.related", locale)}</h2>
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {related.map((card) => (
-          <div data-reveal>
-            <PostCard post={card} ctaLabel={t("common.readArticle", locale)} />
-          </div>
-        ))}
-      </div>
-    </section>
+    <RelatedPosts
+      posts={related}
+      title={t("blog.related", locale)}
+      ctaLabel={t("common.readArticle", locale)}
+      label={t("blog.related", locale)}
+      client:visible
+    />
   )}
 </BaseLayout>
