@@ -96,7 +96,7 @@ Cada paso de código deja el sitio funcionando y lleva su propio commit.
 ### Pie y relacionados
 
 - [ ] En 390 px, el autor no se repite al pie; "Copiar link" ocupa el ancho que dejan los botones de X y LinkedIn, y los tres miden 46 px.
-- [ ] "Copiar link" sigue copiando la URL y muestra "¡Copiado!".
+- [ ] "Copiar link" sigue copiando la URL y muestra "¡Copiado!". *No se cumple, ni en la línea base: la isla de `ShareBar` (`client:visible`) está anidada en `PostArticle` (`client:tina`) y Astro no hidrata una isla hija hasta que se hidrata la madre, cosa que en producción no pasa. Queda para una rama `fix/` aparte.*
 - [ ] En 390 px, "Te podría interesar" está 56 px bajo el pie, el título a 20 px de las tarjetas y las tarjetas miden 280 px.
 - [ ] En 390 y 820 px, el carrusel se desliza, arranca alineado con el contenido y la última tarjeta termina a 16 px (24 en 820) del borde derecho.
 - [ ] Con `Tab`, el foco recorre las tarjetas del carrusel y cada una queda visible al enfocarla.
@@ -104,7 +104,7 @@ Cada paso de código deja el sitio funcionando y lleva su propio commit.
 
 ### General
 
-- [ ] Desde 768 px, la cabecera, la portada, el cuerpo y el pie son iguales a la línea base.
+- [ ] Desde 768 px, la cabecera, la portada, el cuerpo y el pie son iguales a la línea base. *Salvo el primer párrafo: el selector `[&>div>p:first-child]` no aplicaba en ningún tamaño (el `<p>` es hijo directo de `.prose`); se corrigió a `[&>p:first-child]` y desde `md` el primer párrafo ahora lleva `body-xl`, el borde y `pb-9`.*
 - [ ] "Volver al blog", "Copiar link" y "Te podría interesar" se ven traducidos en `/en/` y `/pt/`.
 - [ ] Sin scroll horizontal de la página en 320, 360, 390, 768, 1024, 1280 y 1536 px.
 - [ ] El JS del artículo crece solo por Embla y la isla nueva, y la home y `/blog/` no cambian de peso.
