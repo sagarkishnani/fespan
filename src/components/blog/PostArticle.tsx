@@ -80,9 +80,9 @@ export default function PostArticle({ query, variables, data: initialData, local
           </div>
         )}
 
-        <div className="mt-6 flex flex-col gap-6 border-t border-line pt-7 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-6 flex flex-col gap-6 border-t border-line pt-5 sm:flex-row md:pt-7 sm:items-center sm:justify-between">
           {author?.name ? (
-            <div className="flex items-center gap-4">
+            <div className="hidden items-center gap-4 md:flex">
               {author.photo && <img src={mediaUrl(author.photo)} alt={author.name} className="h-14 w-14 rounded-full object-cover object-[center_20%]" loading="lazy" />}
               <div>
                 <div className="text-body-base font-medium" data-tina-field={tinaField(author, "name")}>{author.name}</div>
@@ -90,7 +90,7 @@ export default function PostArticle({ query, variables, data: initialData, local
               </div>
             </div>
           ) : (
-            <span />
+            <span className="hidden md:block" />
           )}
           {children}
         </div>
